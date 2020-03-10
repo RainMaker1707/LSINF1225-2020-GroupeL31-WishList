@@ -18,24 +18,27 @@
         android:textSize="60sp"
         android:gravity="center"
         android:fontFamily="cursive"
+        android:layout_marginBottom="25dp"
         />
 
     <Button
+        android:id="@+id/sign_up_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/simple_button"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/sign_up"
         android:fontFamily="cursive"
         android:textSize="20sp"
         />
 
     <Button
+        android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/simple_button"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="30dp"
         android:text="@string/sign_in"
         android:fontFamily="cursive"
