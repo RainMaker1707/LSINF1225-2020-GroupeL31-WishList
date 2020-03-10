@@ -5,7 +5,7 @@
 
     <gradient
         android:type="radial"
-        android:gradientRadius="60dp"
+        android:gradientRadius="100dp"
         android:startColor="@color/LightBlue"
         android:endColor="@color/DarkBlue"
         />
@@ -17,6 +17,6 @@
     <corners
         android:radius="90dp"/>
     <size
-        android:width="120dp"
+        android:width="200dp"
         android:height="40dp"/>
 </shape>
