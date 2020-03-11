@@ -103,4 +103,15 @@
         android:fontFamily="cursive"
         />
 
+    <TextView
+        android:id="@+id/go_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_instead"
+        android:textColor="@color/LightBlue"
+        android:linksClickable="true"
+        android:gravity="end"
+        android:layout_marginTop="30dp"
+        />
+
 </LinearLayout>

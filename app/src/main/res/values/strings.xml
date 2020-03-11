@@ -6,4 +6,6 @@
     <string name="mail">Mail</string>
     <string name="password">Password</string>
     <string name="password_confirmation">Password Confirmation</string>
+    <string name="sign_up_instead"><u>Sign Up instead</u></string>
+    <string name="sign_in_instead"><u>Sign In instead</u></string>
 </resources>
