@@ -8,7 +8,8 @@ The request in the database have to be done in SQLite and not SQL, SQLite is sim
 
 Application:
 
-User sign in, mail based primary key, hashed SHA256 password (not for the moment but at the final release)
+User sign in, mail based primary key, Bcrypt hashed password (not for the moment but at the final release)
+
 User sign up required infos : compulsory -> mail, pseudo, password
                               optionals -> photo, address
                               

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/profile_round_pic"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="60dp"
             />
 
     </LinearLayout>
