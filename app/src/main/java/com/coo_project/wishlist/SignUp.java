@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class SignUp extends AppCompatActivity {
 
     private TextView sign_in;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
