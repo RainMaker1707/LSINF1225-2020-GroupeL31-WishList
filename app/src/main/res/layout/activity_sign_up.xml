@@ -1,9 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    android:orientation="vertical"
+    android:background="@drawable/blue_background"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context=".SignIn">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="60sp"
+        android:fontFamily="cursive"
+        android:textColor="@color/LightGray"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/pseudo_in"
+        android:inputType="textPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:height="30dp"
+        android:hint="@string/pseudo"
+        android:fontFamily="cursive"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColorHint="@color/LightGray"
+        android:textColor="@color/DarkGray"
+        android:background="@color/White"
+        android:layout_marginTop="25dp"
+        tools:ignore="AutoFill,TextFields"
+        />
+
+    <EditText
+        android:id="@+id/mail_in"
+        android:inputType="textPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:height="30dp"
+        android:hint="@string/mail"
+        android:fontFamily="cursive"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColorHint="@color/LightGray"
+        android:textColor="@color/DarkGray"
+        android:background="@color/White"
+        android:layout_marginTop="25dp"
+        tools:ignore="AutoFill,TextFields"
+        />
+
+    <EditText
+        android:id="@+id/pass_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:height="40dp"
+        android:inputType="textWebPassword"
+        android:hint="@string/password"
+        android:fontFamily="cursive"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColorHint="@color/LightGray"
+        android:textColor="@color/DarkGray"
+        android:background="@color/White"
+        android:layout_marginTop="25dp"
+        tools:ignore="AutoFill"
+        />
+
+    <EditText
+        android:id="@+id/pass_in_conf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:height="40dp"
+        android:inputType="textWebPassword"
+        android:hint="@string/password_confirmation"
+        android:fontFamily="cursive"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColorHint="@color/LightGray"
+        android:textColor="@color/DarkGray"
+        android:background="@color/White"
+        android:layout_marginTop="25dp"
+        tools:ignore="AutoFill"
+        />
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_button"
+        android:layout_marginTop="30dp"
+        android:text="@string/sign_up"
+        android:textColor="@color/White"
+        android:textSize="20sp"
+        android:fontFamily="cursive"
+        />
+
+    <TextView
+        android:id="@+id/go_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_instead"
+        android:textColor="@color/LightBlue"
+        android:linksClickable="true"
+        android:gravity="end"
+        android:layout_marginTop="30dp"
+        />
+
+</LinearLayout>
