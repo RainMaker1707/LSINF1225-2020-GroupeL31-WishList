@@ -9,11 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class SignUp extends AppCompatActivity {
 
@@ -54,16 +61,22 @@ public class SignUp extends AppCompatActivity {
                 if(pass.equals(pass_conf)){
                     password = pass;
                     try{
-                        connection = DriverManager.getConnection("jdbc:sqlite:" + "wishlist_db.db");
-                    }catch(SQLException ex){
+                        System.out.println("--------CONNECTION TEST--------");
+                        //TODO connection to data base
+
+                    }catch(Exception e){
                         connection = null;
+                        System.out.println("--------ERROR--------");
                     }
                 }else{
                     //TODO error passwords didn't match
                 }
 
                 if (connection != null){
-                    //TODO insert user
+                    System.out.println("--------CONNECTION CHECK--------");
+
+                    //TODO insert user in data base
+
                 }else{
                     //TODO connection error
                 }
