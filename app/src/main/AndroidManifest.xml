@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.coo_project.wishlist">
+    package="be.uclouvain.lsinf1225.groupel31.wishlist">
 
     <application
         android:allowBackup="true"
@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".News"></activity>
-        <activity android:name=".SignUp" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".LogInUp">
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.News"/>
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.SignUp" />
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.SignIn" />
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.LogInUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

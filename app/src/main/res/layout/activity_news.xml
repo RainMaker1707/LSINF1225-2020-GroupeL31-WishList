@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/blue_background"
     android:orientation="vertical"
-    tools:context=".News"
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.News"
     >
 
     <LinearLayout

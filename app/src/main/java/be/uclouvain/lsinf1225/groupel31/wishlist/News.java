@@ -1,4 +1,4 @@
-package com.coo_project.wishlist;
+package be.uclouvain.lsinf1225.groupel31.wishlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
