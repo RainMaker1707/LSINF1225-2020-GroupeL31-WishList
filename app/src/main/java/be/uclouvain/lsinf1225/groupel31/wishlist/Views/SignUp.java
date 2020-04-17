@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
-import android.text.style.LineHeightSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,34 +46,43 @@ public class SignUp extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView uniqueError = findViewById(R.id.mail_error_text);
+                uniqueError.setText(null);
+                uniqueError.setHeight(0);
+                TextView passError = findViewById(R.id.pass_error_text);
+                passError.setText(null);
+                TextView pseudoError = findViewById(R.id.pseudo_error);
+                pseudoError.setHeight(0);
+                pseudoError.setText(null);
                 String mail = mail_in.getText().toString();
                 String pseudo = pseudo_in.getText().toString();
-                TextView UniqueError = findViewById(R.id.mail_error_text);
-                UniqueError.setText(null);
-                UniqueError.setHeight(0);
-                TextView PassError = findViewById(R.id.pass_error_text);
-                PassError.setText(null);
-                if(password.length() >= 8){
-                    if (password.getText().toString().equals(password_conf.getText().toString())){
-                        String pass = password.getText().toString();
-                        User new_user = new User(mail, pass, getApplicationContext());
-                        try {
-                            new_user.signUp(mail, pseudo, pass, null, null);
-                            Intent next_layout = new Intent(getApplicationContext(), News.class);
-                            startActivity(next_layout);
-                            finish();
-                        }catch(SQLiteConstraintException e){
-                            UniqueError.setText(R.string.mail_exist);
-                            UniqueError.setHeight(40);
-                            UniqueError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
+                if (pseudo.length() >= 6) {
+                    if (password.length() >= 8) {
+                        if (password.getText().toString().equals(password_conf.getText().toString())) {
+                            String pass = password.getText().toString();
+                            User new_user = new User(mail, pass, getApplicationContext());
+                            try {
+                                new_user.signUp(mail, pseudo, pass, null, null);
+                                Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                                startActivity(next_layout);
+                                finish();
+                            } catch (SQLiteConstraintException e) {
+                                uniqueError.setText(R.string.mail_exist);
+                                uniqueError.setHeight(50);
+                                uniqueError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
+                            }
+                        } else {
+                            passError.setText(R.string.pass_error_dont_match);
+                            passError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                         }
-                    }else{
-                        PassError.setText(R.string.pass_error_dont_match);
-                        PassError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
+                    } else {
+                        passError.setText(R.string.pass_length_error);
+                        passError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                     }
                 }else{
-                    PassError.setText(R.string.pass_length_error);
-                    PassError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
+                    pseudoError.setHeight(50);
+                    pseudoError.setText(R.string.pseudo_error);
+                    pseudoError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                 }
             }
         });

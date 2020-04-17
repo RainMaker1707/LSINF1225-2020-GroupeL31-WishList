@@ -15,4 +15,6 @@
     <string name="pass_length_error">Password must be at least 8 characters length</string>
     <string name="not_register_error">Mail is not yet register, signUp instead</string>
     <string name="pass_error">Password and mail don\'t match</string>
+    <string name="pseudo_error">Pseudo must be at least 6 characters length</string>
+    <string name="list_wishlist">List of your WhisList</string>
 </resources>

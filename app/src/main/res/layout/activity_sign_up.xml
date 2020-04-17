@@ -8,7 +8,7 @@
     android:background="@drawable/blue_background"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="Views.SignUp">
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignUp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,6 +36,12 @@
         android:background="@color/White"
         android:layout_marginTop="25dp"
         tools:ignore="AutoFill,TextFields"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="0dp"
+        android:id="@+id/pseudo_error"
         />
 
     <EditText

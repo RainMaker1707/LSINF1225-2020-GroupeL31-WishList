@@ -50,7 +50,7 @@ public class SignIn extends AppCompatActivity {
                     String pass_db = select.getString(1);
                     select.close();
                     if(password.equals(pass_db)){
-                        Intent next_layout = new Intent(getApplicationContext(), News.class);
+                        Intent next_layout = new Intent(getApplicationContext(), Base.class);
                         startActivity(next_layout);
                         finish();
                     }else{

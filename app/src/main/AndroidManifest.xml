@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.News"/>
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.Base"/>
         <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignUp" />
         <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignIn" />
         <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.LogInUp">
