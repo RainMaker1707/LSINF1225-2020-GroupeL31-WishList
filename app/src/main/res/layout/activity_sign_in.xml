@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/blue_background"
     android:gravity="center"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignIn">
+    tools:context="Views.SignIn">
 
 
     <TextView
@@ -21,13 +21,13 @@
         />
 
     <EditText
-        android:id="@+id/pseudo_in"
+        android:id="@+id/mail_in"
         android:inputType="textPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
         android:height="30dp"
-        android:hint="@string/pseudo"
+        android:hint="@string/mail"
         android:fontFamily="cursive"
         android:layout_gravity="center"
         android:gravity="center"
@@ -54,6 +54,13 @@
         android:background="@color/White"
         android:layout_marginTop="25dp"
         tools:ignore="Autofill"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height = "0dp"
+        android:id = "@+id/not_register_error"
         />
 
     <Button

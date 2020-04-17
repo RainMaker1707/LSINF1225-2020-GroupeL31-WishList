@@ -12,4 +12,7 @@
     <string name="profile_picture_description_for_blind">Profile picture</string>
     <string name="pass_error_dont_match">Passwords don\'t matches</string>
     <string name="mail_exist">Email address already used</string>
+    <string name="pass_length_error">Password must be at least 8 characters length</string>
+    <string name="not_register_error">Mail is not yet register, signUp instead</string>
+    <string name="pass_error">Password and mail don\'t match</string>
 </resources>

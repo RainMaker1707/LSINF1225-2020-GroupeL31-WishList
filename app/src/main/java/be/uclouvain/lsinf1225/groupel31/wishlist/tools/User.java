@@ -14,18 +14,16 @@ public class User {
     private Image profilPicture;
     private AccessDataBase db;
 
-    public User(String mail, String password, String pseudo, Context context){
+    public User(String mail, String password, Context context){
         db = new AccessDataBase(context);
         this.email = mail;
-        this.pseudo = pseudo;
         this.password = password;
 
     }
 
-    public boolean ExistingUSer(String email){
+    public Cursor ExistingUSer(String email){
         String req = "SELECT * FROM user WHERE mail=\"" + email + "\";";
-        Cursor cursor = db.select(req);
-        return true;
+        return db.select(req);
     }
 
     public void signIn(String mail, String password){

@@ -8,7 +8,7 @@
     android:background="@drawable/blue_background"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignIn">
+    tools:context="Views.SignUp">
 
     <TextView
         android:layout_width="wrap_content"

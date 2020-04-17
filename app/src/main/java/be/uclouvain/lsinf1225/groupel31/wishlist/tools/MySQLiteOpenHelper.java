@@ -39,8 +39,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 +"size     INT           DEFAULT (0),"
                 +"[update] DATETIME);"
         );
-        db.execSQL("CREATE TABLE Wish (\n" +
-                 "num    INTEGER       PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
+        db.execSQL("CREATE TABLE Wish ("
+                +"num    INTEGER       PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
                 +"name   VARCHAR (255) NOT NULL,"
                 +"photo  BLOB          NOT NULL,"
                 +"[desc] TEXT (5000),"
@@ -54,48 +54,22 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 +"id   INTEGER       REFERENCES Wishlist (id)NOT NULL,"
                 +"PRIMARY KEY (mail, id));"
         );
-        db.execSQL("CREATE TABLE Interest (\n" +
-                "    mail VARCHAR (255) REFERENCES User (mail) \n" +
-                "                       NOT NULL,\n" +
-                "    id   INTEGER       REFERENCES Wishlist (id) \n" +
-                "                       NOT NULL,\n" +
-                "    PRIMARY KEY (\n" +
-                "        mail,\n" +
-                "        id\n" +
-                "    )\n" +
-                ");"
+        db.execSQL("CREATE TABLE Interest ("
+                +"mail VARCHAR (255) REFERENCES User (mail) NOT NULL,"
+                +"id   INTEGER       REFERENCES Wishlist (id) NOT NULL,"
+                +"PRIMARY KEY (mail, id));"
         );
-        db.execSQL("CREATE TABLE Interest (\n" +
-                "    mail VARCHAR (255) REFERENCES User (mail) \n" +
-                "                       NOT NULL,\n" +
-                "    id   INTEGER       REFERENCES Wishlist (id) \n" +
-                "                       NOT NULL,\n" +
-                "    PRIMARY KEY (\n" +
-                "        mail,\n" +
-                "        id\n" +
-                "    )\n" +
-                ");"
+        db.execSQL("CREATE TABLE Eval ("
+                +"mail VARCHAR (255) REFERENCES User (mail) NOT NULL,"
+                +"id   INTEGER       REFERENCES Wishlist (id) NOT NULL,"
+                +"num  INTEGER       REFERENCES Wish (num) NOT NULL,"
+                +"eval INTEGER       CHECK (0 <= eval < 11) NOT NULL,"
+                +"PRIMARY KEY (mail, id, num));"
         );
-        db.execSQL("CREATE TABLE Eval (\n" +
-                "    mail VARCHAR (255) REFERENCES User (mail) \n" +
-                "                       NOT NULL,\n" +
-                "    id   INTEGER       REFERENCES Wishlist (id) \n" +
-                "                       NOT NULL,\n" +
-                "    num  INTEGER       REFERENCES Wish (num) \n" +
-                "                       NOT NULL,\n" +
-                "    eval INTEGER       CHECK (0 <= eval < 11) \n" +
-                "                       NOT NULL,\n" +
-                "    PRIMARY KEY (\n" +
-                "        mail,\n" +
-                "        id,\n" +
-                "        num\n" +
-                "    )\n" +
-                ");\n"
+        db.execSQL("CREATE TABLE Content ("
+                +"wishlist INTEGER REFERENCES Wishlist (id),"
+                +"product  INTEGER REFERENCES Wish (num));"
         );
-        db.execSQL("CREATE TABLE Content (\n" +
-                "    wishlist INTEGER REFERENCES Wishlist (id),\n" +
-                "    product  INTEGER REFERENCES Wish (num) \n" +
-                ");\n");
     }
 
     /**

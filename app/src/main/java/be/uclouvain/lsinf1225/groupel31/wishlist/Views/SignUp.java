@@ -54,22 +54,27 @@ public class SignUp extends AppCompatActivity {
                 UniqueError.setHeight(0);
                 TextView PassError = findViewById(R.id.pass_error_text);
                 PassError.setText(null);
-                if (password.getText().toString().equals(password_conf.getText().toString())){
-                    String pass = password.getText().toString();
-                    User new_user = new User(mail, pass, pseudo, getApplicationContext());
-                    try {
-                        new_user.signUp(mail, pseudo, pass, "mountain road 33", "FFFFFF");
-                        Intent next_layout = new Intent(getApplicationContext(), News.class);
-                        startActivity(next_layout);
-                        finish();
-                    }catch(SQLiteConstraintException e){
-                        UniqueError.setText(R.string.mail_exist);
-                        UniqueError.setHeight(40);
-                        UniqueError.setTextColor(getResources().getColor(R.color.Red));
+                if(password.length() >= 8){
+                    if (password.getText().toString().equals(password_conf.getText().toString())){
+                        String pass = password.getText().toString();
+                        User new_user = new User(mail, pass, getApplicationContext());
+                        try {
+                            new_user.signUp(mail, pseudo, pass, null, null);
+                            Intent next_layout = new Intent(getApplicationContext(), News.class);
+                            startActivity(next_layout);
+                            finish();
+                        }catch(SQLiteConstraintException e){
+                            UniqueError.setText(R.string.mail_exist);
+                            UniqueError.setHeight(40);
+                            UniqueError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
+                        }
+                    }else{
+                        PassError.setText(R.string.pass_error_dont_match);
+                        PassError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                     }
                 }else{
-                    PassError.setText(R.string.pass_error_dont_match);
-                    PassError.setTextColor(getResources().getColor(R.color.Red));
+                    PassError.setText(R.string.pass_length_error);
+                    PassError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                 }
             }
         });
