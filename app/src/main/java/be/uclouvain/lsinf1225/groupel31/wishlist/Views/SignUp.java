@@ -1,15 +1,20 @@
-package be.uclouvain.lsinf1225.groupel31.wishlist;
+package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
+import android.text.style.LineHeightSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.sql.Connection;
+
+import be.uclouvain.lsinf1225.groupel31.wishlist.R;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.User;
 
 public class SignUp extends AppCompatActivity {
 
@@ -44,30 +49,27 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View v) {
                 String mail = mail_in.getText().toString();
                 String pseudo = pseudo_in.getText().toString();
-                String pass = password.getText().toString();
-                String pass_conf = password_conf.getText().toString();
-                String password = null;
-                if(pass.equals(pass_conf)){
-                    password = pass;
-                    try{
-                        System.out.println("--------CONNECTION TEST--------");
-                        //TODO connection to data base
-
-                    }catch(Exception e){
-                        connection = null;
-                        System.out.println("--------ERROR--------");
+                TextView UniqueError = findViewById(R.id.mail_error_text);
+                UniqueError.setText(null);
+                UniqueError.setHeight(0);
+                TextView PassError = findViewById(R.id.pass_error_text);
+                PassError.setText(null);
+                if (password.getText().toString().equals(password_conf.getText().toString())){
+                    String pass = password.getText().toString();
+                    User new_user = new User(mail, pass, pseudo, getApplicationContext());
+                    try {
+                        new_user.signUp(mail, pseudo, pass, "mountain road 33", "FFFFFF");
+                        Intent next_layout = new Intent(getApplicationContext(), News.class);
+                        startActivity(next_layout);
+                        finish();
+                    }catch(SQLiteConstraintException e){
+                        UniqueError.setText(R.string.mail_exist);
+                        UniqueError.setHeight(40);
+                        UniqueError.setTextColor(getResources().getColor(R.color.Red));
                     }
                 }else{
-                    //TODO error passwords didn't match
-                }
-
-                if (connection != null){
-                    System.out.println("--------CONNECTION CHECK--------");
-
-                    //TODO insert user in data base
-
-                }else{
-                    //TODO connection error
+                    PassError.setText(R.string.pass_error_dont_match);
+                    PassError.setTextColor(getResources().getColor(R.color.Red));
                 }
             }
         });

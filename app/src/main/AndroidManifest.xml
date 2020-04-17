@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.News"/>
-        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.SignUp" />
-        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.SignIn" />
-        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.LogInUp">
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.News"/>
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignUp" />
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignIn" />
+        <activity android:name="be.uclouvain.lsinf1225.groupel31.wishlist.Views.LogInUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

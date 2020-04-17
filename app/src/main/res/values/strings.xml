@@ -10,4 +10,6 @@
     <string name="sign_up_instead"><u>Sign Up instead</u></string>
     <string name="sign_in_instead"><u>Sign In instead</u></string>
     <string name="profile_picture_description_for_blind">Profile picture</string>
+    <string name="pass_error_dont_match">Passwords don\'t matches</string>
+    <string name="mail_exist">Email address already used</string>
 </resources>

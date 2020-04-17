@@ -8,7 +8,7 @@
     android:background="@drawable/blue_background"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.SignIn">
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignIn">
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,6 +56,13 @@
         tools:ignore="AutoFill,TextFields"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="0dp"
+        android:id="@+id/mail_error_text"
+        />
+
     <EditText
         android:id="@+id/pass_in"
         android:layout_width="wrap_content"
@@ -90,6 +97,12 @@
         android:background="@color/White"
         android:layout_marginTop="25dp"
         tools:ignore="AutoFill"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pass_error_text"
         />
 
     <Button

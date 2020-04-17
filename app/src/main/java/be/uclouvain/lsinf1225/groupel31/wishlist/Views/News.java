@@ -1,8 +1,10 @@
-package be.uclouvain.lsinf1225.groupel31.wishlist;
+package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 
 public class News extends AppCompatActivity {
 

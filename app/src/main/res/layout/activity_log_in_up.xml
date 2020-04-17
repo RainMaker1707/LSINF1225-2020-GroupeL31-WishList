@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/blue_background"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.LogInUp"
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.LogInUp"
     android:layout_gravity="center"
     android:gravity="center">
 
