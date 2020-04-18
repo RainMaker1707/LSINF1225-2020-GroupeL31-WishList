@@ -36,6 +36,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 +"id       INTEGER       PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
                 +"name     VARCHAR (255) NOT NULL,"
                 +"owner    VARCHAR (255) REFERENCES User (mail) NOT NULL,"
+                +"picture  BLOB,"
                 +"size     INT           DEFAULT (0),"
                 +"[update] DATETIME);"
         );

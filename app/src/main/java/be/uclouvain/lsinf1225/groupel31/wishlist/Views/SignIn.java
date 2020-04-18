@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 
 public class SignIn extends AppCompatActivity {
     private TextView sign_up;
@@ -43,7 +43,8 @@ public class SignIn extends AppCompatActivity {
                 TextView error = findViewById(R.id.not_register_error);
                 error.setText(null);
                 error.setHeight(0);
-                User user = new User(mail, password, getApplicationContext());
+                User user = User.getInstance();
+                user.signIn(mail, password, getApplicationContext());
                 Cursor select = user.ExistingUSer(mail);
                 try {
                     select.moveToLast();

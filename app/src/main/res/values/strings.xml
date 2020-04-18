@@ -17,4 +17,10 @@
     <string name="pass_error">Password and mail don\'t match</string>
     <string name="pseudo_error">Pseudo must be at least 6 characters length</string>
     <string name="list_wishlist">List of your WhisList</string>
+    <string name="wishlist_title">WishList default Title</string>
+    <string name="wishlist_default_price">price : 0$</string>
+    <string name="wishlist_size">Wish In : 0</string>
+    <string name="image_wishlist_desc">WishList picture</string>
+    <string name="desc_background">background of the widget</string>
+    <string name="wish_in_format">Wish In : %d</string>
 </resources>

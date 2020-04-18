@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.sql.Connection;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 
 public class SignUp extends AppCompatActivity {
 
@@ -60,13 +60,14 @@ public class SignUp extends AppCompatActivity {
                     if (password.length() >= 8) {
                         if (password.getText().toString().equals(password_conf.getText().toString())) {
                             String pass = password.getText().toString();
-                            User new_user = new User(mail, pass, getApplicationContext());
+                            User new_user = User.getInstance();
+                            new_user.signIn(mail, pass, getApplicationContext());
                             try {
                                 new_user.signUp(mail, pseudo, pass, null, null);
                                 Intent next_layout = new Intent(getApplicationContext(), Base.class);
                                 startActivity(next_layout);
                                 finish();
-                            } catch (SQLiteConstraintException e) {
+                            }catch (SQLiteConstraintException e) {
                                 uniqueError.setText(R.string.mail_exist);
                                 uniqueError.setHeight(50);
                                 uniqueError.setTextColor(getResources().getColor(R.color.Red, getTheme()));
