@@ -23,4 +23,6 @@
     <string name="image_wishlist_desc">WishList picture</string>
     <string name="desc_background">background of the widget</string>
     <string name="wish_in_format">Wish In : %d</string>
+    <string name="create_wishlist_button">Create New WishList</string>
+    <string name="wishlist_name">WishList Name</string>
 </resources>

@@ -3,8 +3,6 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,27 +42,30 @@ public class SignIn extends AppCompatActivity {
                 error.setText(null);
                 error.setHeight(0);
                 User user = User.getInstance();
-                user.signIn(mail, password, getApplicationContext());
-                Cursor select = user.ExistingUSer(mail);
-                try {
-                    select.moveToLast();
-                    String pass_db = select.getString(1);
-                    select.close();
-                    if(password.equals(pass_db)){
-                        Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                user.setDb(getApplicationContext());
+                if (user.ExistingUSer(mail)){
+                    user.signIn(mail);
+                    if(user.matchingPassAndMail(password, mail)){
+                        Intent next_layout = new Intent(getApplicationContext(), LayoutWishList.class);
                         startActivity(next_layout);
                         finish();
                     }else{
+                        user.LogOut();
                         error.setText(R.string.pass_error);
                         error.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                         error.setHeight(50);
                     }
-                }catch(CursorIndexOutOfBoundsException e){
+                }else{
                     error.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                     error.setText(R.string.not_register_error);
                     error.setHeight(50);
-                    select.close();
                 }
+                /*Cursor select = user.ExistingUSer(mail);
+                    if(password.equals(pass_db)){
+
+                    }else{
+
+                    }*/
             }
         });
 

@@ -3,7 +3,6 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -59,15 +58,15 @@ public class SignUp extends AppCompatActivity {
                 if (pseudo.length() >= 6) {
                     if (password.length() >= 8) {
                         if (password.getText().toString().equals(password_conf.getText().toString())) {
-                            String pass = password.getText().toString();
                             User new_user = User.getInstance();
-                            new_user.signIn(mail, pass, getApplicationContext());
-                            try {
-                                new_user.signUp(mail, pseudo, pass, null, null);
-                                Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                            new_user.setDb(getApplicationContext());
+                            if(!new_user.ExistingUSer(mail)){
+                                new_user.signUp(mail, pseudo, password.getText().toString(), null, null);
+                                new_user.signIn(mail);
+                                Intent next_layout = new Intent(getApplicationContext(), LayoutWishList.class);
                                 startActivity(next_layout);
                                 finish();
-                            }catch (SQLiteConstraintException e) {
+                            }else{
                                 uniqueError.setText(R.string.mail_exist);
                                 uniqueError.setHeight(50);
                                 uniqueError.setTextColor(getResources().getColor(R.color.Red, getTheme()));

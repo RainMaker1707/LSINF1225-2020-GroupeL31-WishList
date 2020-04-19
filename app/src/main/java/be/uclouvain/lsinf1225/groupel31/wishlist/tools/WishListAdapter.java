@@ -51,6 +51,7 @@ public class WishListAdapter extends BaseAdapter {
 
         title.setText(current.getName());
         items.setText(String.format("Wish In: %d", current.getSize()));
+        //TODO set Image
 
 
         return convertView;
