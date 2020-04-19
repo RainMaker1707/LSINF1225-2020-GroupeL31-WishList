@@ -46,7 +46,7 @@ public class SignIn extends AppCompatActivity {
                 if (user.ExistingUSer(mail)){
                     user.signIn(mail);
                     if(user.matchingPassAndMail(password, mail)){
-                        Intent next_layout = new Intent(getApplicationContext(), LayoutWishList.class);
+                        Intent next_layout = new Intent(getApplicationContext(), Base.class);
                         startActivity(next_layout);
                         finish();
                     }else{

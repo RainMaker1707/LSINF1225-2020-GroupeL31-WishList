@@ -11,8 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Views.NewWishList"></activity>
-        <activity android:name=".Views.LayoutWishList" />
+        <activity android:name=".Views.NewWish"></activity>
+        <activity android:name=".Views.NewWishList" />
+        <activity android:name=".Views.Base" />
         <activity android:name=".Views.SignUp" />
         <activity android:name=".Views.SignIn" />
         <activity android:name=".Views.LogInUp">

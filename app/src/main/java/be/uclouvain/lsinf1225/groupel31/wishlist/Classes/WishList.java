@@ -1,9 +1,13 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.Classes;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.media.Image;
 
-import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
+
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 
 public class WishList {
 
@@ -11,13 +15,49 @@ public class WishList {
     private Image picture;
     private Integer size;
     private String owner;
-    private List<Wish> wishLst;
+    private Integer id;
+    private AccessDataBase db;
+    private List<Wish> wishLst = new ArrayList<>();
 
-    public WishList(String name, Image picture, Integer size, String owner){
+    public WishList(AccessDataBase db, Integer id, String name, Image picture, Integer size, String owner){
+        this.id = id;
         this.name = name;
         this.picture = picture;
         this.size = size;
         this.owner = owner;
+        this.db = db;
+        updateWishLst();
+    }
+
+    private void updateWishLst() {
+        String req = "SELECT W.* FROM Wishlist L, Wish W, Content C WHERE C.wishlist=\"" +
+                this.getId() + "\" AND C.product = W.num GROUP BY W.num;";
+        Cursor cursor = db.select(req);
+        List<Wish> wishes = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            wishes.add(new Wish(cursor.getString(1), null, cursor.getString(4),
+                    cursor.getDouble(5), cursor.getString(6)));
+            cursor.moveToNext();
+        }
+        setWishLst(wishes);
+        cursor.close();
+    }
+
+    public void createWish(String name, Image picture, String description,
+                           double price, String market){
+        String req = "INSERT INTO Wish (name, photo, wish_id, desc, prix, market) VALUES ";
+        req += "(\"" + name + "\", \"" + picture + "\", \"" + this.id + "\", \"";
+        req += description + "\", \"" + price + "\", \"" + market + "\");";
+        db.insert(req);
+        //TODO link wish and wishlist
+        Cursor cursor = db.select("SELECT * FROM Wish");
+        cursor.moveToLast();
+        int wish_id = cursor.getInt(0);
+        cursor.close();
+        req = "INSERT INTO Content (wishlist, product) VALUES (\"" + this.id + "\", \"" + wish_id + "\");";
+        db.insert(req);
+        updateWishLst();
     }
 
     public String getName() {
@@ -78,5 +118,17 @@ public class WishList {
 
     public boolean canWrite(String mail){
         return false;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setWishLst(List<Wish> wishLst) {
+        this.wishLst = wishLst;
     }
 }

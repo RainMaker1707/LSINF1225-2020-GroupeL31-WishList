@@ -13,10 +13,11 @@ import android.widget.TextView;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishAdapter;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishListAdapter;
 
-public class LayoutWishList extends AppCompatActivity {
+public class Base extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,9 @@ public class LayoutWishList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WishList current = user.getWishlist_list().get(position);
                 title.setText(current.getName());
-                grid.setNumColumns(3);
+                grid.setNumColumns(2);
                 grid.setAdapter(new WishAdapter(getApplicationContext(), current.getWishLst()));
+                CurrentWishList.setInstance(current);
                 create_wishList.setText(R.string.add_wish);
                 create_wishList.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -63,7 +65,6 @@ public class LayoutWishList extends AppCompatActivity {
                 });
             }
         });
-        //TODO creation wish *
         //TODO delete  & modify WishList
         //TODO delete & modify  Wish
         //TODO modify profile and add more info in SignUP

@@ -25,4 +25,11 @@
     <string name="wish_in_format">Wish In : %d</string>
     <string name="create_wishlist_button">Create New WishList</string>
     <string name="wishlist_name">WishList Name</string>
+    <string name="wish_title">Name</string>
+    <string name="wish_price">price: 0€</string>
+    <string name="add_wish">Add Wish</string>
+    <string name="price">Price</string>
+    <string name="wish_name">Wish Name</string>
+    <string name="description">Description</string>
+    <string name="market_address">Market Address</string>
 </resources>

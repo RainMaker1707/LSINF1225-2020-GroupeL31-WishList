@@ -63,7 +63,7 @@ public class SignUp extends AppCompatActivity {
                             if(!new_user.ExistingUSer(mail)){
                                 new_user.signUp(mail, pseudo, password.getText().toString(), null, null);
                                 new_user.signIn(mail);
-                                Intent next_layout = new Intent(getApplicationContext(), LayoutWishList.class);
+                                Intent next_layout = new Intent(getApplicationContext(), Base.class);
                                 startActivity(next_layout);
                                 finish();
                             }else{

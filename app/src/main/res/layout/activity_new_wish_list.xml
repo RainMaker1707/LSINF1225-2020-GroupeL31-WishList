@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
@@ -52,7 +53,7 @@
         android:layout_height="wrap_content"
         android:width="200dp"
         android:height="40dp"
-        android:inputType="textWebPassword"
+        android:inputType="text"
         android:hint="@string/wishlist_name"
         android:fontFamily="cursive"
         android:layout_gravity="center"

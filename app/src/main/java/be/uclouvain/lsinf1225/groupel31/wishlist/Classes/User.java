@@ -45,7 +45,7 @@ public class User {
         setPseudo(cursor.getString(0));
         setPassword(cursor.getString(1));
         setEmail(cursor.getString( 2));
-        setProfilePicture(null);
+        setProfilePicture(null);//TODO set with cursor.getBlob(3)
         setAddress(cursor.getString(4));
         cursor.close();
 
@@ -53,8 +53,8 @@ public class User {
         cursor = db.select("SELECT * FROM WishList WHERE owner=\"" + getEmail() + "\";");
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            wishlists.add(new WishList(cursor.getString(1), null,
-                    cursor.getInt(4), cursor.getString(2)));
+            wishlists.add(new WishList(this.db, cursor.getInt(0), cursor.getString(1),
+                    null, cursor.getInt(4), cursor.getString(2)));
             cursor.moveToNext();
         }
         cursor.close();
@@ -63,11 +63,11 @@ public class User {
 
     private void updateWishList(){
         List<WishList> wishlists= new ArrayList<>();
-        Cursor cursor = db.select("SELECT * FROM WishList WHERE owner=\"" + getEmail() + "\";");
+        Cursor cursor = db.select("SELECT * FROM WishList WHERE owner=\""+ getEmail() + "\";");
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            wishlists.add(new WishList(cursor.getString(1), null,
-                    cursor.getInt(4), cursor.getString(2)));
+            wishlists.add(new WishList(this.db, cursor.getInt(0), cursor.getString(1),
+                    null, cursor.getInt(4), cursor.getString(2)));
             cursor.moveToNext();
         }
         cursor.close();
@@ -135,6 +135,7 @@ public class User {
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
     }
+
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }

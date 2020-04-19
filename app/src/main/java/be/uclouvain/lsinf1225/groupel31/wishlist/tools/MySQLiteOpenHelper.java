@@ -44,6 +44,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 +"num    INTEGER       PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
                 +"name   VARCHAR (255) NOT NULL,"
                 +"photo  BLOB          NOT NULL,"
+                +"wish_id INTEGER      REFERENCES Wishlist (id) NOT NULL,"
                 +"[desc] TEXT (5000),"
                 +"prix DOUBLE NOT NULL,"
                 +"market VARCHAR (255),"
