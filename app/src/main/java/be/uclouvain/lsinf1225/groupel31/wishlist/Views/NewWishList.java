@@ -41,5 +41,15 @@ public class NewWishList extends AppCompatActivity {
                 finish();
             }
         });
+
+        Button back = findViewById(R.id.back_button);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
     }
 }

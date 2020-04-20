@@ -45,7 +45,7 @@ public class User {
         setPseudo(cursor.getString(0));
         setPassword(cursor.getString(1));
         setEmail(cursor.getString( 2));
-        setProfilePicture(null);//TODO set with cursor.getBlob(3)
+        setProfilePicture(null);//TODO set with cursor.getBlob(3) bitsmap
         setAddress(cursor.getString(4));
         cursor.close();
 

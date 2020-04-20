@@ -36,6 +36,17 @@ public class Base extends AppCompatActivity {
             grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
         }
 
+        final Button back = findViewById(R.id.back_button);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.LogOut();
+                Intent next_layout = new Intent(getApplicationContext(), LogInUp.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
+
         final Button create_wishList = findViewById(R.id.create_wishlist);
         create_wishList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +70,16 @@ public class Base extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent next_layout = new Intent(getApplicationContext(), NewWish.class);
+                        startActivity(next_layout);
+                        finish();
+                    }
+                });
+
+                back.setText(R.string.back);
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent next_layout = new Intent(getApplicationContext(), Base.class);
                         startActivity(next_layout);
                         finish();
                     }
