@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.CurrentWishList;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 
 
 public class NewWish extends AppCompatActivity {

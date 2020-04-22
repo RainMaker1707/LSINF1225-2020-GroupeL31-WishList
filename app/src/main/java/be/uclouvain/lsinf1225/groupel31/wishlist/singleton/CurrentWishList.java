@@ -9,4 +9,3 @@ public class CurrentWishList {
 
     public static void setInstance(WishList wishLst){wish_lst = wishLst;}
 }
-

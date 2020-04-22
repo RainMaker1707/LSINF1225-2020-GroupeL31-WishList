@@ -11,6 +11,7 @@ public class Wish {
     private double price;
     private double eval;
 
+    // Constructor
     public Wish(String name, Image picture, String description, double price, String market) {
         this.name = name;
         this.picture = picture;
@@ -19,6 +20,8 @@ public class Wish {
         this.market = market;
     }
 
+
+    // ******* Getters and setters ******
     public void setName(String name) {
         this.name = name;
     }
@@ -54,6 +57,7 @@ public class Wish {
     public Integer getId() {
         return id;
     }
+
     public Image getPicture() {
         return picture;
     }

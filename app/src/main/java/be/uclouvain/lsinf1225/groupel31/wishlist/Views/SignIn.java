@@ -41,7 +41,7 @@ public class SignIn extends AppCompatActivity {
                 TextView error = findViewById(R.id.not_register_error);
                 error.setText(null);
                 error.setHeight(0);
-                User user = User.getInstance();
+                User user = new User();
                 user.setDb(getApplicationContext());
                 if (user.ExistingUSer(mail)){
                     user.signIn(mail);
@@ -60,12 +60,6 @@ public class SignIn extends AppCompatActivity {
                     error.setText(R.string.not_register_error);
                     error.setHeight(50);
                 }
-                /*Cursor select = user.ExistingUSer(mail);
-                    if(password.equals(pass_db)){
-
-                    }else{
-
-                    }*/
             }
         });
 

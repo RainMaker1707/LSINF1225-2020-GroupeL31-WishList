@@ -58,7 +58,7 @@ public class SignUp extends AppCompatActivity {
                 if (pseudo.length() >= 6) {
                     if (password.length() >= 8) {
                         if (password.getText().toString().equals(password_conf.getText().toString())) {
-                            User new_user = User.getInstance();
+                            User new_user = new User();
                             new_user.setDb(getApplicationContext());
                             if(!new_user.ExistingUSer(mail)){
                                 new_user.signUp(mail, pseudo, password.getText().toString(), null, null);

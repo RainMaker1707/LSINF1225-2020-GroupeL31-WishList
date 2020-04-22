@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Views.NewWish"></activity>
+        <activity android:name=".Views.FriendsList"></activity>
+        <activity android:name=".Views.ProfileActivity" />
+        <activity android:name=".Views.WishActivity" />
+        <activity android:name=".Views.NewWish" />
         <activity android:name=".Views.NewWishList" />
         <activity android:name=".Views.Base" />
         <activity android:name=".Views.SignUp" />

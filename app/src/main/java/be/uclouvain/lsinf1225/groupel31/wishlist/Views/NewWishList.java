@@ -11,10 +11,11 @@ import android.widget.TextView;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 
 public class NewWishList extends AppCompatActivity {
     private EditText name_in;
-    private User user = User.getInstance();
+    private User user = CurrentUser.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

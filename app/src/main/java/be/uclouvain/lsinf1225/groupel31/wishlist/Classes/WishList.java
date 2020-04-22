@@ -19,6 +19,7 @@ public class WishList {
     private AccessDataBase db;
     private List<Wish> wishLst = new ArrayList<>();
 
+    // Constructor
     public WishList(AccessDataBase db, Integer id, String name, Image picture, Integer size, String owner){
         this.id = id;
         this.name = name;
@@ -29,12 +30,15 @@ public class WishList {
         updateWishLst();
     }
 
+    // Create a list of wish from the db data
     private void updateWishLst() {
+        //Select
         String req = "SELECT W.* FROM Wishlist L, Wish W, Content C WHERE C.wishlist=\"" +
                 this.getId() + "\" AND C.product = W.num GROUP BY W.num;";
         Cursor cursor = db.select(req);
         List<Wish> wishes = new ArrayList<>();
         cursor.moveToFirst();
+        //loop to append wish in list
         while(!cursor.isAfterLast()){
             wishes.add(new Wish(cursor.getString(1), null, cursor.getString(4),
                     cursor.getDouble(5), cursor.getString(6)));
@@ -44,22 +48,49 @@ public class WishList {
         cursor.close();
     }
 
+    // insert a new line in db table wish
     public void createWish(String name, Image picture, String description,
                            double price, String market){
+        // insert
         String req = "INSERT INTO Wish (name, photo, wish_id, desc, prix, market) VALUES ";
         req += "(\"" + name + "\", \"" + picture + "\", \"" + this.id + "\", \"";
         req += description + "\", \"" + price + "\", \"" + market + "\");";
         db.insert(req);
-        //TODO link wish and wishlist
+
+        //select to find id
         Cursor cursor = db.select("SELECT * FROM Wish");
         cursor.moveToLast();
-        int wish_id = cursor.getInt(0);
+        int wish_id = cursor.getInt(0); // get id
         cursor.close();
+
+        //insert link wishlist-wish in db table content
         req = "INSERT INTO Content (wishlist, product) VALUES (\"" + this.id + "\", \"" + wish_id + "\");";
         db.insert(req);
         updateWishLst();
     }
 
+    public boolean deleteWish(Wish wish){
+        return false;
+    }
+
+    public boolean addPermission(String mail, int permId){
+        return false;
+    }
+
+    public boolean deletePermission(String mail, int permId) {
+        return false;
+    }
+
+    public boolean canRead(String mail){
+        return false;
+    }
+
+    public boolean canWrite(String mail){
+        return false;
+    }
+
+
+    // ***** Getters and setters *****
     public String getName() {
         return this.name;
     }
@@ -94,30 +125,6 @@ public class WishList {
 
     public void setPicture(Image picture) {
         this.picture = picture;
-    }
-
-    public boolean addWish(Wish wish){
-        return false;
-    }
-
-    public boolean deleteWish(Wish wish){
-        return false;
-    }
-
-    public boolean addPermission(String mail, int permId){
-        return false;
-    }
-
-    public boolean deletePermission(String mail, int permId) {
-        return false;
-    }
-
-    public boolean canRead(String mail){
-        return false;
-    }
-
-    public boolean canWrite(String mail){
-        return false;
     }
 
     public Integer getId() {

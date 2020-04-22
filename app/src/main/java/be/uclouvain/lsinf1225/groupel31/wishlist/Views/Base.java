@@ -13,7 +13,9 @@ import android.widget.TextView;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.CurrentWishList;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishAdapter;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishListAdapter;
 
@@ -30,7 +32,7 @@ public class Base extends AppCompatActivity {
         final GridView grid = findViewById(R.id.news_grid);
         grid.setNumColumns(1);
 
-        final User user = User.getInstance();
+        final User user = CurrentUser.getInstance();
 
         if(user.getWishlist_list().size() != 0){
             grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
@@ -60,7 +62,7 @@ public class Base extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                WishList current = user.getWishlist_list().get(position);
+                final WishList current = user.getWishlist_list().get(position);
                 title.setText(current.getName());
                 grid.setNumColumns(2);
                 grid.setAdapter(new WishAdapter(getApplicationContext(), current.getWishLst()));
@@ -70,6 +72,16 @@ public class Base extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent next_layout = new Intent(getApplicationContext(), NewWish.class);
+                        startActivity(next_layout);
+                        finish();
+                    }
+                });
+
+                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        CurrentWish.setInstance(current.getWishLst().get(position));
+                        Intent next_layout = new Intent(getApplicationContext(), WishActivity.class);
                         startActivity(next_layout);
                         finish();
                     }
@@ -86,12 +98,15 @@ public class Base extends AppCompatActivity {
                 });
             }
         });
+        //TODO Wish Layout
         //TODO delete  & modify WishList
         //TODO delete & modify  Wish
-        //TODO modify profile and add more info in SignUP
+        //TODO modify profile and add more info in SignUP & preferences
         //TODO set picture profile
         //TODO set picture WishList
         //TODO set picture Wish
+        //TODO manage permissions
+        //TODO logs table for wish
         //TODO Friends layout, request, add, delete
     }
 }
