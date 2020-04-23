@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.ProfileActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.ProfileActivity"
     android:background="@drawable/blue_background">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:orientation="horizontal">
         <Button
             android:id="@+id/back_button"
@@ -32,17 +35,35 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/picture_profile"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:src="@drawable/no_picture"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/Black"
-            />
     </LinearLayout>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/picture_profile"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/no_picture"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/Black"
+        />
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp">
+
+    </ListView>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/simple_button"
+        android:text="@string/modify_profile"
+        android:fontFamily="cursive"
+        android:layout_gravity="center"/>
 </LinearLayout>

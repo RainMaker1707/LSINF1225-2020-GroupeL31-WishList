@@ -3,6 +3,7 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,6 +38,17 @@ public class Base extends AppCompatActivity {
         if(user.getWishlist_list().size() != 0){
             grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
         }
+
+        de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        profile_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nex_layout = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(nex_layout);
+                finish();
+            }
+        });
+
 
         final Button back = findViewById(R.id.back_button);
         back.setOnClickListener(new View.OnClickListener() {

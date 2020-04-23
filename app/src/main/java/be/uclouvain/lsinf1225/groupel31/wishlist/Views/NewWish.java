@@ -42,6 +42,16 @@ public class NewWish extends AppCompatActivity {
             }
         });
 
+        de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        profile_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nex_layout = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(nex_layout);
+                finish();
+            }
+        });
+
         Button back = findViewById(R.id.back_button);
         back.setOnClickListener(new View.OnClickListener() {
             @Override

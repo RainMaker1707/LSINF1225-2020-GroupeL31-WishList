@@ -34,4 +34,6 @@
     <string name="market_address">Market Address</string>
     <string name="back"><![CDATA[<]]></string>
     <string name="logout">X</string>
+    <string name="space">\t\t:\t\t</string>
+    <string name="modify_profile">Modify profile</string>
 </resources>
