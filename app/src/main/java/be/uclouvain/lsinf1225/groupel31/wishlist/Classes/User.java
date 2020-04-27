@@ -31,7 +31,7 @@ public class User {
         this.created = true;
     }
 
-    /** set signIn on true, retrieve all data from data base and set the current user singleton
+    /** Set signIn on true, retrieve all data from data base and set the current user singleton
      * on this one
      */
     public void signIn(String mail){
@@ -52,6 +52,7 @@ public class User {
         setAddress(cursor.getString(4));
         cursor.close();
         updateWishList();
+        updateFriendList();
     }
 
     /** Update the wishlist from the database
@@ -70,7 +71,7 @@ public class User {
         setWishlist_list(wishlists);
     }
 
-    /**Update the friend list from the dataBase
+    /** Update the friend list from the dataBase
      */
     private void updateFriendList(){
         List<User> friendList = new ArrayList<>();
@@ -90,7 +91,7 @@ public class User {
         cursor.close();
     }
 
-    /**destroy the user attributes and remove the singleton reference
+    /** Destroy the user attributes and remove the singleton reference
      */
     public void LogOut(){
         destroyUser();
@@ -111,18 +112,18 @@ public class User {
         setDb(null);
     }
 
-    /**function which just check if password and mail passed as arg are same as these stored in db
-     * @param password
-     * @param mail
-     * @return
+    /** Function which just check if password and mail passed as arg are same as these stored in db
+     * @param password user's password input
+     * @param mail user's mail input
+     * @return true if matches false else
      */
     public boolean matchingPassAndMail(String password, String mail){
         return this.getPassword().equals(password) && this.getEmail().equals(mail);
     }
 
     /** Check if a line with the email apssed as arg exist in db
-     * @param email
-     * @return
+     * @param email user's mail input
+     * @return true if exist false else
      */
     public boolean ExistingUSer(String email){
         String req = "SELECT * FROM user WHERE mail=\"" + email + "\";";
@@ -138,12 +139,12 @@ public class User {
         return true;
     }
 
-    /** store a new line in db table user
-     * @param email
-     * @param pseudo
-     * @param password
-     * @param address
-     * @param profilePicture
+    /** Store a new line in db table user
+     * @param email user's mail input
+     * @param pseudo user's pseudo input
+     * @param password user's password input
+     * @param address user's address input
+     * @param profilePicture user's profile input
      */
     public void signUp( String email, String pseudo, String password,
                        @Nullable String address, @Nullable String profilePicture){
@@ -153,9 +154,9 @@ public class User {
         db.insert(req);
     }
 
-    /** store a new line in db table wishlist
-     * @param name
-     * @param picture
+    /** Store a new line in db table wishlist
+     * @param name name of the new wishlist
+     * @param picture picture for the new wishlist
      */
     public void createWishList(String name, @Nullable Image picture){
         String req = "INSERT INTO Wishlist (name, owner, picture) VALUES ";
