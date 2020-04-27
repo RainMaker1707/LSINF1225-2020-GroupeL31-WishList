@@ -15,7 +15,8 @@ public class WishActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish);
-
+        
+        //profile picture action -> go to profile activity
         de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +27,7 @@ public class WishActivity extends AppCompatActivity {
             }
         });
 
+        //Button back activity -> got o base activity
         Button back = findViewById(R.id.back_button);
         back.setOnClickListener(new View.OnClickListener() {
             @Override

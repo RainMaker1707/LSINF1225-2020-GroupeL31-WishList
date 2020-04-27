@@ -19,7 +19,14 @@ public class WishList {
     private AccessDataBase db;
     private List<Wish> wishLst = new ArrayList<>();
 
-    // Constructor
+    /** Constructor
+     * @param db
+     * @param id
+     * @param name
+     * @param picture
+     * @param size
+     * @param owner
+     */
     public WishList(AccessDataBase db, Integer id, String name, Image picture, Integer size, String owner){
         this.id = id;
         this.name = name;
@@ -30,7 +37,8 @@ public class WishList {
         updateWishLst();
     }
 
-    // Create a list of wish from the db data
+    /** Create a list of wish from the db data
+     */
     private void updateWishLst() {
         //Select
         String req = "SELECT W.* FROM Wishlist L, Wish W, Content C WHERE C.wishlist=\"" +
@@ -48,7 +56,13 @@ public class WishList {
         cursor.close();
     }
 
-    // insert a new line in db table wish
+    /** insert a new line in db table wish
+     * @param name
+     * @param picture
+     * @param description
+     * @param price
+     * @param market
+     */
     public void createWish(String name, Image picture, String description,
                            double price, String market){
         // insert

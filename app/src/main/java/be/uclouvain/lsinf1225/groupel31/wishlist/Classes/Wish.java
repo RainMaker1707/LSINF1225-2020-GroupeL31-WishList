@@ -11,7 +11,13 @@ public class Wish {
     private double price;
     private double eval;
 
-    // Constructor
+    /** Constructor
+     * @param name
+     * @param picture
+     * @param description
+     * @param price
+     * @param market
+     */
     public Wish(String name, Image picture, String description, double price, String market) {
         this.name = name;
         this.picture = picture;

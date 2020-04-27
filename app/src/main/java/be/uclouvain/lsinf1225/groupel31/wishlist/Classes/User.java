@@ -13,7 +13,6 @@ import java.util.List;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 
-//Class which contains an user and all is attributes stored in data base
 public class User {
 
     private boolean created;
@@ -24,6 +23,7 @@ public class User {
     private String address;
     private Image profilePicture;
     private List<WishList> wishlist_list;
+    private List<User> friendList;
     private AccessDataBase db;
 
     //only set the created on true
@@ -31,16 +31,17 @@ public class User {
         this.created = true;
     }
 
-    /* set signIn on true, retrieve all data from data base and set the current user singleton
+    /** set signIn on true, retrieve all data from data base and set the current user singleton
      * on this one
      */
     public void signIn(String mail){
-        this.signIn = true;
+        setSignIn(true);
         setRefFromDb(mail);
         CurrentUser.setInstance(this);
     }
 
-    //Retrieve all data from db and set it in usable var
+    /** Retrieve all data from db and set it in usable var
+     */
     public void setRefFromDb(String mail) {
         Cursor cursor = db.select("SELECT * FROM user WHERE mail=\"" + mail + "\";");
         cursor.moveToLast();
@@ -53,7 +54,8 @@ public class User {
         updateWishList();
     }
 
-    //Update the wishlist from the database
+    /** Update the wishlist from the database
+     */
     private void updateWishList(){
         List<WishList> wishlists= new ArrayList<>();
         Cursor cursor = db.select("SELECT * FROM WishList WHERE owner=\""+ getEmail() + "\";");
@@ -68,13 +70,22 @@ public class User {
         setWishlist_list(wishlists);
     }
 
-    // destroy the user attributes and remove the singleton reference
+    /**Update the friend list from the dataBase
+     */
+    private void updateFriendList(){
+        List<User> friendList = new ArrayList<>();
+        Cursor cursor = db.select("SELECT ...");//TODO continue code here
+    }
+
+    /**destroy the user attributes and remove the singleton reference
+     */
     public void LogOut(){
         destroyUser();
         CurrentUser.setInstance(null);
     }
 
-    // remove all user's attributes
+    /** remove all user's attributes
+     */
     public void destroyUser(){
         setCreated(false);
         setSignIn(false);
@@ -87,12 +98,19 @@ public class User {
         setDb(null);
     }
 
-    //function which just check if password and mail passed as arg are same as these stored in db
+    /**function which just check if password and mail passed as arg are same as these stored in db
+     * @param password
+     * @param mail
+     * @return
+     */
     public boolean matchingPassAndMail(String password, String mail){
         return this.getPassword().equals(password) && this.getEmail().equals(mail);
     }
 
-    // Check if a line with the email apssed as arg exist in db
+    /** Check if a line with the email apssed as arg exist in db
+     * @param email
+     * @return
+     */
     public boolean ExistingUSer(String email){
         String req = "SELECT * FROM user WHERE mail=\"" + email + "\";";
         Cursor cursor = db.select(req);
@@ -107,7 +125,13 @@ public class User {
         return true;
     }
 
-    // store a new line in db table user
+    /** store a new line in db table user
+     * @param email
+     * @param pseudo
+     * @param password
+     * @param address
+     * @param profilePicture
+     */
     public void signUp( String email, String pseudo, String password,
                        @Nullable String address, @Nullable String profilePicture){
         String req = "INSERT INTO User (pseudo, password, mail, photo, address) VALUES ";
@@ -116,7 +140,10 @@ public class User {
         db.insert(req);
     }
 
-    // store a new line in db table wishlist
+    /** store a new line in db table wishlist
+     * @param name
+     * @param picture
+     */
     public void createWishList(String name, @Nullable Image picture){
         String req = "INSERT INTO Wishlist (name, owner, picture) VALUES ";
         req += "(\"" + name + "\", \"" + this.getEmail() + "\", \"" + picture + "\");";

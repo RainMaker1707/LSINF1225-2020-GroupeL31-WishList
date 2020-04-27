@@ -19,6 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //Button back action
         Button back = findViewById(R.id.back_button);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        //ListView adapter set
         ListView list = findViewById(R.id.list_view);
         list.setAdapter(new UserAdapter(getApplicationContext(), CurrentUser.getInstance()));
 

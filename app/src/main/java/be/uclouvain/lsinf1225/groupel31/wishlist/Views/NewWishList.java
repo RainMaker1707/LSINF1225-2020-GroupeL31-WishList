@@ -20,19 +20,25 @@ public class NewWishList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_wish_list);
+
+        //Create wishlist button action
         name_in = findViewById(R.id.name_in);
         Button create = findViewById(R.id.button_create);
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //get editText input
                 String name = name_in.getText().toString();
+                //insert in db
                 user.createWishList(name, null);
+                //go to next layout -> base activity
                 Intent next_layout = new Intent(getApplicationContext(), Base.class);
                 startActivity(next_layout);
                 finish();
             }
         });
 
+        //Circle profile picture action -> got to profile activity
         de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +49,7 @@ public class NewWishList extends AppCompatActivity {
             }
         });
 
+        // Title with action back -> go to base activity
         TextView title = findViewById(R.id.title);
         title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +60,7 @@ public class NewWishList extends AppCompatActivity {
             }
         });
 
+        //Button back -> go to base activity
         Button back = findViewById(R.id.back_button);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
