@@ -75,11 +75,11 @@ public class UserAdapter extends BaseAdapter {
         List<String> current = getItem(position);
 
         TextView title = convertView.findViewById(R.id.preference_name);
-        EditText preference = convertView.findViewById(R.id.preference_user);
+        TextView preference = convertView.findViewById(R.id.preference_user);
 
         title.setText(current.get(0));
         title.setTextSize(20);
-        preference.setHint(current.get(1));
+        preference.setText(current.get(1));
         preference.setTextSize(20);
         return convertView;
     }

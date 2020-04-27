@@ -32,6 +32,13 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 +" photo    BLOB,"
                 +" address  VARCHAR (255));"
         );
+
+        db.execSQL("CREATE TABLE Friend (\n"
+                +"mail_host      VARCHAR (255) REFERENCES User (mail) NOT NULL,"
+                +"relation       BOOLEAN       NOT NULL DEFAULT (0),\n"
+                +"mail_requested VARCHAR (255) REFERENCES User (mail) NOT NULL,"
+                +"PRIMARY KEY (mail_host, mail_requested ));"
+        );
         db.execSQL("CREATE TABLE Wishlist ("
                 +"id       INTEGER       PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
                 +"name     VARCHAR (255) NOT NULL,"

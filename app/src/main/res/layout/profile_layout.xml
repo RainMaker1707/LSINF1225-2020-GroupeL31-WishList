@@ -3,25 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
     <TextView
         android:id="@+id/preference_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/news"/>
+        android:text="@string/news"
+        android:textColor="@color/LightGray"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/space"/>
+        android:text="@string/space"
+        android:textColor="@color/LightGray"/>
 
-    <EditText
+
+    <TextView
         android:id="@+id/preference_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:inputType="text"
-        android:hint="@string/news"
-        tools:ignore="Autofill" />
+        android:text="@string/news"
+        android:textColor="@color/LightGray"/>
 
 </LinearLayout>

@@ -55,10 +55,12 @@
         android:layout_gravity="center"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="60dp">
 
     </ListView>
+
     <Button
+        android:id="@+id/modify_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-50dp"
@@ -66,4 +68,5 @@
         android:text="@string/modify_profile"
         android:fontFamily="cursive"
         android:layout_gravity="center"/>
+
 </LinearLayout>

@@ -31,5 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ListView list = findViewById(R.id.list_view);
         list.setAdapter(new UserAdapter(getApplicationContext(), CurrentUser.getInstance()));
+
+        //TODO modify profile
     }
 }
