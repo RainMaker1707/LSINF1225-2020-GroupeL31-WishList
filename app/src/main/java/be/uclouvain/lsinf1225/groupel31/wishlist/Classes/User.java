@@ -74,7 +74,20 @@ public class User {
      */
     private void updateFriendList(){
         List<User> friendList = new ArrayList<>();
-        Cursor cursor = db.select("SELECT ...");//TODO continue code here
+        Cursor cursor = db.select("SELECT mail_host, mail_requested " +
+                "FROM Friend WHERE relation=\"1\" AND (mail_host LIKE \""+ this.getEmail() +"\" " +
+                "OR mail_requested LIKE \""+ this.getEmail() + "\");");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            friendList.add(new User());
+            int last = friendList.size() - 1;
+            String temp_mail = cursor.getString(0);
+            if(this.getEmail().equals(cursor.getString(0))){
+                temp_mail = cursor.getString(1);
+            }
+            friendList.get(last).setRefFromDb(temp_mail);
+        }
+        cursor.close();
     }
 
     /**destroy the user attributes and remove the singleton reference

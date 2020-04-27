@@ -12,5 +12,6 @@
     <color name="Red">#DB0A0A</color>
     <color name="transparent">#00000000</color>
     <color name="wish_list_background">#5590A4C5</color>
+    <color name="Blue_alpha">#BF0A397E</color>
 
 </resources>

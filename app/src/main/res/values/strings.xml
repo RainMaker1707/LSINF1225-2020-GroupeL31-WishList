@@ -36,4 +36,5 @@
     <string name="logout">X</string>
     <string name="space">\t\t:\t\t</string>
     <string name="modify_profile">Modify profile</string>
+    <string name="friend_list">Friends list</string>
 </resources>
