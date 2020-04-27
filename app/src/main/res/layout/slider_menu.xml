@@ -11,4 +11,59 @@
         android:layout_marginEnd="20dp"
         android:src="@drawable/menu_background"/>
 
+    <Button
+        android:id="@+id/profile"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:background="@drawable/simple_button"
+        android:text="@string/profile"
+        android:fontFamily="cursive"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="235dp"/>
+
+    <Button
+        android:id="@+id/wishlist"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:background="@drawable/simple_button"
+        android:text="@string/app_name"
+        android:fontFamily="cursive"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/profile"
+        android:layout_marginStart="235dp"
+        />
+
+    <Button
+        android:id="@+id/friend_list"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:background="@drawable/simple_button"
+        android:text="@string/friend_list"
+        android:fontFamily="cursive"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/wishlist"
+        android:layout_marginStart="235dp"/>
+
+    <Button
+        android:id="@+id/param"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:background="@drawable/simple_button"
+        android:text="@string/param"
+        android:fontFamily="cursive"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/friend_list"
+        android:layout_marginStart="235dp"/>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:background="@drawable/simple_button"
+        android:text="@string/logout_txt"
+        android:fontFamily="cursive"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/param"
+        android:layout_marginStart="235dp"/>
+
 </RelativeLayout>

@@ -37,4 +37,7 @@
     <string name="space">\t\t:\t\t</string>
     <string name="modify_profile">Modify profile</string>
     <string name="friend_list">Friends list</string>
+    <string name="logout_txt">Logout</string>
+    <string name="profile">Profile</string>
+    <string name="param">Parameters</string>
 </resources>
