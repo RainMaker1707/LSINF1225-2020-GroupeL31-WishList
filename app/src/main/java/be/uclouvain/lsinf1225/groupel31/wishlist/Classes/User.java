@@ -52,7 +52,7 @@ public class User {
         setAddress(cursor.getString(4));
         cursor.close();
         updateWishList();
-        updateFriendList();
+        //updateFriendList();
     }
 
     /** Update the wishlist from the database

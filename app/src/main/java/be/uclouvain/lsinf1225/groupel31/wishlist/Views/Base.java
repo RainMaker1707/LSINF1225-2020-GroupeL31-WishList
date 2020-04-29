@@ -2,6 +2,7 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
@@ -21,7 +23,7 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishAdapter;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishListAdapter;
 
 public class Base extends AppCompatActivity {
-
+    boolean showed = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +40,23 @@ public class Base extends AppCompatActivity {
         if(user.getWishlist_list().size() != 0){
             grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
         }
-
-        de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nex_layout = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(nex_layout);
-                finish();
+
+                RelativeLayout menu = findViewById(R.id.menu);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout
+                        .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                if (!showed){
+                    params.setMarginStart(0);
+                    showed = true;
+                }else {
+                    params.setMarginStart(600);
+                    showed = false;
+                }
+                menu.setLayoutParams(params);
+
             }
         });
 
@@ -113,10 +124,13 @@ public class Base extends AppCompatActivity {
         //TODO Wish Layout
         //TODO delete  & modify WishList
         //TODO delete & modify  Wish
+
         //TODO modify profile and add more info in SignUP & preferences
+
         //TODO set picture profile
         //TODO set picture WishList
         //TODO set picture Wish
+
         //TODO manage permissions
         //TODO logs table for wish
         //TODO Friends layout, request, add, delete
