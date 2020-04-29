@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
@@ -16,6 +17,8 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 public class NewWishList extends AppCompatActivity {
     private EditText name_in;
     private User user = CurrentUser.getInstance();
+    boolean showed = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +46,18 @@ public class NewWishList extends AppCompatActivity {
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nex_layout = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(nex_layout);
-                finish();
+
+                RelativeLayout menu = findViewById(R.id.menu);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout
+                        .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                if (!showed){
+                    params.setMargins(0, 70,0,0);
+                    showed = true;
+                }else {
+                    params.setMarginStart(600);
+                    showed = false;
+                }
+                menu.setLayoutParams(params);
             }
         });
 
@@ -60,9 +72,22 @@ public class NewWishList extends AppCompatActivity {
             }
         });
 
-        //Button back -> go to base activity
-        Button back = findViewById(R.id.back_button);
-        back.setOnClickListener(new View.OnClickListener() {
+        //**** Menu buttons START ****
+
+        //button profile
+        final Button profile_btn = findViewById(R.id.profile);
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
+
+        //button wish list
+        final Button wishlist_btn = findViewById(R.id.wishlist);
+        wishlist_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent next_layout = new Intent(getApplicationContext(), Base.class);
@@ -70,5 +95,34 @@ public class NewWishList extends AppCompatActivity {
                 finish();
             }
         });
+
+        //button friend list
+        final Button friend_list_btn = findViewById(R.id.friend_list);
+        friend_list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), FriendsList.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
+
+        //button parameters
+        final Button param_btn = findViewById(R.id.param);
+        param_btn.setEnabled(false);//TODO parameters*
+
+        //button logout
+        final Button logout_btn = findViewById(R.id.logout);
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.LogOut();
+                Intent next_layout = new Intent(getApplicationContext(), LogInUp.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
+        //**** Menu buttons END ****
+
     }
 }

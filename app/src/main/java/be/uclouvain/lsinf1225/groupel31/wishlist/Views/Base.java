@@ -2,9 +2,7 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,9 +35,12 @@ public class Base extends AppCompatActivity {
 
         final User user = CurrentUser.getInstance();
 
+        //grid set adapter if something in user.list<WishList>
         if(user.getWishlist_list().size() != 0){
             grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
         }
+
+        //menu show or not
         final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +50,7 @@ public class Base extends AppCompatActivity {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout
                         .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 if (!showed){
-                    params.setMarginStart(0);
+                    params.setMargins(0, 70,0,0);
                     showed = true;
                 }else {
                     params.setMarginStart(600);
@@ -60,9 +61,41 @@ public class Base extends AppCompatActivity {
             }
         });
 
+        //**** Menu buttons START ****
 
-        final Button back = findViewById(R.id.back_button);
-        back.setOnClickListener(new View.OnClickListener() {
+        //button profile
+        final Button profile_btn = findViewById(R.id.profile);
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
+
+        //button wish list
+        final Button wishlist_btn = findViewById(R.id.wishlist);
+        wishlist_btn.setEnabled(false);
+
+        //button friend list
+        final Button friend_list_btn = findViewById(R.id.friend_list);
+        friend_list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), FriendsList.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
+
+        //button parameters
+        final Button param_btn = findViewById(R.id.param);
+        param_btn.setEnabled(false);//TODO parameters*
+
+        //button logout
+        final Button logout_btn = findViewById(R.id.logout);
+        logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 user.LogOut();
@@ -71,7 +104,9 @@ public class Base extends AppCompatActivity {
                 finish();
             }
         });
+        //**** Menu buttons END ****
 
+        //button create wishlist under layout gridView
         final Button create_wishList = findViewById(R.id.create_wishlist);
         create_wishList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +117,7 @@ public class Base extends AppCompatActivity {
             }
         });
 
+        //Grid item on click listener
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,21 +136,22 @@ public class Base extends AppCompatActivity {
                     }
                 });
 
-                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                //active wishlist button to back
+                wishlist_btn.setEnabled(true);
+                wishlist_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        CurrentWish.setInstance(current.getWishLst().get(position));
-                        Intent next_layout = new Intent(getApplicationContext(), WishActivity.class);
+                    public void onClick(View v) {
+                        Intent next_layout = new Intent(getApplicationContext(), Base.class);
                         startActivity(next_layout);
                         finish();
                     }
                 });
 
-                back.setText(R.string.back);
-                back.setOnClickListener(new View.OnClickListener() {
+                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        CurrentWish.setInstance(current.getWishLst().get(position));
+                        Intent next_layout = new Intent(getApplicationContext(), WishActivity.class);
                         startActivity(next_layout);
                         finish();
                     }
@@ -134,5 +171,7 @@ public class Base extends AppCompatActivity {
         //TODO manage permissions
         //TODO logs table for wish
         //TODO Friends layout, request, add, delete
+
+        //TODO parameters
     }
 }

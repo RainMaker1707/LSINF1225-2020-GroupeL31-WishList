@@ -40,4 +40,5 @@
     <string name="logout_txt">Logout</string>
     <string name="profile">Profile</string>
     <string name="param">Parameters</string>
+    <string name="menu">| | |</string>
 </resources>
