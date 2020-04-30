@@ -11,8 +11,10 @@ public class AccessDataBase {
     private Integer version = 1;
     private MySQLiteOpenHelper SQLiteHelper;
     private SQLiteDatabase db;
+    private Context context;
 
     public AccessDataBase(Context context){
+        this.context = context;
         SQLiteHelper = new MySQLiteOpenHelper(context, dbName, null, version);
     }
 
@@ -24,5 +26,9 @@ public class AccessDataBase {
     public Cursor select(String req){
         db = SQLiteHelper.getReadableDatabase();
         return db.rawQuery(req,null);
+    }
+
+    public Context getContext() {
+        return context;
     }
 }

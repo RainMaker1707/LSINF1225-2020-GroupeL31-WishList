@@ -43,4 +43,11 @@
     <string name="menu">| | |</string>
     <string name="blind_menu">Menu on the right side</string>
     <string name="menu_bg">menu background</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="search_friend">Search Friend</string>
+    <string name="friend_pseudo">Enter friend\'s pseudo or mail</string>
+    <string name="add_friends">addadadd</string>
+    <string name="user_name">User name</string>
+    <string name="wishlist_nbr">Has %s WishList</string>
+    <string name="mail_test">mailtest@mail.test.be</string>
 </resources>

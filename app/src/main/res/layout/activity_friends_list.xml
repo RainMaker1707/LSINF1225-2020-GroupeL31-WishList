@@ -56,7 +56,8 @@
         android:id="@+id/friend_list"
         android:layout_below="@id/title_fl"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp">
 
     </ListView>
 
@@ -132,5 +133,18 @@
             android:layout_marginStart="235dp"/>
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/add_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-55dp"
+        android:layout_marginStart="110dp"
+        android:background="@drawable/simple_button"
+        android:fontFamily="cursive"
+        android:text="@string/add_friend"
+        android:textSize="18sp"
+        android:textColor="@color/White"
+        android:layout_below="@id/friend_list"/>
 
 </RelativeLayout>

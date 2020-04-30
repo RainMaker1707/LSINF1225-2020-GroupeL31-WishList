@@ -85,5 +85,15 @@ public class FriendsList extends AppCompatActivity {
             }
         });
         //**** Menu buttons END ****
+
+        Button add_friend = findViewById(R.id.add_friend);
+        add_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), AddFriend.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
     }
 }

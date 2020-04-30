@@ -13,5 +13,6 @@
     <color name="transparent">#00000000</color>
     <color name="wish_list_background">#5590A4C5</color>
     <color name="Blue_alpha">#BF0A397E</color>
+    <color name="DarkBlue_alpha">#BF00061D</color>
 
 </resources>

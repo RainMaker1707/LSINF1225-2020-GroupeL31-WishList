@@ -80,15 +80,17 @@ public class User {
                 "OR mail_requested LIKE \""+ this.getEmail() + "\");");
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            friendList.add(new User());
-            int last = friendList.size() - 1;
+            User toAdd = new User();
+            toAdd.setDb(db.getContext());
             String temp_mail = cursor.getString(0);
             if(this.getEmail().equals(cursor.getString(0))){
                 temp_mail = cursor.getString(1);
             }
-            friendList.get(last).setRefFromDb(temp_mail);
+            toAdd.setRefFromDb(temp_mail);
+            friendList.add(toAdd);
         }
         cursor.close();
+        setFriendList(friendList);
     }
 
     /** Destroy the user attributes and remove the singleton reference
@@ -184,6 +186,14 @@ public class User {
 
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
+    }
+
+    public void setFriendList(List<User> users) {
+        this.friendList = users;
+    }
+
+    public List<User> getFriendList(){
+        return this.friendList;
     }
 
     public String getEmail() {
