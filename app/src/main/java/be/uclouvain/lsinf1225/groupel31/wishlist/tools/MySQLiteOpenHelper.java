@@ -39,6 +39,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 +"mail_requested VARCHAR (255) REFERENCES User (mail) NOT NULL,"
                 +"PRIMARY KEY (mail_host, mail_requested ));"
         );
+
         db.execSQL("CREATE TABLE Wishlist ("
                 +"id       INTEGER       PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,"
                 +"name     VARCHAR (255) NOT NULL,"

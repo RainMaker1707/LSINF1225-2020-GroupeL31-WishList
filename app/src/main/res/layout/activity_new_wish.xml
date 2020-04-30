@@ -54,7 +54,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/picture_gift"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         app:civ_border_width="2dp"
         app:civ_border_color="@color/Black"/>
         <LinearLayout
@@ -86,7 +86,8 @@
                     android:inputType="textPersonName"
                     android:background="@color/White"
                     android:layout_marginTop="15dp"
-                    android:layout_marginStart="20dp"/>
+                    android:layout_marginStart="20dp"
+                    tools:ignore="Autofill" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -113,7 +114,8 @@
                     android:inputType="numberDecimal"
                     android:background="@color/White"
                     android:layout_marginTop="15dp"
-                    android:layout_marginStart="70dp"/>
+                    android:layout_marginStart="70dp"
+                    tools:ignore="Autofill" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -131,7 +133,8 @@
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:inputType="text"
-        android:background="@color/White"/>
+        android:background="@color/White"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/description_in"
@@ -146,7 +149,8 @@
         android:layout_width="300dp"
         android:inputType="text"
         android:layout_height="150dp"
-        android:background="@color/White"/>
+        android:background="@color/White"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/add_button"
@@ -171,6 +175,7 @@
             android:layout_width="200dp"
             android:layout_height="300dp"
             android:layout_marginStart="200dp"
+            android:contentDescription="@string/blind_menu"
             android:layout_marginTop="100dp"
             android:layout_marginEnd="20dp"
             android:src="@drawable/menu_background"/>

@@ -170,6 +170,7 @@ public class Base extends AppCompatActivity {
 
         //TODO manage permissions
         //TODO logs table for wish
+
         //TODO Friends layout, request, add, delete
 
         //TODO parameters

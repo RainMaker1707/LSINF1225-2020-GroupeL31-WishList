@@ -41,4 +41,6 @@
     <string name="profile">Profile</string>
     <string name="param">Parameters</string>
     <string name="menu">| | |</string>
+    <string name="blind_menu">Menu on the right side</string>
+    <string name="menu_bg">menu background</string>
 </resources>
