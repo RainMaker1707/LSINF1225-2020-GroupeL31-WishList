@@ -35,7 +35,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE Friend (\n"
                 +"mail_host      VARCHAR (255) REFERENCES User (mail) NOT NULL,"
-                +"relation       BOOLEAN       NOT NULL DEFAULT (0),\n"
+                +"relation       BOOLEAN       NOT NULL DEFAULT (0),"
                 +"mail_requested VARCHAR (255) REFERENCES User (mail) NOT NULL,"
                 +"PRIMARY KEY (mail_host, mail_requested ));"
         );

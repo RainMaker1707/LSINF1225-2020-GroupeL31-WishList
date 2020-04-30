@@ -50,4 +50,5 @@
     <string name="user_name">User name</string>
     <string name="wishlist_nbr">Has %s WishList</string>
     <string name="mail_test">mailtest@mail.test.be</string>
+    <string name="x">X</string>
 </resources>

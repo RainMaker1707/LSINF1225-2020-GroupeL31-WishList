@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    android:background="@color/DarkGray">
+
+    <TextView
+        android:id="@+id/quit_popup"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:text="@string/x"
+        android:textAlignment="center"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round"
+        android:layout_marginEnd="10dp"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/friend_picture_popup"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/no_picture"
+        />
+
+    <TextView
+        android:id="@+id/friend_name_popup"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_name"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/mail_friend_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mail_test"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="53dp">
+
+        <TextView
+            android:id="@+id/wishlist_nbr_popup"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/wishlist_nbr"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:background="@color/DarkBlue"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/add_friend__popup"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="@string/add_friend"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:background="@color/Green"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

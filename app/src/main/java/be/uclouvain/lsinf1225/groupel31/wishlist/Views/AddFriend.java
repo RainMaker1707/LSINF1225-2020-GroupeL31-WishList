@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
 public class AddFriend extends AppCompatActivity {
     private boolean showed = false;
     private Activity activity;
+    private Dialog popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class AddFriend extends AppCompatActivity {
         setContentView(R.layout.activity_add_friend);
 
         this.activity = this;
+        popup = new Dialog(activity);
 
         final User user = CurrentUser.getInstance();
 
@@ -142,15 +145,50 @@ public class AddFriend extends AppCompatActivity {
                     list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            User current = users.get(position);
-                            AlertDialog.Builder popup = new AlertDialog.Builder(activity);
-                            popup.setTitle(current.getPseudo());
-                            popup.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            final User current = users.get(position);
+
+                            // set popup args
+                            popup.setContentView(R.layout.friend_popup);
+
+                            // set friend name
+                            TextView name = popup.findViewById(R.id.friend_name_popup);
+                            name.setText(current.getPseudo());
+
+                            // set friend mail
+                            TextView mail = popup.findViewById(R.id.mail_friend_popup);
+                            mail.setText(current.getEmail());
+
+                            // set friend wishlist nbr
+                            TextView nbr = popup.findViewById(R.id.wishlist_nbr_popup);
+                            nbr.setText("Has " + current.getWishlist_list().size() + " WishList");
+
+                            //TODO set pictures
+
+                            //TODO button add
+                            Button add = popup.findViewById(R.id.add_friend__popup);
+                            add.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(getApplicationContext(), "OK popup", Toast.LENGTH_SHORT).show();
+                                public void onClick(View v) {
+                                    AccessDataBase db = new AccessDataBase(getApplicationContext());
+                                    db.insert("INSERT INTO Friend (mail_host, relation, mail_requested)"
+                                            + "VALUES (\""+ user.getEmail() + "\", 1, \""
+                                            + current.getEmail() + "\");");
+                                    Toast.makeText(getApplicationContext(), "Correctly added "
+                                            + current.getPseudo(),
+                                            Toast.LENGTH_SHORT).show();
+
                                 }
                             });
+
+                            // listener for quit button
+                            TextView quit = popup.findViewById(R.id.quit_popup);
+                            quit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popup.dismiss();
+                                }
+                            });
+
                             popup.show();
                         }
                     });

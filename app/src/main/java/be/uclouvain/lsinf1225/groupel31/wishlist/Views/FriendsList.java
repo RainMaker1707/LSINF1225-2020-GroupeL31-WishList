@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
 
 public class FriendsList extends AppCompatActivity {
     boolean showed = false;
@@ -95,5 +98,15 @@ public class FriendsList extends AppCompatActivity {
                 finish();
             }
         });
+
+        ListView list = findViewById(R.id.friend_list);
+        list.setAdapter(new FriendAdapter(getApplicationContext(), user.getFriendList()));
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                
+            }
+        });
+
     }
 }
