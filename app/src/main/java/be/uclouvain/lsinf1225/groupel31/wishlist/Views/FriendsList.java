@@ -101,12 +101,6 @@ public class FriendsList extends AppCompatActivity {
 
         ListView list = findViewById(R.id.friend_list);
         list.setAdapter(new FriendAdapter(getApplicationContext(), user.getFriendList()));
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
-            }
-        });
 
     }
 }
