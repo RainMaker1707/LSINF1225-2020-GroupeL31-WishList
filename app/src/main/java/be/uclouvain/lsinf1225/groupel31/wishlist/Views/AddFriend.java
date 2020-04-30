@@ -2,15 +2,11 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,16 +28,13 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
 
 public class AddFriend extends AppCompatActivity {
     private boolean showed = false;
-    private Activity activity;
     private Dialog popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-
-        this.activity = this;
-        popup = new Dialog(activity);
+        popup = new Dialog(this);
 
         final User user = CurrentUser.getInstance();
 
@@ -131,10 +124,19 @@ public class AddFriend extends AppCompatActivity {
                     cursor.moveToFirst();
                     while (!cursor.isAfterLast()) {
                         if(!cursor.getString(1).equals(user.getEmail())) {
-                            User toAdd = new User();
-                            toAdd.setDb(getApplicationContext());
-                            toAdd.setRefFromDb(cursor.getString(1));
-                            users.add(toAdd);
+                            boolean found = false;
+                            for(int i = 0; i< user.getFriendList().size(); i++){
+                                if(cursor.getString(1).equals(user.getFriendList().get(i).getEmail())){
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if(!found) {
+                                User toAdd = new User();
+                                toAdd.setDb(getApplicationContext());
+                                toAdd.setRefFromDb(cursor.getString(1));
+                                users.add(toAdd);
+                            }
 
                         }
                         cursor.moveToNext();
@@ -160,22 +162,23 @@ public class AddFriend extends AppCompatActivity {
 
                             // set friend wishlist nbr
                             TextView nbr = popup.findViewById(R.id.wishlist_nbr_popup);
-                            nbr.setText("Has " + current.getWishlist_list().size() + " WishList");
+                            nbr.setText(String.format("Has %s WishLists",
+                                    current.getWishlist_list().size()));
 
                             //TODO set pictures
 
-                            //TODO button add
-                            Button add = popup.findViewById(R.id.add_friend__popup);
+                            // button add
+                            TextView add = popup.findViewById(R.id.add_friend__popup);
                             add.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    AccessDataBase db = new AccessDataBase(getApplicationContext());
-                                    db.insert("INSERT INTO Friend (mail_host, relation, mail_requested)"
-                                            + "VALUES (\""+ user.getEmail() + "\", 1, \""
-                                            + current.getEmail() + "\");");
+
+                                    user.addFriend(current.getEmail());
+
                                     Toast.makeText(getApplicationContext(), "Correctly added "
                                             + current.getPseudo(),
                                             Toast.LENGTH_SHORT).show();
+                                    popup.dismiss();
 
                                 }
                             });

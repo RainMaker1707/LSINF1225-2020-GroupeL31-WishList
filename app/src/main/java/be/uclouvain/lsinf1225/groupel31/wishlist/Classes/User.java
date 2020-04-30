@@ -15,8 +15,6 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 
 public class User {
 
-    private boolean created;
-    private boolean signIn = false;
     private String email;
     private String pseudo;
     private String password;
@@ -28,14 +26,15 @@ public class User {
 
     //only set the created on true
     public User(){
-        this.created = true;
+
     }
 
     /** Set signIn on true, retrieve all data from data base and set the current user singleton
      * on this one
      */
     public void signIn(String mail){
-        setSignIn(true);
+        setEmail(mail);
+        CurrentUser.setInstance(this);
         setRefFromDb(mail);
         CurrentUser.setInstance(this);
     }
@@ -52,7 +51,10 @@ public class User {
         setAddress(cursor.getString(4));
         cursor.close();
         updateWishList();
-        updateFriendList();
+        if(CurrentUser.getInstance().getEmail().equals(mail)) {
+            updateFriendList();
+        }
+
     }
 
     /** Update the wishlist from the database
@@ -76,21 +78,30 @@ public class User {
     private void updateFriendList(){
         List<User> friendList = new ArrayList<>();
         Cursor cursor = db.select("SELECT mail_host, mail_requested " +
-                "FROM Friend WHERE relation=\"1\" AND (mail_host LIKE \""+ this.getEmail() +"\" " +
-                "OR mail_requested LIKE \""+ this.getEmail() + "\");");
+                "FROM Friend WHERE relation=1 AND (mail_host=\""+ this.getEmail() +"\" " +
+                "OR mail_requested=\""+ this.getEmail() + "\");");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
-            User toAdd = new User();
-            toAdd.setDb(db.getContext());
+        while(!cursor.isAfterLast()) {
             String temp_mail = cursor.getString(0);
-            if(this.getEmail().equals(cursor.getString(0))){
+            if(temp_mail.equals(CurrentUser.getInstance().getEmail())){
                 temp_mail = cursor.getString(1);
             }
+
+            User toAdd = new User();
+            toAdd.setDb(db);
             toAdd.setRefFromDb(temp_mail);
             friendList.add(toAdd);
+            cursor.moveToNext();
         }
         cursor.close();
         setFriendList(friendList);
+    }
+
+    public void addFriend(String mail){
+        db.insert("INSERT INTO Friend (mail_host, relation, mail_requested)"
+                + "VALUES (\""+ this.getEmail() + "\", 1, \""
+                + mail + "\");");
+        updateFriendList();
     }
 
     /** Destroy the user attributes and remove the singleton reference
@@ -102,16 +113,13 @@ public class User {
 
     /** remove all user's attributes
      */
-    public void destroyUser(){
-        setCreated(false);
-        setSignIn(false);
+    private void destroyUser(){
         setAddress(null);
         setEmail(null);
         setPassword(null);
         setProfilePicture(null);
         setPseudo(null);
         setWishlist_list(null);
-        setDb(null);
     }
 
     /** Function which just check if password and mail passed as arg are same as these stored in db
@@ -168,31 +176,32 @@ public class User {
     }
 
     // ******* getters and setters *****
-    public void setEmail(String email){
+    private void setEmail(String email){
         this.email = email;
     }
 
-    public void setAddress(String address) {
+    private void setAddress(String address) {
         this.address = address;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 
-    public void setProfilePicture(Image profilePicture) {
+    private void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
     }
 
-    public void setPseudo(String pseudo) {
+    private void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
 
-    public void setFriendList(List<User> users) {
+    private void setFriendList(List<User> users) {
         this.friendList = users;
     }
 
     public List<User> getFriendList(){
+        updateFriendList();
         return this.friendList;
     }
 
@@ -204,7 +213,7 @@ public class User {
         return pseudo;
     }
 
-    public String getPassword() {
+    private String getPassword() {
         return password;
     }
 
@@ -220,27 +229,16 @@ public class User {
         return this.wishlist_list;
     }
 
-    public boolean isSignIn() {
-        return signIn;
-    }
-
-    public void setWishlist_list(List<WishList> wishlist_list) {
+    private void setWishlist_list(List<WishList> wishlist_list) {
         this.wishlist_list = wishlist_list;
     }
 
-    public void setSignIn(boolean signIn) {
-        this.signIn = signIn;
-    }
-
-    public boolean isCreated() {
-        return created;
-    }
-
-    public void setCreated(boolean created) {
-        this.created = created;
-    }
 
     public void setDb(Context context) {
         this.db = new AccessDataBase(context);
+    }
+
+    private void setDb(AccessDataBase db){
+        this.db = db;
     }
 }
