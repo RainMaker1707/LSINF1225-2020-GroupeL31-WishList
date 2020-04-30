@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
@@ -59,6 +60,9 @@ public class SignIn extends AppCompatActivity {
                     user.signIn(mail);
                     if(user.matchingPassAndMail(password, mail)){
                         //go to next layout -> base activity
+                        Toast.makeText(getApplicationContext(), "Log In as "
+                                + user.getPseudo(), Toast.LENGTH_SHORT).show();
+
                         Intent next_layout = new Intent(getApplicationContext(), Base.class);
                         startActivity(next_layout);
                         finish();

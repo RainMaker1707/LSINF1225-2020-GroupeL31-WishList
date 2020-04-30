@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
 
@@ -77,6 +78,8 @@ public class SignUp extends AppCompatActivity {
                                 //set all user's attributes with db ref and set singleton CurrentUser on this user
                                 new_user.signIn(mail);
                                 //go to next layout->base activity
+                                Toast.makeText(getApplicationContext(), "Log Up successfully as "
+                                        + new_user.getPseudo(), Toast.LENGTH_SHORT).show();
                                 Intent next_layout = new Intent(getApplicationContext(), Base.class);
                                 startActivity(next_layout);
                                 finish();
