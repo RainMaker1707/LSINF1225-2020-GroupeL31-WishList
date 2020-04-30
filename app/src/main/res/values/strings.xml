@@ -51,4 +51,5 @@
     <string name="wishlist_nbr">Has %s WishList</string>
     <string name="mail_test">mailtest@mail.test.be</string>
     <string name="x">X</string>
+    <string name="delete_friend">Delete friend</string>
 </resources>

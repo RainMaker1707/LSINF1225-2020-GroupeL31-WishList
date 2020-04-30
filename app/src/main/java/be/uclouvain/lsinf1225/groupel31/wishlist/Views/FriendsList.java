@@ -2,6 +2,7 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
@@ -17,6 +21,7 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
 
 public class FriendsList extends AppCompatActivity {
     boolean showed = false;
+    private Dialog popup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +106,51 @@ public class FriendsList extends AppCompatActivity {
 
         ListView list = findViewById(R.id.friend_list);
         list.setAdapter(new FriendAdapter(getApplicationContext(), user.getFriendList()));
+
+        popup = new Dialog(this);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final User current = user.getFriendList().get(position);
+                popup.setContentView(R.layout.friend_popup);
+
+                //TODO picture set
+
+                TextView name = popup.findViewById(R.id.friend_name_popup);
+                name.setText(current.getPseudo());
+
+                TextView mail = popup.findViewById(R.id.mail_friend_popup);
+                mail.setText(current.getEmail());
+
+                TextView wishlist_nbr = popup.findViewById(R.id.wishlist_nbr_popup);
+                wishlist_nbr.setText(String.format("Has %s WishList", current.getWishlist_list().size()));
+
+                TextView delete = popup.findViewById(R.id.add_friend__popup);
+                delete.setText(R.string.delete_friend);
+                delete.setBackgroundColor(getColor(R.color.Red));
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        user.deleteFriend(current.getEmail());
+                        popup.dismiss();
+                        Intent refresh = new Intent(getApplicationContext(), FriendsList.class);
+                        startActivity(refresh);
+                        finish();
+                    }
+                });
+
+                TextView quit = popup.findViewById(R.id.quit_popup);
+                quit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.dismiss();
+                    }
+                });
+
+                popup.show();
+
+            }
+        });
 
     }
 }

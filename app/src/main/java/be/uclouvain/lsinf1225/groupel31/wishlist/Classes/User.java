@@ -104,6 +104,14 @@ public class User {
         updateFriendList();
     }
 
+    public void deleteFriend(String mail){
+        db.insert("DELETE FROM Friend WHERE (mail_host=\""
+                + this.getEmail() + "\" AND mail_requested=\""
+                + mail + "\") OR (mail_host=\"" + mail + "\" AND mail_requested=\""
+                + this.getEmail() + "\");");
+        updateFriendList();
+    }
+
     /** Destroy the user attributes and remove the singleton reference
      */
     public void LogOut(){
