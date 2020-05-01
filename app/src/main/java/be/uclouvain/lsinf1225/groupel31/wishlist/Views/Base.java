@@ -158,6 +158,9 @@ public class Base extends AppCompatActivity {
                 });
             }
         });
+
+        //TODO Friends request (accept or refuse)
+
         //TODO Wish Layout
         //TODO delete  & modify WishList
         //TODO delete & modify  Wish
@@ -171,7 +174,7 @@ public class Base extends AppCompatActivity {
         //TODO manage permissions
         //TODO logs table for wish
 
-        //TODO Friends layout, request, add, delete
+
 
         //TODO parameters
     }

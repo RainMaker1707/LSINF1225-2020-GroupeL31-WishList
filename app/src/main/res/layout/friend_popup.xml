@@ -66,8 +66,10 @@
 
         <TextView
             android:id="@+id/add_friend__popup"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="100dp"
+            android:height="50dp"
             android:text="@string/add_friend"
             android:textAlignment="center"
             android:gravity="center_vertical"
@@ -75,7 +77,18 @@
             android:background="@color/Green"
             android:fontFamily="cursive"
             android:textStyle="bold"
-
+            />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="@color/White"
+            android:text="@string/x"
+            android:background="@color/Red"
             />
     </LinearLayout>
 
