@@ -3,14 +3,17 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.util.Currency;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
 
 public class WishActivity extends AppCompatActivity {
 
@@ -92,5 +95,8 @@ public class WishActivity extends AppCompatActivity {
             }
         });
         //**** Menu buttons END ****
+
+        Wish currentWish = CurrentWish.getInstance();
+        
     }
 }

@@ -8,6 +8,7 @@
     android:background="@drawable/blue_background"
     tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.WishActivity">
     <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -112,4 +113,114 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_bar"
+        android:layout_marginStart="50dp"
+        android:text="@string/wish_title"
+        android:fontFamily="cursive"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/LightGray"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/page_title"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:src="@drawable/picture_gift"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:layout_marginTop="50dp"
+                android:fontFamily="cursive"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/market"
+                android:layout_marginTop="50dp"
+                android:fontFamily="cursive"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="40dp">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:layout_marginTop="50dp"
+                android:fontFamily="cursive"/>
+
+            <TextView
+                android:id="@+id/market"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/market"
+                android:layout_marginTop="50dp"
+                android:fontFamily="cursive"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/descriptor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:layout_marginStart="50dp"
+        android:text="@string/description"
+        android:fontFamily="cursive"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/LightGray"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/descriptor"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="65dp"
+        android:text="@string/lorem"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_button"
+        android:layout_below="@id/description"
+        android:layout_marginTop="-50dp"
+        android:layout_marginStart="110dp"
+        android:text="@string/modify"
+        android:fontFamily="cursive"
+        android:textColor="@color/White"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
 </RelativeLayout>
