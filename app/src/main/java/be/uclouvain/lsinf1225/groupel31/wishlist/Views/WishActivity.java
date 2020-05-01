@@ -3,7 +3,6 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.icu.util.Currency;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -99,19 +98,23 @@ public class WishActivity extends AppCompatActivity {
 
         Wish currentWish = CurrentWish.getInstance();
 
+        //Set title page to wish name
         TextView name = findViewById(R.id.page_title);
         name.setText(currentWish.getName());
 
+        //Set price
         TextView price = findViewById(R.id.price);
         price.setText(String.format("%s €", currentWish.getPrice()));
 
+        //Set market if one is saved
         TextView market = findViewById(R.id.market);
         if(currentWish.getMarket().length() > 1){ market.setText(currentWish.getMarket());}
-        else{market.setText("No market filled");}
+        else{market.setText(R.string.no_market);}
 
+        //Set description if one is saved
         TextView description = findViewById(R.id.description);
         if(currentWish.getDescription().length() > 1){ description.setText(currentWish.getDescription());}
-        else{market.setText("No description filled");}
+        else{description.setText(R.string.no_desc);}
 
         //TODO set picture
 

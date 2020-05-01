@@ -172,7 +172,8 @@ public class Base extends AppCompatActivity {
         //TODO set picture WishList
         //TODO set picture Wish
 
-        //TODO in last
+        //TODO after
+        //TODO show friend's wishlist
         //TODO manage permissions
         //TODO logs table for wish
         //TODO parameters
