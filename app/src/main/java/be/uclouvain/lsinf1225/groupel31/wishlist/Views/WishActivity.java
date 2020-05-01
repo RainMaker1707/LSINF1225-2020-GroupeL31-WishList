@@ -17,13 +17,14 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
 
 public class WishActivity extends AppCompatActivity {
 
-    boolean showed = false;
-    User user = CurrentUser.getInstance();
+    private boolean isFriendWish;
+    private boolean showed = false;
+    private User user = CurrentUser.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish);
-
+        isFriendWish = getIntent().getBooleanExtra("isFriendWish", false);
         //Circle profile picture action -> go to profile activity
         de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +116,13 @@ public class WishActivity extends AppCompatActivity {
         TextView description = findViewById(R.id.description);
         if(currentWish.getDescription().length() > 1){ description.setText(currentWish.getDescription());}
         else{description.setText(R.string.no_desc);}
+
+        //button, modify
+        Button modify = findViewById(R.id.modify_btn);
+        if (isFriendWish){ modify.setEnabled(false);}
+        else{
+            modify.setOnClickListener(null);//TODO modify wish
+        }
 
         //TODO set picture
 

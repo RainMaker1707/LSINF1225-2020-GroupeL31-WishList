@@ -1,7 +1,5 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +8,8 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
@@ -20,26 +20,19 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishAdapter;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishListAdapter;
 
-public class Base extends AppCompatActivity {
-    boolean showed = false;
+public class FriendsWishList extends AppCompatActivity {
+
+    private boolean showed = false;
+    private User currentFriend = new User();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
 
-        final TextView title = findViewById(R.id.page_title);
-        title.setText(R.string.list_wishlist);
-
-        final GridView grid = findViewById(R.id.news_grid);
-        grid.setNumColumns(1);
-
         final User user = CurrentUser.getInstance();
-
-        //grid set adapter if something in user.list<WishList>
-        if(user.getWishlist_list().size() != 0){
-            grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
-        }
-
+        currentFriend.setDb(getApplicationContext());
+        currentFriend.setRefFromDb(getIntent().getStringExtra("currentFriend"));
         //menu show or not
         final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
@@ -105,37 +98,27 @@ public class Base extends AppCompatActivity {
             }
         });
         //**** Menu buttons END ****
+        TextView title = findViewById(R.id.page_title);
+        title.setText(String.format("%s 's WishLists", currentFriend.getPseudo()));
 
         //button create wishlist under layout gridView
         final Button create_wishList = findViewById(R.id.create_wishlist);
-        create_wishList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent next_layout = new Intent(getApplicationContext(), NewWishList.class);
-                startActivity(next_layout);
-                finish();
-            }
-        });
+        create_wishList.setEnabled(false);
 
-        //Grid item on click listener
+        //grid view
+        final GridView grid = findViewById(R.id.news_grid);
+        grid.setNumColumns(1);
+        grid.setAdapter(new WishListAdapter(getApplicationContext(), currentFriend.getWishlist_list()));
+
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final WishList current = user.getWishlist_list().get(position);
-                title.setText(current.getName());
+                final WishList current = currentFriend.getWishlist_list().get(position);
                 grid.setNumColumns(2);
                 grid.setAdapter(new WishAdapter(getApplicationContext(), current.getWishLst()));
                 CurrentWishList.setInstance(current);
                 create_wishList.setText(R.string.add_wish);
-                create_wishList.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent next_layout = new Intent(getApplicationContext(), NewWish.class);
-                        startActivity(next_layout);
-                        finish();
-                    }
-                });
-
+                create_wishList.setEnabled(false);
                 //active wishlist button to back
                 wishlist_btn.setEnabled(true);
                 wishlist_btn.setOnClickListener(new View.OnClickListener() {
@@ -152,31 +135,12 @@ public class Base extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         CurrentWish.setInstance(current.getWishLst().get(position));
                         Intent next_layout = new Intent(getApplicationContext(), WishActivity.class);
-                        next_layout.putExtra("isFriendWish", false);
+                        next_layout.putExtra("isFriendWish", true);
                         startActivity(next_layout);
                         finish();
                     }
                 });
             }
         });
-
-        //TODO today
-        //Friends request (accept or refuse) OK
-        //Wish Layout OK
-        //wish layout dynamic OK
-        //show friend's wishlist
-        //TODO delete  & modify WishList
-        //TODO delete & modify  Wish
-
-        //TODO tomorrow
-        //TODO modify profile and add more info in SignUP & preferences
-        //TODO set picture profile
-        //TODO set picture WishList
-        //TODO set picture Wish
-
-        //TODO after
-        //TODO manage permissions
-        //TODO logs table for wish
-        //TODO parameters
     }
 }

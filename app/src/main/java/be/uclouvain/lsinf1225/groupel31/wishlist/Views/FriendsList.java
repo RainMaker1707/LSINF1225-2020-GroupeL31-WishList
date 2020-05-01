@@ -123,6 +123,16 @@ public class FriendsList extends AppCompatActivity {
 
                 TextView wishlist_nbr = popup.findViewById(R.id.wishlist_nbr_popup);
                 wishlist_nbr.setText(String.format("Has %s WishList", current.getWishlist_list().size()));
+                wishlist_nbr.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent next_layout = new Intent(getApplicationContext(), FriendsWishList.class);
+                        next_layout.putExtra("currentFriend", current.getEmail());
+                        startActivity(next_layout);
+                        finish();
+                    }
+                });
+
                 TextView delete = popup.findViewById(R.id.add_friend__popup);
                 if(current.isFriend()) {
                     delete.setText(R.string.delete_friend);
@@ -174,6 +184,7 @@ public class FriendsList extends AppCompatActivity {
                         }
                     });
                 }
+
 
                 TextView quit = popup.findViewById(R.id.quit_popup);
                 quit.setOnClickListener(new View.OnClickListener() {

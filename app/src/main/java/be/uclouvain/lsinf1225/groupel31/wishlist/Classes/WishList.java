@@ -81,6 +81,8 @@ public class WishList {
         req = "INSERT INTO Content (wishlist, product) VALUES (\"" + this.id + "\", \"" + wish_id + "\");";
         db.insert(req);
         updateWishLst();
+        this.size++;
+        db.insert("UPDATE Wishlist SET size=" + this.size + " WHERE id=" + this.getId());
     }
 
     public boolean deleteWish(Wish wish){

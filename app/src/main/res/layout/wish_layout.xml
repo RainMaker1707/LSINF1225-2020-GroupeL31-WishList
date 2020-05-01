@@ -32,14 +32,15 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
             >
             <TextView
                 android:id ="@+id/wish_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/LightGray"
+                android:textAlignment="center"
                 android:text="@string/wish_title"
                 android:fontFamily="cursive"
                 android:textSize="20sp"/>
@@ -50,6 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/wish_title"
                 android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
                 android:textColor="@color/LightGray"
                 android:text="@string/wish_price"
                 android:fontFamily="cursive"
