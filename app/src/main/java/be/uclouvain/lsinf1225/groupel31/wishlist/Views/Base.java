@@ -162,6 +162,7 @@ public class Base extends AppCompatActivity {
         //TODO today
         //Friends request (accept or refuse) OK
         //Wish Layout OK
+        //wish layout dynamic OK
         //TODO delete  & modify WishList
         //TODO delete & modify  Wish
 

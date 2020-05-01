@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
@@ -97,6 +98,22 @@ public class WishActivity extends AppCompatActivity {
         //**** Menu buttons END ****
 
         Wish currentWish = CurrentWish.getInstance();
-        
+
+        TextView name = findViewById(R.id.page_title);
+        name.setText(currentWish.getName());
+
+        TextView price = findViewById(R.id.price);
+        price.setText(String.format("%s €", currentWish.getPrice()));
+
+        TextView market = findViewById(R.id.market);
+        if(currentWish.getMarket().length() > 1){ market.setText(currentWish.getMarket());}
+        else{market.setText("No market filled");}
+
+        TextView description = findViewById(R.id.description);
+        if(currentWish.getDescription().length() > 1){ description.setText(currentWish.getDescription());}
+        else{market.setText("No description filled");}
+
+        //TODO set picture
+
     }
 }

@@ -163,7 +163,7 @@ public class FriendsList extends AppCompatActivity {
                     refuse.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            user.deleteFriend(current.getEmail());
+                            user.refuseRequest(current.getEmail());
                             popup.dismiss();
                             Toast.makeText(getApplicationContext(), "Refused invite",
                                     Toast.LENGTH_SHORT).show();
