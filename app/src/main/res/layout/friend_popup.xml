@@ -4,7 +4,7 @@
     android:layout_gravity="center"
     android:layout_width="300dp"
     android:layout_height="400dp"
-    android:background="@color/DarkGray">
+    android:background="@color/MiddleGray">
 
     <TextView
         android:id="@+id/quit_popup"
