@@ -159,23 +159,21 @@ public class Base extends AppCompatActivity {
             }
         });
 
+        //TODO today
         //TODO Friends request (accept or refuse)
-
         //TODO Wish Layout
         //TODO delete  & modify WishList
         //TODO delete & modify  Wish
 
+        //TODO tomorrow
         //TODO modify profile and add more info in SignUP & preferences
-
         //TODO set picture profile
         //TODO set picture WishList
         //TODO set picture Wish
 
+        //TODO in last
         //TODO manage permissions
         //TODO logs table for wish
-
-
-
         //TODO parameters
     }
 }

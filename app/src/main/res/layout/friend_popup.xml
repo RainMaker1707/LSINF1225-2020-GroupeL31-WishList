@@ -79,6 +79,7 @@
             android:textStyle="bold"
             />
         <TextView
+            android:id="@+id/refuse_popup"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:fontFamily="cursive"

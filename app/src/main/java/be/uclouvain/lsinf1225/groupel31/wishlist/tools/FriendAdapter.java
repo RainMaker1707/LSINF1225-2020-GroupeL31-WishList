@@ -48,7 +48,12 @@ public class FriendAdapter extends BaseAdapter {
         TextView name = convertView.findViewById(R.id.name);
         TextView nbr_wishlist = convertView.findViewById(R.id.nbr_wishlist);
         TextView mail = convertView.findViewById(R.id.mail_friend);
-
+        ImageView background = convertView.findViewById(R.id.background);
+        if(!current.isFriend() && current.isRequested()){
+            background.setImageResource(R.drawable.friend_req);
+        }else if(!current.isFriend() && !current.isRequested()){
+            background.setImageResource(R.drawable.friend_dis);
+        }
         name.setText(current.getPseudo());
         nbr_wishlist.setText(String.format("Has %s WishLists", current.getWishlist_list().size()));
         mail.setText(current.getEmail());

@@ -52,4 +52,6 @@
     <string name="mail_test">mailtest@mail.test.be</string>
     <string name="x">X</string>
     <string name="delete_friend">Delete friend</string>
+    <string name="pending">Pending invite</string>
+    <string name="accept">V</string>
 </resources>

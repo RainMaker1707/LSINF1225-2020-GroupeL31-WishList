@@ -11,8 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
@@ -124,20 +123,57 @@ public class FriendsList extends AppCompatActivity {
 
                 TextView wishlist_nbr = popup.findViewById(R.id.wishlist_nbr_popup);
                 wishlist_nbr.setText(String.format("Has %s WishList", current.getWishlist_list().size()));
-
                 TextView delete = popup.findViewById(R.id.add_friend__popup);
-                delete.setText(R.string.delete_friend);
-                delete.setBackgroundColor(getColor(R.color.Red));
-                delete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        user.deleteFriend(current.getEmail());
-                        popup.dismiss();
-                        Intent refresh = new Intent(getApplicationContext(), FriendsList.class);
-                        startActivity(refresh);
-                        finish();
-                    }
-                });
+                if(current.isFriend()) {
+                    delete.setText(R.string.delete_friend);
+                    delete.setBackgroundColor(getColor(R.color.Red));
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            user.deleteFriend(current.getEmail());
+                            popup.dismiss();
+                            Toast.makeText(getApplicationContext(), "Delete succesfully",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent refresh = new Intent(getApplicationContext(), FriendsList.class);
+                            startActivity(refresh);
+                            finish();
+                        }
+                    });
+                }else if(!current.isFriend() && !current.isRequested()){
+                    delete.setText(R.string.pending);
+                    delete.setBackgroundColor(getColor(R.color.Gray));
+                }else if (!current.isFriend() && current.isRequested()){
+                    delete.setText(R.string.accept);
+                    delete.setWidth(150);
+                    delete.setBackgroundColor(getColor(R.color.Green));
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            user.acceptRequest(current.getEmail());
+                            popup.dismiss();
+                            Toast.makeText(getApplicationContext(), "Accepted invite",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent refresh = new Intent(getApplicationContext(), FriendsList.class);
+                            startActivity(refresh);
+                            finish();
+                        }
+                    });
+
+                    TextView refuse = popup.findViewById(R.id.refuse_popup);
+                    refuse.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            user.deleteFriend(current.getEmail());
+                            popup.dismiss();
+                            Toast.makeText(getApplicationContext(), "Refused invite",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent refresh = new Intent(getApplicationContext(), FriendsList.class);
+                            startActivity(refresh);
+                            finish();
+
+                        }
+                    });
+                }
 
                 TextView quit = popup.findViewById(R.id.quit_popup);
                 quit.setOnClickListener(new View.OnClickListener() {

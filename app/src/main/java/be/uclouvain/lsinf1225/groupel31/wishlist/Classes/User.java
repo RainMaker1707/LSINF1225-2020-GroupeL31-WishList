@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.media.Image;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -19,10 +20,13 @@ public class User {
     private String pseudo;
     private String password;
     private String address;
+    private Context context;
     private Image profilePicture;
     private List<WishList> wishlist_list;
     private List<User> friendList;
     private AccessDataBase db;
+    private boolean isFriend = false;
+    private boolean requested = false;
 
     //only set the created on true
     public User(){
@@ -77,19 +81,21 @@ public class User {
      */
     private void updateFriendList(){
         List<User> friendList = new ArrayList<>();
-        Cursor cursor = db.select("SELECT mail_host, mail_requested " +
-                "FROM Friend WHERE relation=1 AND (mail_host=\""+ this.getEmail() +"\" " +
+        Cursor cursor = db.select("SELECT mail_host, relation, mail_requested " +
+                "FROM Friend WHERE (mail_host=\""+ this.getEmail() +"\" " +
                 "OR mail_requested=\""+ this.getEmail() + "\");");
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
             String temp_mail = cursor.getString(0);
             if(temp_mail.equals(CurrentUser.getInstance().getEmail())){
-                temp_mail = cursor.getString(1);
+                temp_mail = cursor.getString(2);
             }
 
             User toAdd = new User();
-            toAdd.setDb(db);
+            toAdd.setDb(this.context);
             toAdd.setRefFromDb(temp_mail);
+            if(cursor.getInt(1) == 1 ){toAdd.setFriend(true);}
+            else if(temp_mail.equals(cursor.getString(0))){toAdd.setRequested(true);}
             friendList.add(toAdd);
             cursor.moveToNext();
         }
@@ -99,9 +105,20 @@ public class User {
 
     public void addFriend(String mail){
         db.insert("INSERT INTO Friend (mail_host, relation, mail_requested)"
-                + "VALUES (\""+ this.getEmail() + "\", 1, \""
+                + "VALUES (\""+ this.getEmail() + "\", 0, \""
                 + mail + "\");");
         updateFriendList();
+    }
+
+    public void acceptRequest(String mail){
+        db.insert("UPDATE Friend SET relation=1 " +
+                "WHERE (mail_host=\"" + this.getEmail() + "\" AND mail_requested=\"" + mail +"\") " +
+                "OR (mail_host=\"" + mail + "\" AND mail_requested=\"" + this.getEmail()+ "\");");
+        updateFriendList();
+    }
+
+    public void refuseRequest(String mail){
+        deleteFriend(mail);
     }
 
     public void deleteFriend(String mail){
@@ -117,6 +134,8 @@ public class User {
     public void LogOut(){
         destroyUser();
         CurrentUser.setInstance(null);
+        Toast.makeText(this.context, "See You Soon !",
+                Toast.LENGTH_SHORT).show();
     }
 
     /** remove all user's attributes
@@ -243,10 +262,23 @@ public class User {
 
 
     public void setDb(Context context) {
+        this.context = context;
         this.db = new AccessDataBase(context);
     }
 
-    private void setDb(AccessDataBase db){
-        this.db = db;
+    public boolean isFriend() {
+        return isFriend;
+    }
+
+    public void setFriend(boolean friend) {
+        isFriend = friend;
+    }
+
+    public boolean isRequested() {
+        return requested;
+    }
+
+    public void setRequested(boolean requested) {
+        this.requested = requested;
     }
 }
