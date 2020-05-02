@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -114,7 +115,7 @@ public class AddFriend extends AppCompatActivity {
         button.setLayoutParams(params);
 
 
-        final ListView list_view = findViewById(R.id.list_view);
+        final GridView list_view = findViewById(R.id.list_view_t);
 
 
         EditText text = findViewById(R.id.input_search);

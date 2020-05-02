@@ -70,4 +70,5 @@
     <string name="sure_delete">Are you sure to delete this wishlist :</string>
     <string name="sure">Yes</string>
     <string name="no">No</string>
+    <string name="cancel">Cancel</string>
 </resources>

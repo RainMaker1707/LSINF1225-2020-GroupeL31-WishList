@@ -52,7 +52,6 @@ public class WishAdapter extends BaseAdapter {
 
         title.setText(current.getName());
         price.setText(String.format("Price : %.2f", current.getPrice()));
-        //TODO set args
         //TODO set Image
         return convertView;
     }

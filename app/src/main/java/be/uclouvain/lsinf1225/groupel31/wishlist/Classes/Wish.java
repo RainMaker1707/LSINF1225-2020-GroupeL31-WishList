@@ -18,7 +18,8 @@ public class Wish {
      * @param price
      * @param market
      */
-    public Wish(String name, Image picture, String description, double price, String market) {
+    public Wish(int id, String name, Image picture, String description, double price, String market) {
+        this.id = id;
         this.name = name;
         this.picture = picture;
         this.description = description;

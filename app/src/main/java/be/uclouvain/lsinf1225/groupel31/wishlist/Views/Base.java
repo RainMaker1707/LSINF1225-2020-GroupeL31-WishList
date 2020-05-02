@@ -208,6 +208,14 @@ public class Base extends AppCompatActivity {
                                 conf_popup.show();
                             }
                         });
+
+                        TextView quit = popup.findViewById(R.id.quit_popup);
+                        quit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popup.dismiss();
+                            }
+                        });
                         popup.show();
 
                     }
@@ -257,8 +265,8 @@ public class Base extends AppCompatActivity {
         //show friend's wishlist OK
 
         //** 02/05
-        //TODO modify & delete WishList -> in curse
-        //TODO SEARCH Wish
+        //modify & delete WishList
+        //SEARCH Wish
         //TODO delete & modify  Wish
         //TODO modify profile and add more info in SignUP & preferences
 

@@ -48,7 +48,7 @@ public class WishList {
         cursor.moveToFirst();
         //loop to append wish in list
         while(!cursor.isAfterLast()){
-            wishes.add(new Wish(cursor.getString(1), null, cursor.getString(4),
+            wishes.add(new Wish(cursor.getInt(0), cursor.getString(1), null, cursor.getString(4),
                     cursor.getDouble(5), cursor.getString(6)));
             cursor.moveToNext();
         }
@@ -71,18 +71,21 @@ public class WishList {
         req += description + "\", \"" + price + "\", \"" + market + "\");";
         db.insert(req);
 
-        //select to find id
+        //select to find id of last wish inserted
         Cursor cursor = db.select("SELECT * FROM Wish");
         cursor.moveToLast();
         int wish_id = cursor.getInt(0); // get id
         cursor.close();
+        this.linkWish(wish_id);
+    }
 
+    public void linkWish(int wish_id){
         //insert link wishlist-wish in db table content
-        req = "INSERT INTO Content (wishlist, product) VALUES (\"" + this.id + "\", \"" + wish_id + "\");";
+        String req = "INSERT INTO Content (wishlist, product) VALUES (\"" + this.id + "\", \"" + wish_id + "\");";
         db.insert(req);
-        updateWishLst();
         this.size++;
         db.insert("UPDATE Wishlist SET size=" + this.size + " WHERE id=" + this.getId());
+        updateWishLst();
     }
 
     public void changeName(String input) {
