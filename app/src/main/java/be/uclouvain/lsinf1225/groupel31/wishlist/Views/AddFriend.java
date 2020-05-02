@@ -117,7 +117,7 @@ public class AddFriend extends AppCompatActivity {
 
         final GridView list_view = findViewById(R.id.list_view_t);
 
-
+        //on text change listener to search friend
         EditText text = findViewById(R.id.input_search);
         text.addTextChangedListener(new TextWatcher() {
             @Override
@@ -128,20 +128,26 @@ public class AddFriend extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(count > 0) {
+                    //make the list of all user with the name is like the pattern 's' + '*char'
                     final List <User> users = new ArrayList<>();
                     AccessDataBase db = new AccessDataBase(getApplicationContext());
                     Cursor cursor = db.select("SELECT pseudo, mail FROM User WHERE pseudo LIKE \""
                             + s + "%\" OR mail LIKE \"" + s + "%\";");
                     cursor.moveToFirst();
+                    //check all user corresponding to the pattern
                     while (!cursor.isAfterLast()) {
+                        //check if it's not current user
                         if(!cursor.getString(1).equals(user.getEmail())) {
                             boolean found = false;
+                            //check if user is already in listFriend
                             for(int i = 0; i< user.getFriendList().size(); i++){
+                                //if already in set the flag to true and break the loop
                                 if(cursor.getString(1).equals(user.getFriendList().get(i).getEmail())){
                                     found = true;
                                     break;
                                 }
                             }
+                            //if not already in friend list add user to the list to display
                             if(!found) {
                                 User toAdd = new User();
                                 toAdd.setDb(getApplicationContext());
@@ -154,10 +160,12 @@ public class AddFriend extends AppCompatActivity {
                     }
                     cursor.close();
 
+                    //now we have the list we can build the adapter grid view with it
                     list_view.setAdapter(new FriendAdapter(getApplicationContext(), users));
                     list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            // retrieve the user clicked on
                             final User current = users.get(position);
 
                             // set popup args

@@ -202,6 +202,9 @@ public class User {
         this.updateWishList(); // to update the object linked with the wishlist
     }
 
+    /** Delete a line in the db's table WishList
+     * @param id wishlist's id to delete
+     */
     public void deleteWishList(int id){
         String req = "DELETE FROM Wishlist WHERE id=" + id + ";";
         db.insert(req);

@@ -1,5 +1,6 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist;
 
+//Just a class to save my global to do
 public class TODO {
     //** 01/05
     //Friends request (accept or refuse) OK
@@ -8,8 +9,10 @@ public class TODO {
     //show friend's wishlist OK
 
     //** 02/05
-    //modify & delete WishList
-    //SEARCH Wish
+    //modify & delete WishList OK
+    //SEARCH Wish OK
+    //Add Wish from search OK
+    //Comment code OK
     //TODO add more info in SignUP & preferences
     //TODO modify profile
     //TODO set picture profile

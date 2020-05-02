@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Connection;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
@@ -21,7 +20,6 @@ public class SignUp extends AppCompatActivity {
     private EditText password;
     private EditText password_conf;
     private EditText pseudo_in;
-    private Connection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

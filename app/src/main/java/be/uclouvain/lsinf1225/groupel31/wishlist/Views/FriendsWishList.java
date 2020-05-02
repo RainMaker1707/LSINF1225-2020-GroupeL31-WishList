@@ -110,11 +110,13 @@ public class FriendsWishList extends AppCompatActivity {
         grid.setNumColumns(1);
         grid.setAdapter(new WishListAdapter(getApplicationContext(), this, currentFriend.getWishlist_list()));
 
+        //grid view on item listener display wishes contain in the wishlist
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final WishList current = currentFriend.getWishlist_list().get(position);
                 grid.setNumColumns(2);
+                //build adapter with current wishlist content list
                 grid.setAdapter(new WishAdapter(getApplicationContext(), current.getWishLst()));
                 CurrentWishList.setInstance(current);
                 create_wishList.setText(R.string.add_wish);
@@ -130,6 +132,7 @@ public class FriendsWishList extends AppCompatActivity {
                     }
                 });
 
+                // reset the listener to a new one redirect to the display wish attributes
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
