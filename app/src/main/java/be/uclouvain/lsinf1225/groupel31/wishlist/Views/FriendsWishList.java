@@ -108,7 +108,7 @@ public class FriendsWishList extends AppCompatActivity {
         //grid view
         final GridView grid = findViewById(R.id.news_grid);
         grid.setNumColumns(1);
-        grid.setAdapter(new WishListAdapter(getApplicationContext(), currentFriend.getWishlist_list()));
+        grid.setAdapter(new WishListAdapter(getApplicationContext(), this, currentFriend.getWishlist_list()));
 
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

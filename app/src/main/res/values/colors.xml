@@ -16,5 +16,7 @@
     <color name="DarkBlue_alpha">#BF00061D</color>
     <color name="Green">#BF0E9208</color>
     <color name="Green_alpha">#7F0E9208</color>
+    <color name="Red_alpha">#5FDB0A0A</color>
+    <color name="LightBlue_alpha">#804B86DB</color>
 
 </resources>

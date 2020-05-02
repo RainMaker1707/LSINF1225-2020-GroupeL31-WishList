@@ -202,6 +202,12 @@ public class User {
         this.updateWishList(); // to update the object linked with the wishlist
     }
 
+    public void deleteWishList(int id){
+        String req = "DELETE FROM Wishlist WHERE id=" + id + ";";
+        db.insert(req);
+        updateWishList();
+    }
+
     // ******* getters and setters *****
     private void setEmail(String email){
         this.email = email;

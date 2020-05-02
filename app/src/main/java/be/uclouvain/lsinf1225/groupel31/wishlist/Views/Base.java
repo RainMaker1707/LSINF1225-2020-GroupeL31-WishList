@@ -37,7 +37,7 @@ public class Base extends AppCompatActivity {
 
         //grid set adapter if something in user.list<WishList>
         if(user.getWishlist_list().size() != 0){
-            grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
+            grid.setAdapter(new WishListAdapter(getApplicationContext(), this, user.getWishlist_list()));
         }
 
         //menu show or not
@@ -160,21 +160,24 @@ public class Base extends AppCompatActivity {
             }
         });
 
-        //TODO today
+        //** yesterday
         //Friends request (accept or refuse) OK
         //Wish Layout OK
         //wish layout dynamic OK
-        //show friend's wishlist
-        //TODO delete  & modify WishList
-        //TODO delete & modify  Wish
+        //show friend's wishlist OK
+        //delete wishlist OK
 
-        //TODO tomorrow
+        //**TODO today
+        //TODO modify WishList
+        //TODO delete & modify  Wish
         //TODO modify profile and add more info in SignUP & preferences
+
+        //**TODO tomorrow
         //TODO set picture profile
         //TODO set picture WishList
         //TODO set picture Wish
 
-        //TODO after
+        //**TODO after
         //TODO manage permissions
         //TODO logs table for wish
         //TODO parameters
