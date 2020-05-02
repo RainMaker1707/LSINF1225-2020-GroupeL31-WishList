@@ -61,4 +61,6 @@
     <string name="no_desc">No description filled</string>
     <string name="blind_delete">Button delete</string>
     <string name="search_wish">Search Wish</string>
+    <string name="btn">button</string>
+    <string name="edit_btn">Edit WishList</string>
 </resources>

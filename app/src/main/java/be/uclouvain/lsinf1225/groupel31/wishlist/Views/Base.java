@@ -2,12 +2,14 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,10 +24,12 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishListAdapter;
 
 public class Base extends AppCompatActivity {
     boolean showed = false;
+    private Dialog popup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
+        popup = new Dialog(this);
 
         final TextView title = findViewById(R.id.page_title);
         title.setText(R.string.list_wishlist);
@@ -121,6 +125,14 @@ public class Base extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Button edit_btn = findViewById(R.id.edit_btn);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout
+                        .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                edit_btn.setLayoutParams(params);
+                edit_btn.setBackground(getDrawable(R.drawable.simple_button));
+                edit_btn.setText(R.string.edit_btn);
+
                 final WishList current = user.getWishlist_list().get(position);
                 title.setText(current.getName());
                 grid.setNumColumns(2);
@@ -167,7 +179,7 @@ public class Base extends AppCompatActivity {
         //show friend's wishlist OK
 
         //** 02/05
-        //TODO modify & delete WishList
+        //TODO modify & delete WishList -> in curse
         //TODO SEARCH Wish
         //TODO delete & modify  Wish
         //TODO modify profile and add more info in SignUP & preferences

@@ -168,6 +168,7 @@
 
     </ListView>
 
+
     <Button
         android:id="@+id/button_new"
         android:layout_width="wrap_content"
@@ -176,5 +177,6 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="-50dp"
         android:background="@drawable/simple_button"/>
+
 
 </RelativeLayout>

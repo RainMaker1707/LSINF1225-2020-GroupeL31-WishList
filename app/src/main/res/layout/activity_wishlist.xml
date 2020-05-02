@@ -84,16 +84,30 @@
 
     </GridView>
 
-    <Button
-        android:id="@+id/create_wishlist"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/news_grid"
+        android:orientation="horizontal"
         android:layout_marginTop="-50dp"
-        android:layout_marginStart="120dp"
-        android:background="@drawable/simple_button"
         android:gravity="center"
-        android:text="@string/create_wishlist_button" />
+        android:layout_below="@id/news_grid">
+        <Button
+            android:id="@+id/create_wishlist"
+            android:contentDescription="@string/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/simple_button"
+            android:gravity="center"
+            android:text="@string/create_wishlist_button" />
+        <Button
+            android:id="@+id/edit_btn"
+            android:contentDescription="@string/btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/menu"
