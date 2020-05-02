@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -152,8 +153,24 @@ public class Base extends AppCompatActivity {
                         modify_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                //TODO
-                                System.out.println("****Modify****");
+                                EditText input_t = popup.findViewById(R.id.name_in_popup);
+                                String input = input_t.getText().toString();
+                                if(input.length() < 2){
+                                    Toast.makeText(getApplicationContext(),
+                                            "New name need a length greater than 2",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                                else if(!input.equals(current.getName())){
+                                    current.changeName(input);
+                                    Toast.makeText(getApplicationContext(),
+                                            "Name successfully changed",
+                                            Toast.LENGTH_SHORT).show();
+                                    popup.dismiss();
+                                    Intent refresh = new Intent(getApplicationContext(), Base.class);
+                                    startActivity(refresh);
+                                    finish();
+                                }
                             }
                         });
 
@@ -175,6 +192,17 @@ public class Base extends AppCompatActivity {
                                         Intent refresh = new Intent(getApplicationContext(), Base.class);
                                         startActivity(refresh);
                                         finish();
+                                    }
+                                });
+
+                                TextView not = conf_popup.findViewById(R.id.cancel_btn);
+                                not.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Toast.makeText(getApplicationContext(),
+                                                "Cancelled",
+                                                Toast.LENGTH_SHORT).show();
+                                        conf_popup.dismiss();
                                     }
                                 });
                                 conf_popup.show();

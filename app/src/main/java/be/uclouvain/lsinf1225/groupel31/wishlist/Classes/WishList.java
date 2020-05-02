@@ -85,6 +85,11 @@ public class WishList {
         db.insert("UPDATE Wishlist SET size=" + this.size + " WHERE id=" + this.getId());
     }
 
+    public void changeName(String input) {
+        db.insert("UPDATE Wishlist SET name=\"" + input + "\" WHERE id=" +this.getId());
+        this.setName(input);
+    }
+
     public boolean deleteWish(Wish wish){
         return false;
     }
@@ -154,4 +159,5 @@ public class WishList {
     public void setWishLst(List<Wish> wishLst) {
         this.wishLst = wishLst;
     }
+
 }
