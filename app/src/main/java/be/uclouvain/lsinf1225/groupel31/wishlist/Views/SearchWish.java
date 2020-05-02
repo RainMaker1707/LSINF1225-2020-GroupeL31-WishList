@@ -2,6 +2,7 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,12 +14,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,8 +107,9 @@ public class SearchWish extends AppCompatActivity {
         });
         //**** Menu buttons END ****
 
+        // button add wish listener -> go to layout NewWish
         Button button = findViewById(R.id.button_new);
-        button.setText("Add new Wish");
+        button.setText(getString(R.string.add_new_wish));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,9 +119,11 @@ public class SearchWish extends AppCompatActivity {
             }
         });
 
+        // set grid view with column number at 2
         final GridView list_view = findViewById(R.id.list_view_t);
         list_view.setNumColumns(2);
 
+        //set the on text change listener on the input edit text
         EditText input = findViewById(R.id.input_search);
         input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -133,6 +134,7 @@ public class SearchWish extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(count > 0) {
+                    // make the list to display with wish adapter
                     final List<Wish> wishes = new ArrayList<>();
                     AccessDataBase db = new AccessDataBase(getApplicationContext());
                     Cursor cursor = db.select("SELECT * FROM Wish WHERE name LIKE \"" + s + "%\";");
@@ -148,12 +150,17 @@ public class SearchWish extends AppCompatActivity {
                         cursor.moveToNext();
                     }
                     cursor.close();
+
+                    // feed grid view with the list just make and the adapter + set listener
                     list_view.setAdapter(new WishAdapter(getApplicationContext(), wishes));
                     list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @SuppressLint("DefaultLocale")
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //set popup content
                             popup.setContentView(R.layout.add_wish_popup);
 
+                            // button quit popup on top right listener
                             TextView quit = popup.findViewById(R.id.quit_popup);
                             quit.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -162,6 +169,7 @@ public class SearchWish extends AppCompatActivity {
                                 }
                             });
 
+                            // cancel button listener
                             TextView cancel = popup.findViewById(R.id.cancel_btn);
                             cancel.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -171,25 +179,34 @@ public class SearchWish extends AppCompatActivity {
                                     popup.dismiss();
                                 }
                             });
+
+                            // get current wish which one was clicked on
                             final Wish currentWish = (Wish) parent.getItemAtPosition(position);
+
+                            // add button listener
                             TextView add = popup.findViewById(R.id.add_btn);
                             add.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    // get the wishlist id and link the wish with it
                                     CurrentWishList.getInstance().linkWish(currentWish.getId());
                                     popup.dismiss();
+                                    //refresh the layout
                                     Intent refresh = new Intent(getApplicationContext(), Base.class);
                                     startActivity(refresh);
                                     finish();
                                 }
                             });
 
+                            // set the name with the current wish name in popup
                             TextView name = popup.findViewById(R.id.name_popup);
                             name.setText(currentWish.getName());
 
+                            // set price with current wish one
                             TextView price = popup.findViewById(R.id.price_popup);
                             price.setText(String.format("Price : %.2f", currentWish.getPrice()));
 
+                            // set description with current wish one
                             TextView description = popup.findViewById(R.id.desc_popup);
                             description.setText(currentWish.getDescription());
 
