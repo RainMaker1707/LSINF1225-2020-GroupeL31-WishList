@@ -63,4 +63,11 @@
     <string name="search_wish">Search Wish</string>
     <string name="btn">button</string>
     <string name="edit_btn">Edit WishList</string>
+    <string name="new_name">New name</string>
+    <string name="delete_wishlist">Delete Wishlist</string>
+    <string name="save_change">Save change</string>
+    <string name="change_picture">Change picture</string>
+    <string name="sure_delete">Are you sure to delete this wishlist :</string>
+    <string name="sure">Yes</string>
+    <string name="no">No</string>
 </resources>

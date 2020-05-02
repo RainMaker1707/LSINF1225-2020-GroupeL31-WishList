@@ -20,14 +20,14 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/friend_picture_popup"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_gravity="center"
         android:src="@drawable/no_picture"
         />
 
     <TextView
-        android:id="@+id/friend_name_popup"
+        android:id="@+id/name_popup"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,15 +37,28 @@
         android:textStyle="bold"
         />
 
-    <TextView
-        android:id="@+id/mail_friend_popup"
+    <EditText
+        android:id="@+id/name_in_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mail_test"
+        android:hint="@string/new_name"
+        android:inputType="text"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="cursive"
         android:textStyle="bold"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/change_picture"
+        android:fontFamily="cursive"
+        android:textSize="12sp"
+        android:background="@drawable/tp_bg_btn"
         />
 
     <LinearLayout
@@ -53,48 +66,34 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/wishlist_nbr_popup"
-            android:layout_width="200dp"
+            android:id="@+id/modify_btn"
+            android:layout_width="150dp"
             android:layout_height="50dp"
-            android:text="@string/wishlist_nbr"
+            android:text="@string/save_change"
             android:textAlignment="center"
             android:gravity="center_vertical"
             android:layout_gravity="center"
-            android:background="@color/DarkBlue"
+            android:background="@color/Blue"
             android:fontFamily="cursive"
             android:textStyle="bold"
             />
 
         <TextView
-            android:id="@+id/add_friend__popup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="100dp"
-            android:height="50dp"
-            android:text="@string/add_friend"
-            android:textAlignment="center"
-            android:gravity="center_vertical"
-            android:layout_gravity="center"
-            android:background="@color/Green"
-            android:fontFamily="cursive"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:id="@+id/refuse_popup"
-            android:layout_width="50dp"
+            android:id="@+id/delete_btn"
+            android:layout_width="150dp"
             android:layout_height="50dp"
+            android:text="@string/delete_wishlist"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:background="@color/Red_alpha"
             android:fontFamily="cursive"
             android:textStyle="bold"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            android:text="@string/x"
-            android:background="@color/Red"
             />
+
     </LinearLayout>
 
 

@@ -97,12 +97,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/simple_button"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:gravity="center"
             android:text="@string/create_wishlist_button" />
         <Button
             android:id="@+id/edit_btn"
             android:contentDescription="@string/btn"
             android:layout_width="0dp"
+            android:layout_marginStart="2dp"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             />

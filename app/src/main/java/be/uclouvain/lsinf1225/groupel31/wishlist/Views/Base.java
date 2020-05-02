@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
@@ -25,11 +26,13 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishListAdapter;
 public class Base extends AppCompatActivity {
     boolean showed = false;
     private Dialog popup;
+    private Dialog conf_popup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
         popup = new Dialog(this);
+        conf_popup = new Dialog(this);
 
         final TextView title = findViewById(R.id.page_title);
         title.setText(R.string.list_wishlist);
@@ -125,15 +128,62 @@ public class Base extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final WishList current = user.getWishlist_list().get(position);
+
                 Button edit_btn = findViewById(R.id.edit_btn);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout
                         .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                params.setMarginStart(10);
                 edit_btn.setLayoutParams(params);
                 edit_btn.setBackground(getDrawable(R.drawable.simple_button));
                 edit_btn.setText(R.string.edit_btn);
+                edit_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.setContentView(R.layout.wishlist_popup);
 
-                final WishList current = user.getWishlist_list().get(position);
+                        TextView name = popup.findViewById(R.id.name_popup);
+                        name.setText(current.getName());
+
+                        //TODO change picture
+
+                        TextView modify_btn = popup.findViewById(R.id.modify_btn);
+                        modify_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //TODO
+                                System.out.println("****Modify****");
+                            }
+                        });
+
+                        TextView delete_btn = popup.findViewById(R.id.delete_btn);
+                        delete_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                conf_popup.setContentView(R.layout.delete_confirmation);
+                                TextView delete = conf_popup.findViewById(R.id.delete_btn);
+                                delete.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        user.deleteWishList(current.getId());
+                                        Toast.makeText(getApplicationContext(),
+                                                "Successfully deleted",
+                                                Toast.LENGTH_SHORT).show();
+                                        conf_popup.dismiss();
+                                        popup.dismiss();
+                                        Intent refresh = new Intent(getApplicationContext(), Base.class);
+                                        startActivity(refresh);
+                                        finish();
+                                    }
+                                });
+                                conf_popup.show();
+                            }
+                        });
+                        popup.show();
+
+                    }
+                });
                 title.setText(current.getName());
                 grid.setNumColumns(2);
                 grid.setAdapter(new WishAdapter(getApplicationContext(), current.getWishLst()));
