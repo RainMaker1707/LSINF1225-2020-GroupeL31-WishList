@@ -267,13 +267,14 @@ public class Base extends AppCompatActivity {
         //** 02/05
         //modify & delete WishList
         //SEARCH Wish
-        //TODO delete & modify  Wish
-        //TODO modify profile and add more info in SignUP & preferences
+        //TODO add more info in SignUP & preferences
+        //TODO modify profile
 
         //**TODO tomorrow
         //TODO set picture profile
         //TODO set picture WishList
         //TODO set picture Wish
+        //TODO modify  Wish
 
         //**TODO after
         //TODO manage permissions
