@@ -11,21 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Views.AddFriend"/>
-        <activity android:name=".Views.FriendsList"/>
-        <activity android:name=".Views.ProfileActivity"/>
-        <activity android:name=".Views.WishActivity"/>
-        <activity android:name=".Views.NewWish"/>
-        <activity android:name=".Views.NewWishList"/>
-        <activity android:name=".Views.Base"/>
-        <activity android:name=".Views.SignUp"/>
-        <activity android:name=".Views.SignIn"/>
-        <activity android:name=".Views.FriendsWishList"/>
+        <activity android:name=".Views.SearchWish"></activity>
+        <activity android:name=".Views.AddFriend" />
+        <activity android:name=".Views.FriendsList" />
+        <activity android:name=".Views.ProfileActivity" />
+        <activity android:name=".Views.WishActivity" />
+        <activity android:name=".Views.NewWish" />
+        <activity android:name=".Views.NewWishList" />
+        <activity android:name=".Views.Base" />
+        <activity android:name=".Views.SignUp" />
+        <activity android:name=".Views.SignIn" />
+        <activity android:name=".Views.FriendsWishList" />
         <activity android:name=".Views.LogInUp">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

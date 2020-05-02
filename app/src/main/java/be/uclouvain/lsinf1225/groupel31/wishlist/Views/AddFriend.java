@@ -38,6 +38,7 @@ public class AddFriend extends AppCompatActivity {
 
         final User user = CurrentUser.getInstance();
 
+
         //menu show or not
         final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +104,15 @@ public class AddFriend extends AppCompatActivity {
             }
         });
         //**** Menu buttons END ****
+
+
+        //Hide useless button
+        Button button = findViewById(R.id.button_new);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.setMarginStart(-600);
+        button.setLayoutParams(params);
+
 
         final ListView list_view = findViewById(R.id.list_view);
 

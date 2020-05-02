@@ -60,32 +60,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/modify_btn"
-        android:layout_width="70dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="230dp"
-        android:background="@color/LightBlue_alpha"
-        android:text="@string/menu"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        />
 
-    <Button
-        android:id="@+id/delete_btn"
-        android:layout_width="70dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="300dp"
-        android:background="@drawable/rounded_btn"
-        android:layout_marginTop="10dp"/>
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:contentDescription="@string/blind_delete"
-        android:layout_marginStart="310dp"
-        android:layout_marginTop="35dp"
-        android:src="@drawable/delete_icon"/>
 
 </RelativeLayout>

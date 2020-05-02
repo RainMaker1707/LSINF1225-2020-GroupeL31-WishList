@@ -60,4 +60,5 @@
     <string name="no_market">No market filled</string>
     <string name="no_desc">No description filled</string>
     <string name="blind_delete">Button delete</string>
+    <string name="search_wish">Search Wish</string>
 </resources>

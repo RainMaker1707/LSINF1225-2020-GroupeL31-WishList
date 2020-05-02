@@ -130,7 +130,7 @@ public class Base extends AppCompatActivity {
                 create_wishList.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent next_layout = new Intent(getApplicationContext(), NewWish.class);
+                        Intent next_layout = new Intent(getApplicationContext(), SearchWish.class);
                         startActivity(next_layout);
                         finish();
                     }
@@ -160,15 +160,15 @@ public class Base extends AppCompatActivity {
             }
         });
 
-        //** yesterday
+        //** 01/05
         //Friends request (accept or refuse) OK
         //Wish Layout OK
         //wish layout dynamic OK
         //show friend's wishlist OK
-        //delete wishlist OK
 
-        //**TODO today
-        //TODO modify WishList
+        //** 02/05
+        //TODO modify & delete WishList
+        //TODO SEARCH Wish
         //TODO delete & modify  Wish
         //TODO modify profile and add more info in SignUP & preferences
 

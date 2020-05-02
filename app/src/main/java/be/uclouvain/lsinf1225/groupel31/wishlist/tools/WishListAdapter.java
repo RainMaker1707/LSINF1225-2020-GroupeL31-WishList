@@ -57,27 +57,8 @@ public class WishListAdapter extends BaseAdapter {
         ImageView picture = convertView.findViewById(R.id.wishlist_picture);
         TextView items = convertView.findViewById(R.id.wishlist_in);
 
-        Button modify = convertView.findViewById(R.id.modify_btn);
-        Button delete = convertView.findViewById(R.id.delete_btn);
 
-        modify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO
-                System.out.println("*****MODIFY*****");
-            }
-        });
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CurrentUser.getInstance().deleteWishList(current.getId());
-                Intent next_layout = new Intent(context, Base.class);
-                next_layout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(next_layout);
-                activity.finish();
-            }
-        });
 
         title.setText(current.getName());
         items.setText(String.format("Wish In: %d", current.getSize()));
