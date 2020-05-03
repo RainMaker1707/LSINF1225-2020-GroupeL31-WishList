@@ -31,4 +31,6 @@ public class AccessDataBase {
     public Context getContext() {
         return context;
     }
+
+    public SQLiteDatabase get(){return this.db;}
 }

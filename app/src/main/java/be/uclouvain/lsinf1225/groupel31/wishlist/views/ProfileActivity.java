@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -23,14 +24,17 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         final User user = CurrentUser.getInstance();
 
+        // Set profile picture
+        ImageView picture = findViewById(R.id.picture_profile);
+        if(user.getProfilePicture() != null){ picture.setImageBitmap(user.getProfilePicture());}
 
-        //ListView adapter set
+        // ListView adapter set
         ListView list = findViewById(R.id.list_view);
         list.setAdapter(new UserAdapter(getApplicationContext(), CurrentUser.getInstance()));
 
         //TODO modify profile
 
-        //Menu and menu buttons
+        // Menu and menu buttons
         Button menu = findViewById(R.id.menu_btn);
         menu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:gravity="center_vertical"/>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/picture_popup"
         android:layout_width="150dp"
         android:layout_height="150dp"

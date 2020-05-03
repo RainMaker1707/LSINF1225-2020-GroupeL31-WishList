@@ -2,26 +2,36 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUpMoreInfo extends AppCompatActivity {
 
+    private Dialog popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_more_info);
-
+        popup = new Dialog(this);
         // get current user
         final User user = CurrentUser.getInstance();
 
@@ -71,5 +81,60 @@ public class SignUpMoreInfo extends AppCompatActivity {
             }
         });
 
+        // Profile picture listener
+        final CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        profile_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.setContentView(R.layout.picture_popup);
+
+                // quit button
+                TextView quit = popup.findViewById(R.id.quit_popup);
+                quit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.dismiss();
+                    }
+                });
+
+                // cancel button
+                TextView cancel = popup.findViewById(R.id.cancel_btn);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "Cancelled",
+                                Toast.LENGTH_SHORT).show();
+                        popup.dismiss();
+                    }
+                });
+
+                // album button
+                ImageView album = popup.findViewById(R.id.saved_picture);
+                album.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pick, 1);
+
+                        CircleImageView photo = popup.findViewById(R.id.picture_popup);
+                        photo.setImageBitmap(user.getProfilePicture());
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1 && resultCode==RESULT_OK){
+            // get image data path file
+            Uri selected = data.getData();
+            Bitmap image = ImageToBlob.getBytePhoto(ImageToBlob.getBytes(selected, this));
+            CurrentUser.getInstance().updateProfilePicture(image);
+        }
     }
 }

@@ -1,19 +1,22 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.Classes;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
-import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 
 public class User {
 
@@ -26,7 +29,7 @@ public class User {
     private String meal;
     private String color;
     private String hobby;
-    private Image profilePicture;
+    private Bitmap profilePicture;
     private List<WishList> wishlist_list;
     private List<User> friendList;
     private AccessDataBase db;
@@ -55,7 +58,12 @@ public class User {
         setPseudo(cursor.getString(0));
         setPassword(cursor.getString(1));
         setEmail(cursor.getString( 2));
-        setProfilePicture(null);//TODO set with cursor.getBlob(3) bitsmap
+        byte[] picture = cursor.getBlob(3);
+        try{
+            setProfilePicture(ImageToBlob.getBytePhoto(picture));
+        }catch (NullPointerException e){
+            setProfilePicture(null);
+        }
         setSport(cursor.getString(4));
         setfavColor(cursor.getString(5));
         setHobby(cursor.getString(6));
@@ -68,6 +76,7 @@ public class User {
         }
 
     }
+
 
     public void addMoreInfo(String address, String color, String meal, String sport, String hobby){
         db.insert("UPDATE User SET address=\"" + address + "\", color=\"" + color +"\", "
@@ -159,7 +168,7 @@ public class User {
         setAddress(null);
         setEmail(null);
         setPassword(null);
-        setProfilePicture(null);
+        updateProfilePicture(null);
         setPseudo(null);
         setWishlist_list(null);
     }
@@ -226,6 +235,15 @@ public class User {
         updateWishList();
     }
 
+    public void updateProfilePicture(Bitmap profilePicture){
+        this.profilePicture = profilePicture;
+        ContentValues values = new ContentValues();
+        values.put("photo", ImageToBlob.getBytes(profilePicture));
+        String selection = "pseudo LIKE ?";
+        String[] selectionArg = {this.getEmail()};
+        db.get().update("User", values, selection, selectionArg);
+    }
+
     // ******* getters and setters *****
     private void setEmail(String email){
         this.email = email;
@@ -239,8 +257,8 @@ public class User {
         this.password = password;
     }
 
-    private void setProfilePicture(Image profilePicture) {
-        this.profilePicture = profilePicture;
+    private void setProfilePicture(Bitmap bytePhoto) {
+        this.profilePicture = bytePhoto;
     }
 
     private void setPseudo(String pseudo) {
@@ -272,7 +290,7 @@ public class User {
         return address;
     }
 
-    public Image getProfilePicture() {
+    public Bitmap getProfilePicture() {
         return profilePicture;
     }
 
