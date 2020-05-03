@@ -58,11 +58,9 @@ public class User {
         setPseudo(cursor.getString(0));
         setPassword(cursor.getString(1));
         setEmail(cursor.getString( 2));
-        byte[] picture = cursor.getBlob(3);
-        try{
+        if(cursor.getBlob(3) != null) {
+            byte[] picture = cursor.getBlob(3);
             setProfilePicture(ImageToBlob.getBytePhoto(picture));
-        }catch (NullPointerException e){
-            setProfilePicture(null);
         }
         setSport(cursor.getString(4));
         setfavColor(cursor.getString(5));
@@ -168,9 +166,13 @@ public class User {
         setAddress(null);
         setEmail(null);
         setPassword(null);
-        updateProfilePicture(null);
+        this.profilePicture = null;
         setPseudo(null);
         setWishlist_list(null);
+        setMeal(null);
+        setfavColor(null);
+        setSport(null);
+        setHobby(null);
     }
 
     /** Function which just check if password and mail passed as arg are same as these stored in db
@@ -236,12 +238,12 @@ public class User {
     }
 
     public void updateProfilePicture(Bitmap profilePicture){
-        this.profilePicture = profilePicture;
         ContentValues values = new ContentValues();
         values.put("photo", ImageToBlob.getBytes(profilePicture));
-        String selection = "pseudo LIKE ?";
+        String selection = "mail LIKE ?";
         String[] selectionArg = {this.getEmail()};
         db.get().update("User", values, selection, selectionArg);
+        this.setRefFromDb(this.getEmail());
     }
 
     // ******* getters and setters *****

@@ -12,6 +12,7 @@ import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class FriendAdapter extends BaseAdapter {
@@ -53,6 +54,11 @@ public class FriendAdapter extends BaseAdapter {
             background.setImageResource(R.drawable.friend_req);
         }else if(!current.isFriend() && !current.isRequested()){
             background.setImageResource(R.drawable.friend_dis);
+        }
+
+        if(current.getProfilePicture() != null){
+            CircleImageView img = convertView.findViewById(R.id.profilePicture);
+            img.setImageBitmap(current.getProfilePicture());
         }
         name.setText(current.getPseudo());
         nbr_wishlist.setText(String.format("Has %s WishLists", current.getWishlist_list().size()));

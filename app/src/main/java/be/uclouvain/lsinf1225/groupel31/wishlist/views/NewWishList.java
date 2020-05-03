@@ -43,6 +43,7 @@ public class NewWishList extends AppCompatActivity {
 
         //Circle profile picture action -> got to profile activity
         de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        if(user.getProfilePicture() != null){profile_picture.setImageBitmap(user.getProfilePicture());}
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

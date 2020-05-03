@@ -18,9 +18,12 @@ public class TODO {
 
     //** 03/05
     //fill db with info from in SignUP
-    //TODO set picture profile -> in curse
+    //set picture profile
+    //display profile picture if set
     //TODO set picture WishList
+    //TODO display WishList picture if set
     //TODO set picture Wish
+    //TODO display Wish picture if set
 
     //TODO modify profile
     //TODO modify  Wish

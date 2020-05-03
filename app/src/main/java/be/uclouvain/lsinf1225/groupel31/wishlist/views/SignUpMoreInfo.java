@@ -24,7 +24,7 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUpMoreInfo extends AppCompatActivity {
-
+    private Bitmap img;
     private Dialog popup;
 
     @Override
@@ -115,12 +115,19 @@ public class SignUpMoreInfo extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(pick, 1);
-
-                        CircleImageView photo = popup.findViewById(R.id.picture_popup);
-                        photo.setImageBitmap(user.getProfilePicture());
                     }
                 });
 
+                // save button
+                TextView save = popup.findViewById(R.id.valid_btn);
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CurrentUser.getInstance().updateProfilePicture(img);
+                        profile_picture.setImageBitmap(user.getProfilePicture());
+                        popup.dismiss();
+                    }
+                });
                 popup.show();
             }
         });
@@ -133,8 +140,9 @@ public class SignUpMoreInfo extends AppCompatActivity {
         if(requestCode==1 && resultCode==RESULT_OK){
             // get image data path file
             Uri selected = data.getData();
-            Bitmap image = ImageToBlob.getBytePhoto(ImageToBlob.getBytes(selected, this));
-            CurrentUser.getInstance().updateProfilePicture(image);
+            img = ImageToBlob.getBytePhoto(ImageToBlob.getBytes(selected, this));
+            CircleImageView photo = popup.findViewById(R.id.picture_popup);
+            photo.setImageBitmap(img);
         }
     }
 }

@@ -58,6 +58,7 @@ public class Base extends AppCompatActivity {
 
         //menu show or not
         final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        if(user.getProfilePicture() != null){profile_picture.setImageBitmap(user.getProfilePicture());}
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

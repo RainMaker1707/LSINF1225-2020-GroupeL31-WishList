@@ -17,6 +17,7 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FriendsList extends AppCompatActivity {
     boolean showed = false;
@@ -31,6 +32,7 @@ public class FriendsList extends AppCompatActivity {
 
         // Menu and Menu buttons
         final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        if(user.getProfilePicture() != null){profile_picture.setImageBitmap(user.getProfilePicture());}
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +122,11 @@ public class FriendsList extends AppCompatActivity {
                 // set the popup view with the suitable layout
                 popup.setContentView(R.layout.friend_popup);
 
-                //TODO picture set
+                // set picture if set in db
+                if(current.getProfilePicture() != null){
+                    CircleImageView img = popup.findViewById(R.id.friend_picture_popup);
+                    img.setImageBitmap(current.getProfilePicture());
+                }
 
                 // set the good line with the user's pseudo/name
                 TextView name = popup.findViewById(R.id.friend_name_popup);
