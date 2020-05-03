@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/blue_background"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.WishActivity">
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.views.WishActivity">
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="wrap_content"

@@ -3,27 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="be.uclouvain.lsinf1225.groupel31.wishlist">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Views.SignUpMoreInfo"></activity>
-        <activity android:name=".Views.SearchWish" />
-        <activity android:name=".Views.AddFriend" />
-        <activity android:name=".Views.FriendsList" />
-        <activity android:name=".Views.ProfileActivity" />
-        <activity android:name=".Views.WishActivity" />
-        <activity android:name=".Views.NewWish" />
-        <activity android:name=".Views.NewWishList" />
-        <activity android:name=".Views.Base" />
-        <activity android:name=".Views.SignUp" />
-        <activity android:name=".Views.SignIn" />
-        <activity android:name=".Views.FriendsWishList" />
-        <activity android:name=".Views.LogInUp">
+        <activity android:name=".views.SignUpMoreInfo"/>
+        <activity android:name=".views.SearchWish"/>
+        <activity android:name=".views.AddFriend"/>
+        <activity android:name=".views.FriendsList"/>
+        <activity android:name=".views.ProfileActivity"/>
+        <activity android:name=".views.WishActivity"/>
+        <activity android:name=".views.NewWish"/>
+        <activity android:name=".views.NewWishList"/>
+        <activity android:name=".views.Base"/>
+        <activity android:name=".views.SignUp"/>
+        <activity android:name=".views.SignIn"/>
+        <activity android:name=".views.FriendsWishList"/>
+        <activity android:name=".views.LogInUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

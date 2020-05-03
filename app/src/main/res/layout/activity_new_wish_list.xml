@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/blue_background"
     android:orientation="vertical"
-    tools:context=".Views.NewWishList">
+    tools:context=".views.NewWishList">
     <LinearLayout
         android:id="@+id/top_bar_layout"
         android:layout_width="wrap_content"

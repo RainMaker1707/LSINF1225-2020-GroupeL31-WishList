@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
+package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import android.content.Intent;
 import android.os.Bundle;

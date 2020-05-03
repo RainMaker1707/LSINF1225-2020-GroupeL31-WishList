@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
+package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,6 @@ import android.widget.Toast;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 
 public class SignUpMoreInfo extends AppCompatActivity {
 

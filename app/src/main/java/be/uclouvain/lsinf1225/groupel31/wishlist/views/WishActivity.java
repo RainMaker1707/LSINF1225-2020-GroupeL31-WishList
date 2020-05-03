@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
+package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,35 +6,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.UserAdapter;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
 
-public class ProfileActivity extends AppCompatActivity {
-    boolean showed = false;
+public class WishActivity extends AppCompatActivity {
 
+    private boolean isFriendWish;
+    private boolean showed = false;
+    private User user = CurrentUser.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        final User user = CurrentUser.getInstance();
-
-
-        //ListView adapter set
-        ListView list = findViewById(R.id.list_view);
-        list.setAdapter(new UserAdapter(getApplicationContext(), CurrentUser.getInstance()));
-
-        //TODO modify profile
-
-        //Menu and menu buttons
-        Button menu = findViewById(R.id.menu_btn);
-        menu.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_wish);
+        isFriendWish = getIntent().getBooleanExtra("isFriendWish", false);
+        //Circle profile picture action -> go to profile activity
+        de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 RelativeLayout menu = findViewById(R.id.menu);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout
                         .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -53,7 +49,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         //button profile
         final Button profile_btn = findViewById(R.id.profile);
-        profile_btn.setEnabled(false);
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
 
         //button wish list
         final Button wishlist_btn = findViewById(R.id.wishlist);
@@ -93,5 +96,35 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         //**** Menu buttons END ****
+
+        Wish currentWish = CurrentWish.getInstance();
+
+        //Set title page to wish name
+        TextView name = findViewById(R.id.page_title);
+        name.setText(currentWish.getName());
+
+        //Set price
+        TextView price = findViewById(R.id.price);
+        price.setText(String.format("%s €", currentWish.getPrice()));
+
+        //Set market if one is saved
+        TextView market = findViewById(R.id.market);
+        if(currentWish.getMarket().length() > 1){ market.setText(currentWish.getMarket());}
+        else{market.setText(R.string.no_market);}
+
+        //Set description if one is saved
+        TextView description = findViewById(R.id.description);
+        if(currentWish.getDescription().length() > 1){ description.setText(currentWish.getDescription());}
+        else{description.setText(R.string.no_desc);}
+
+        //button, modify
+        Button modify = findViewById(R.id.modify_btn);
+        if (isFriendWish){ modify.setEnabled(false);}
+        else{
+            modify.setOnClickListener(null);//TODO modify wish
+        }
+
+        //TODO set picture
+
     }
 }

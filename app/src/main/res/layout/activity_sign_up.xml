@@ -7,7 +7,7 @@
     android:background="@drawable/blue_background"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.SignUp">
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.views.SignUp">
 
     <TextView
         android:layout_width="wrap_content"

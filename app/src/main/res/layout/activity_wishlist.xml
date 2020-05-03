@@ -8,7 +8,7 @@
     android:background="@drawable/blue_background"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.Base"
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.views.Base"
     >
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package be.uclouvain.lsinf1225.groupel31.wishlist.Views;
+package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,40 +8,52 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 
-public class NewWishList extends AppCompatActivity {
-    private EditText name_in;
-    private User user = CurrentUser.getInstance();
+
+public class NewWish extends AppCompatActivity {
+
     boolean showed = false;
+    User user = CurrentUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_wish_list);
+        setContentView(R.layout.activity_new_wish);
+        final WishList current_list = CurrentWishList.getInstance();
+        final EditText name_in = findViewById(R.id.name_in);
+        final EditText price_in = findViewById(R.id.price_in);
+        final EditText market_in = findViewById(R.id.market_in);
+        final EditText description_in = findViewById(R.id.description_in);
 
-        //Create wishlist button action
-        name_in = findViewById(R.id.name_in);
-        Button create = findViewById(R.id.button_create);
-        create.setOnClickListener(new View.OnClickListener() {
+        //Button add wish action
+        Button button = findViewById(R.id.add_button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get editText input
+
+                //Get editText inputs
                 String name = name_in.getText().toString();
+                double price = Double.parseDouble(price_in.getText().toString());
+                String market = market_in.getText().toString();
+                String description = description_in.getText().toString();
+
                 //insert in db
-                user.createWishList(name, null);
-                //go to next layout -> base activity
+                current_list.createWish(name, null, description, price, market);
+
+                //go to next layout -> go to base activity
                 Intent next_layout = new Intent(getApplicationContext(), Base.class);
                 startActivity(next_layout);
                 finish();
             }
         });
 
-        //Circle profile picture action -> got to profile activity
+        //Circle profile picture action -> go to profile activity
         de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,17 +70,6 @@ public class NewWishList extends AppCompatActivity {
                     showed = false;
                 }
                 menu.setLayoutParams(params);
-            }
-        });
-
-        // Title with action back -> go to base activity
-        TextView title = findViewById(R.id.title);
-        title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent next_layout = new Intent(getApplicationContext(), Base.class);
-                startActivity(next_layout);
-                finish();
             }
         });
 

@@ -2,12 +2,10 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.tools;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +13,6 @@ import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
-import be.uclouvain.lsinf1225.groupel31.wishlist.Views.Base;
-import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 
 
 public class WishListAdapter extends BaseAdapter {

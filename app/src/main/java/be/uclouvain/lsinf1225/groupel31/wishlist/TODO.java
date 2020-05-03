@@ -21,9 +21,10 @@ public class TODO {
     //TODO set picture profile -> in curse
     //TODO set picture WishList
     //TODO set picture Wish
+
     //TODO modify profile
     //TODO modify  Wish
-    //TODO modify profile layout
+    //TODO modify profile layout with preferences
 
     //**TODO after
     //TODO manage permissions

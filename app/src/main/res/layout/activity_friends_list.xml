@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/blue_background"
-    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.Views.FriendsList">
+    tools:context="be.uclouvain.lsinf1225.groupel31.wishlist.views.FriendsList">
 
     <LinearLayout
         android:id="@+id/top_bar_layout"
