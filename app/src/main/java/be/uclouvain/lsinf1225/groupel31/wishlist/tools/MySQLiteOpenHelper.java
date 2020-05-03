@@ -30,6 +30,10 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 +" password VARCHAR (255) NOT NULL,"
                 +" mail     VARCHAR (255) PRIMARY KEY NOT NULL UNIQUE,"
                 +" photo    BLOB,"
+                +" sport    VARCHAR,"
+                +" color VARCHAR,"
+                +" hobby VARCHAR,"
+                +" meal VARCHAR,"
                 +" address  VARCHAR (255));"
         );
 

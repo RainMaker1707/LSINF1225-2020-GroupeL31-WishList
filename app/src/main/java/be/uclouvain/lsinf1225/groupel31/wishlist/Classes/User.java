@@ -22,6 +22,10 @@ public class User {
     private String password;
     private String address;
     private Context context;
+    private String sport;
+    private String meal;
+    private String color;
+    private String hobby;
     private Image profilePicture;
     private List<WishList> wishlist_list;
     private List<User> friendList;
@@ -52,13 +56,24 @@ public class User {
         setPassword(cursor.getString(1));
         setEmail(cursor.getString( 2));
         setProfilePicture(null);//TODO set with cursor.getBlob(3) bitsmap
-        setAddress(cursor.getString(4));
+        setSport(cursor.getString(4));
+        setfavColor(cursor.getString(5));
+        setHobby(cursor.getString(6));
+        setMeal(cursor.getString(7));
+        setAddress(cursor.getString(8));
         cursor.close();
         updateWishList();
         if(CurrentUser.getInstance().getEmail().equals(mail)) {
             updateFriendList();
         }
 
+    }
+
+    public void addMoreInfo(String address, String color, String meal, String sport, String hobby){
+        db.insert("UPDATE User SET address=\"" + address + "\", color=\"" + color +"\", "
+                +"meal=\"" + meal + "\", sport=\"" + sport + "\", hobby=\"" + hobby + "\" "
+                +"WHERE mail=\"" + this.getEmail() + "\";");
+        this.setRefFromDb(this.getEmail());
     }
 
     /** Update the wishlist from the database
@@ -289,5 +304,37 @@ public class User {
 
     public void setRequested(boolean requested) {
         this.requested = requested;
+    }
+
+    public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    public String getMeal() {
+        return meal;
+    }
+
+    public void setMeal(String meal) {
+        this.meal = meal;
+    }
+
+    public String getFavColor() {
+        return color;
+    }
+
+    public void setfavColor(String color) {
+        this.color = color;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 }

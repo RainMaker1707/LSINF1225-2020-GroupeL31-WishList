@@ -20,30 +20,27 @@
         android:gravity="center"
         />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/picture_profile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/title"
-        android:src="@drawable/no_picture"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="30dp"/>
 
     <ScrollView
         android:id="@+id/scroll_view"
-        android:layout_below="@id/picture_profile"
+        android:layout_below="@id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="40dp">
+        android:layout_marginEnd="30dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/picture_profile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/no_picture"
+                android:layout_marginTop="30dp"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,8 +152,8 @@
         android:id="@+id/save_info_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-50dp"
         android:layout_marginStart="105dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/simple_button"
         android:layout_below="@id/scroll_view"
         android:text="@string/save_info"
@@ -164,5 +161,15 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/White"/>
+
+    <TextView
+        android:id="@+id/pass_btn"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="175dp"
+        android:layout_below="@id/save_info_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pass"
+        android:textSize="12sp"/>
 
 </RelativeLayout>

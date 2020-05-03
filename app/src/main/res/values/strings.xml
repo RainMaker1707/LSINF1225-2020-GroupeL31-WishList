@@ -80,4 +80,6 @@
     <string name="sport">Sport</string>
     <string name="hobby">hobby</string>
     <string name="work">Work</string>
+    <string name="hint_search_wish">Enter Wish\'s name</string>
+    <string name="pass">pass this step</string>
 </resources>

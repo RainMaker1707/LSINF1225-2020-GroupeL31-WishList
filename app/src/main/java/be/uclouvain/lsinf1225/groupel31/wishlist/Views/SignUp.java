@@ -75,10 +75,11 @@ public class SignUp extends AppCompatActivity {
                                 new_user.signUp(mail, pseudo, password.getText().toString(), null, null);
                                 //set all user's attributes with db ref and set singleton CurrentUser on this user
                                 new_user.signIn(mail);
-                                //go to next layout->base activity
+                                //go to next layout->more info activity
                                 Toast.makeText(getApplicationContext(), "Log Up successfully as "
                                         + new_user.getPseudo(), Toast.LENGTH_SHORT).show();
-                                Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                                Intent next_layout = new Intent(getApplicationContext(),
+                                        SignUpMoreInfo.class);
                                 startActivity(next_layout);
                                 finish();
                             }else{

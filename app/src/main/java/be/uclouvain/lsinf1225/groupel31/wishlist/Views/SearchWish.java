@@ -119,12 +119,22 @@ public class SearchWish extends AppCompatActivity {
             }
         });
 
+        //set page title
+        TextView title = findViewById(R.id.page_title);
+        title.setText(R.string.add_new_wish);
+
+        //set input title
+        TextView search = findViewById(R.id.search);
+        search.setText(R.string.search_wish);
+
         // set grid view with column number at 2
         final GridView list_view = findViewById(R.id.list_view_t);
         list_view.setNumColumns(2);
 
         //set the on text change listener on the input edit text
         EditText input = findViewById(R.id.input_search);
+        //set input hint
+        input.setHint(R.string.hint_search_wish);
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
