@@ -37,6 +37,7 @@ public class AddFriend extends AppCompatActivity {
         setContentView(R.layout.activity_add_friend);
         popup = new Dialog(this);
 
+        //get logged in user reference
         final User user = CurrentUser.getInstance();
 
 

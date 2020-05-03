@@ -72,4 +72,12 @@
     <string name="no">No</string>
     <string name="cancel">Cancel</string>
     <string name="add_new_wish">Add new wish</string>
+    <string name="address">Address</string>
+    <string name="save_info">Save info</string>
+    <string name="your_address">Your address</string>
+    <string name="favorite_color">Favorites color</string>
+    <string name="favorite_meal">Favorite meal</string>
+    <string name="sport">Sport</string>
+    <string name="hobby">hobby</string>
+    <string name="work">Work</string>
 </resources>

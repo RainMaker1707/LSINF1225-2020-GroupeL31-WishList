@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Views.SearchWish"></activity>
+        <activity android:name=".Views.SignUpMoreInfo"></activity>
+        <activity android:name=".Views.SearchWish" />
         <activity android:name=".Views.AddFriend" />
         <activity android:name=".Views.FriendsList" />
         <activity android:name=".Views.ProfileActivity" />

@@ -13,11 +13,12 @@ public class TODO {
     //SEARCH Wish OK
     //Add Wish from search OK
     //Comment code OK
-    //TODO add more info in SignUP & preferences
+    //layout more info & preferences
+    //TODO fill db with info from in SignUP -> in curse
     //TODO modify profile
-    //TODO set picture profile
 
     //**TODO tomorrow
+    //TODO set picture profile
     //TODO set picture WishList
     //TODO set picture Wish
     //TODO modify  Wish

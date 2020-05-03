@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 
 public class User {
@@ -40,7 +41,6 @@ public class User {
         setEmail(mail);
         CurrentUser.setInstance(this);
         setRefFromDb(mail);
-        CurrentUser.setInstance(this);
     }
 
     /** Retrieve all data from db and set it in usable var
