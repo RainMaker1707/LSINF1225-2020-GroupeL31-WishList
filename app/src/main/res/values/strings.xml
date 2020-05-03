@@ -82,4 +82,5 @@
     <string name="work">Work</string>
     <string name="hint_search_wish">Enter Wish\'s name</string>
     <string name="pass">pass this step</string>
+    <string name="blind_picture">Profile picture round in middle of the popup</string>
 </resources>
