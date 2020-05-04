@@ -13,6 +13,7 @@ import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class WishListAdapter extends BaseAdapter {
@@ -50,10 +51,12 @@ public class WishListAdapter extends BaseAdapter {
         final WishList current = getItem(position);
 
         TextView title = convertView.findViewById(R.id.wishlist_title);
-        ImageView picture = convertView.findViewById(R.id.wishlist_picture);
         TextView items = convertView.findViewById(R.id.wishlist_in);
 
-
+        if(current.getPicture() != null){
+            CircleImageView picture = convertView.findViewById(R.id.wishlist_picture);
+            picture.setImageBitmap(current.getPicture());
+        }
 
 
         title.setText(current.getName());

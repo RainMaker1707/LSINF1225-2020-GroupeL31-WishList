@@ -87,12 +87,17 @@ public class User {
      */
     private void updateWishList(){
         List<WishList> wishlists= new ArrayList<>();
-        Cursor cursor = db.select("SELECT * FROM WishList WHERE owner=\""+ getEmail() + "\";");
+        Cursor cursor = db.select("SELECT * FROM WishList WHERE owner=\""+ getEmail() + "\" ORDER BY id;");
         cursor.moveToFirst();
         //loop to append wishlist in list
         while(!cursor.isAfterLast()){
-            wishlists.add(new WishList(this.db, cursor.getInt(0), cursor.getString(1),
-                    null, cursor.getInt(4), cursor.getString(2)));
+            if(cursor.getBlob(3) != null) {
+                wishlists.add(new WishList(this.db, cursor.getInt(0), cursor.getString(1),
+                        ImageToBlob.getBytePhoto(cursor.getBlob(3)), cursor.getInt(4), cursor.getString(2)));
+            }else{
+                wishlists.add(new WishList(this.db, cursor.getInt(0), cursor.getString(1),
+                        null, cursor.getInt(4), cursor.getString(2)));
+            }
             cursor.moveToNext();
         }
         cursor.close();
@@ -219,11 +224,10 @@ public class User {
 
     /** Store a new line in db table wishlist
      * @param name name of the new wishlist
-     * @param picture picture for the new wishlist
      */
-    public void createWishList(String name, @Nullable Image picture){
-        String req = "INSERT INTO Wishlist (name, owner, picture) VALUES ";
-        req += "(\"" + name + "\", \"" + this.getEmail() + "\", \"" + picture + "\");";
+    public void createWishList(String name){
+        String req = "INSERT INTO Wishlist (name, owner) VALUES ";
+        req += "(\"" + name + "\", \"" + this.getEmail() + "\");";
         db.insert(req);
         this.updateWishList(); // to update the object linked with the wishlist
     }

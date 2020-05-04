@@ -1,18 +1,21 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.Classes;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 
 public class WishList {
 
     private String name;
-    private Image picture;
+    private Bitmap picture;
     private Integer size;
     private String owner;
     private Integer id;
@@ -27,7 +30,7 @@ public class WishList {
      * @param size
      * @param owner
      */
-    public WishList(AccessDataBase db, Integer id, String name, Image picture, Integer size, String owner){
+    public WishList(AccessDataBase db, Integer id, String name, Bitmap picture, Integer size, String owner){
         this.id = id;
         this.name = name;
         this.picture = picture;
@@ -93,6 +96,19 @@ public class WishList {
         this.setName(input);
     }
 
+    public void updatePicture(Bitmap picture){
+        if(picture == null){
+            this.setPicture(null);
+        }else {
+            ContentValues values = new ContentValues();
+            values.put("picture", ImageToBlob.getBytes(picture));
+            String selection = "id LIKE ?";
+            String[] selectionArg = {String.format("%s", this.getId())};
+            db.get().update("Wishlist", values, selection, selectionArg);
+            this.setPicture(picture);
+        }
+    }
+
     public boolean deleteWish(Wish wish){
         return false;
     }
@@ -119,7 +135,7 @@ public class WishList {
         return this.name;
     }
 
-    public Image getPicture() {
+    public Bitmap getPicture() {
         return this.picture;
     }
 
@@ -147,7 +163,7 @@ public class WishList {
         this.name = name;
     }
 
-    public void setPicture(Image picture) {
+    public void setPicture(Bitmap picture) {
         this.picture = picture;
     }
 

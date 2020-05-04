@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,8 +25,10 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishAdapter;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishListAdapter;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Base extends AppCompatActivity {
     // menu flag
@@ -31,6 +37,8 @@ public class Base extends AppCompatActivity {
     //Dialog-popup global access
     private Dialog popup;
     private Dialog conf_popup;
+    private Dialog picture_popup;
+    private Bitmap img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class Base extends AppCompatActivity {
         //set popups with context
         popup = new Dialog(this);
         conf_popup = new Dialog(this);
+        picture_popup = new Dialog(this);
 
         //set the page title to "List of your WishList"
         final TextView title = findViewById(R.id.page_title);
@@ -160,7 +169,73 @@ public class Base extends AppCompatActivity {
                         TextView name = popup.findViewById(R.id.name_popup);
                         name.setText(current.getName());
 
+                        final CircleImageView picture = popup.findViewById(R.id.wishlist_picture_popup);
+                        // set picture
+                        if(current.getPicture() != null){
+                            picture.setImageBitmap(current.getPicture());
+                        }
                         //TODO change picture
+                        Button change_picture = popup.findViewById(R.id.change_pct_btn);
+                        change_picture.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                picture_popup.setContentView(R.layout.picture_popup);
+
+                                if(current.getPicture() != null){
+                                    CircleImageView picture = picture_popup.findViewById(R.id.picture_popup);
+                                    picture.setImageBitmap(current.getPicture());
+                                }else {
+                                    CircleImageView picture = picture_popup.findViewById(R.id.picture_popup);
+                                    picture.setImageDrawable(getDrawable(R.drawable.picture_gift));
+                                }
+
+                                // quit button
+                                TextView quit = picture_popup.findViewById(R.id.quit_popup);
+                                quit.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        picture_popup.dismiss();
+                                    }
+                                });
+
+                                // cancel button
+                                TextView cancel = picture_popup.findViewById(R.id.cancel_btn);
+                                cancel.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Toast.makeText(getApplicationContext(), "Cancelled",
+                                                Toast.LENGTH_SHORT).show();
+                                        picture_popup.dismiss();
+                                    }
+                                });
+
+                                // album button
+                                ImageView album = picture_popup.findViewById(R.id.saved_picture);
+                                album.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                        startActivityForResult(pick, 1);
+                                    }
+                                });
+
+                                //save button
+                                TextView save = picture_popup.findViewById(R.id.valid_btn);
+                                save.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        picture.setImageBitmap(img);
+                                        current.updatePicture(img);
+                                        Toast.makeText(getApplicationContext(), "Picture changed",
+                                                Toast.LENGTH_SHORT).show();
+                                        picture_popup.dismiss();
+                                    }
+                                });
+
+
+                                picture_popup.show();
+                            }
+                        });
 
                         //save change button listener
                         TextView modify_btn = popup.findViewById(R.id.modify_btn);
@@ -180,7 +255,7 @@ public class Base extends AppCompatActivity {
                                 else if(!input.equals(current.getName())){
                                     current.changeName(input);
                                     Toast.makeText(getApplicationContext(),
-                                            "Name successfully changed",
+                                            "Successfully changed",
                                             Toast.LENGTH_SHORT).show();
                                     popup.dismiss();
                                     Intent refresh = new Intent(getApplicationContext(), Base.class);
@@ -287,5 +362,17 @@ public class Base extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1 && resultCode==RESULT_OK){
+            // get image data path file
+            Uri selected = data.getData();
+            img = ImageToBlob.getBytePhoto(ImageToBlob.getBytes(selected, this));
+            CircleImageView photo = picture_popup.findViewById(R.id.picture_popup);
+            photo.setImageBitmap(img);
+        }
     }
 }

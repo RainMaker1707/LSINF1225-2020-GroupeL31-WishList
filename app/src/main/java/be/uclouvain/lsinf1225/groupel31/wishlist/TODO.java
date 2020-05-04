@@ -20,8 +20,9 @@ public class TODO {
     //fill db with info from in SignUP
     //set picture profile
     //display profile picture if set
-    //TODO set picture WishList
-    //TODO display WishList picture if set
+    //set picture WishList
+    //display WishList picture if set
+    //modify wishlist picture
     //TODO set picture Wish
     //TODO display Wish picture if set
 

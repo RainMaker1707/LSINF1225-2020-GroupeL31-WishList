@@ -2,27 +2,94 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewWishList extends AppCompatActivity {
-    private EditText name_in;
+
     private User user = CurrentUser.getInstance();
-    boolean showed = false;
+    private boolean showed = false;
+    private EditText name_in;
+    private Dialog popup;
+    private Bitmap img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_wish_list);
+
+        popup = new Dialog(this);
+
+        CircleImageView photo = findViewById(R.id.picture_wishlist);
+        photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.setContentView(R.layout.picture_popup);
+
+                CircleImageView picture = popup.findViewById(R.id.picture_popup);
+                picture.setImageDrawable(getDrawable(R.drawable.picture_gift));
+
+                // quit button
+                TextView quit = popup.findViewById(R.id.quit_popup);
+                quit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.dismiss();
+                    }
+                });
+
+                // cancel button
+                TextView cancel = popup.findViewById(R.id.cancel_btn);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "Cancelled",
+                                Toast.LENGTH_SHORT).show();
+                        popup.dismiss();
+                    }
+                });
+
+                // album button
+                ImageView album = popup.findViewById(R.id.saved_picture);
+                album.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pick, 1);
+                    }
+                });
+
+                // save button
+                TextView save = popup.findViewById(R.id.valid_btn);
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CircleImageView new_pict = findViewById(R.id.picture_wishlist);
+                        new_pict.setImageBitmap(img);
+                        popup.dismiss();
+                    }
+                });
+                popup.show();
+            }
+        });
 
         //Create wishlist button action
         name_in = findViewById(R.id.name_in);
@@ -33,7 +100,9 @@ public class NewWishList extends AppCompatActivity {
                 //get editText input
                 String name = name_in.getText().toString();
                 //insert in db
-                user.createWishList(name, null);
+                user.createWishList(name);
+                WishList created = user.getWishlist_list().get(user.getWishlist_list().size() - 1);
+                created.updatePicture(img);
                 //go to next layout -> base activity
                 Intent next_layout = new Intent(getApplicationContext(), Base.class);
                 startActivity(next_layout);
@@ -41,8 +110,8 @@ public class NewWishList extends AppCompatActivity {
             }
         });
 
-        //Circle profile picture action -> got to profile activity
-        de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
+        // menu showed or not
+        CircleImageView profile_picture = findViewById(R.id.picture_profile);
         if(user.getProfilePicture() != null){profile_picture.setImageBitmap(user.getProfilePicture());}
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,5 +194,17 @@ public class NewWishList extends AppCompatActivity {
         });
         //**** Menu buttons END ****
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1 && resultCode==RESULT_OK){
+            // get image data path file
+            Uri selected = data.getData();
+            img = ImageToBlob.getBytePhoto(ImageToBlob.getBytes(selected, this));
+            CircleImageView photo = popup.findViewById(R.id.picture_popup);
+            photo.setImageBitmap(img);
+        }
     }
 }
