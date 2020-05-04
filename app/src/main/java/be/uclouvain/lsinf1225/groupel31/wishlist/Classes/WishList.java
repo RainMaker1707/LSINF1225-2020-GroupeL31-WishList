@@ -51,8 +51,13 @@ public class WishList {
         cursor.moveToFirst();
         //loop to append wish in list
         while(!cursor.isAfterLast()){
-            wishes.add(new Wish(cursor.getInt(0), cursor.getString(1), null, cursor.getString(4),
-                    cursor.getDouble(5), cursor.getString(6)));
+            Wish toAdd = new Wish(cursor.getInt(0), cursor.getString(1),
+                    cursor.getString(3), cursor.getString(4),
+                    cursor.getDouble(5), cursor.getString(6));
+            if(cursor.getBlob(2) != null){
+                toAdd.setPicture(ImageToBlob.getBytePhoto(cursor.getBlob(2)));
+            }
+            wishes.add(toAdd);
             cursor.moveToNext();
         }
         setWishLst(wishes);
@@ -66,7 +71,7 @@ public class WishList {
      * @param price
      * @param market
      */
-    public void createWish(String name, Image picture, String description,
+    public void createWish(String name, Bitmap picture, String description,
                            double price, String market){
         // insert
         String req = "INSERT INTO Wish (name, photo, wish_id, desc, prix, market) VALUES ";
@@ -74,11 +79,20 @@ public class WishList {
         req += description + "\", \"" + price + "\", \"" + market + "\");";
         db.insert(req);
 
-        //select to find id of last wish inserted
+        // select to find id of last wish inserted
         Cursor cursor = db.select("SELECT * FROM Wish");
         cursor.moveToLast();
         int wish_id = cursor.getInt(0); // get id
         cursor.close();
+
+        // update picture
+        ContentValues values = new ContentValues();
+        values.put("photo", ImageToBlob.getBytes(picture));
+        String selection = "num LIKE ?";
+        String[] selectionArg = {String.format("%s", wish_id)};
+        db.get().update("Wish", values, selection, selectionArg);
+
+        // link wish
         this.linkWish(wish_id);
     }
 

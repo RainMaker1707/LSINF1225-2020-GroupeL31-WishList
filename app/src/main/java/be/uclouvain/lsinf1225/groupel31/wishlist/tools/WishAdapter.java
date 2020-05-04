@@ -50,9 +50,11 @@ public class WishAdapter extends BaseAdapter {
         ImageView picture = convertView.findViewById(R.id.wish_picture);
         TextView price = convertView.findViewById(R.id.wish_price);
 
+        if(current.getPicture() != null){picture.setImageBitmap(current.getPicture());}
+
         title.setText(current.getName());
         price.setText(String.format("Price : %.2f", current.getPrice()));
-        //TODO set Image
+
         return convertView;
     }
 }

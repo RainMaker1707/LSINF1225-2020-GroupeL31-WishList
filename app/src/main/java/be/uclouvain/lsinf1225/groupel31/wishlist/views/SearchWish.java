@@ -27,6 +27,7 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.WishAdapter;
 
 public class SearchWish extends AppCompatActivity {
@@ -153,10 +154,13 @@ public class SearchWish extends AppCompatActivity {
                     while(!cursor.isAfterLast()) {
                         Wish toAdd = new Wish(cursor.getInt(0),
                                 cursor.getString(1),
-                                null,
+                                cursor.getString(3),
                                 cursor.getString(4),
                                 cursor.getDouble(5),
                                 cursor.getString(6));
+                        if(cursor.getBlob(2) != null){
+                            toAdd.setPicture(ImageToBlob.getBytePhoto(cursor.getBlob(2)));
+                        }
                         wishes.add(toAdd);
                         cursor.moveToNext();
                     }

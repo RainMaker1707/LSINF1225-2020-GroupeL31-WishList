@@ -65,7 +65,6 @@ public class SignUpMoreInfo extends AppCompatActivity {
                 String sport = sport_in.getText().toString();
                 String hobby = hobby_in.getText().toString();
 
-                //TODO picture
 
                 //insert info in db
                 user.addMoreInfo(address, color, meal, sport, hobby);

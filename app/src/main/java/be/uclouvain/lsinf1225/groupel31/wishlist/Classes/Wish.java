@@ -1,27 +1,35 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.Classes;
 
+import android.content.ContentValues;
+import android.graphics.Bitmap;
 import android.media.Image;
+
+import androidx.annotation.Nullable;
+
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
+import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 
 public class Wish {
     private String name;
     private String market;
     private Integer id;
-    private Image picture;
+    private String owner;
+    private Bitmap picture;
     private String description;
     private double price;
     private double eval;
 
     /** Constructor
      * @param name
-     * @param picture
+     * @param owner
      * @param description
      * @param price
      * @param market
      */
-    public Wish(int id, String name, Image picture, String description, double price, String market) {
+    public Wish(int id, String name, String owner, String description, double price, String market) {
         this.id = id;
         this.name = name;
-        this.picture = picture;
+        this.owner = owner;
         this.description = description;
         this.price = price;
         this.market = market;
@@ -37,7 +45,7 @@ public class Wish {
         this.id = id;
     }
 
-    public void setPicture(Image picture) {
+    public void setPicture(Bitmap picture) {
         this.picture = picture;
     }
 
@@ -65,7 +73,7 @@ public class Wish {
         return id;
     }
 
-    public Image getPicture() {
+    public Bitmap getPicture() {
         return picture;
     }
 
@@ -83,5 +91,13 @@ public class Wish {
 
     public double getEval() {
         return eval;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

@@ -14,6 +14,7 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WishActivity extends AppCompatActivity {
 
@@ -122,10 +123,11 @@ public class WishActivity extends AppCompatActivity {
         Button modify = findViewById(R.id.modify_btn);
         if (isFriendWish){ modify.setEnabled(false);}
         else{
-            modify.setOnClickListener(null);//TODO modify wish
+            modify.setOnClickListener(null);
         }
 
-        //TODO set picture
+        CircleImageView photo = findViewById(R.id.pict_wish);
+        if(currentWish.getPicture() != null){photo.setImageBitmap(currentWish.getPicture());}
 
     }
 }
