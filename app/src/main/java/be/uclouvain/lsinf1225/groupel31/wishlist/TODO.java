@@ -23,14 +23,16 @@ public class TODO {
     //set picture WishList
     //display WishList picture if set
     //modify wishlist picture
+    //add preferences in profile layout
+
+    //** TODO tomorrow
     //TODO set picture Wish
     //TODO display Wish picture if set
-
-    //TODO modify profile
     //TODO modify  Wish
-    //TODO modify profile layout with preferences
+    //TODO modify profile
 
-    //**TODO after
+
+    //** TODO after
     //TODO manage permissions
     //TODO logs table for wish
     //TODO parameters

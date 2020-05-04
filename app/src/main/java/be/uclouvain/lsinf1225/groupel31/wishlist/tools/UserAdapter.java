@@ -49,6 +49,30 @@ public class UserAdapter extends BaseAdapter {
         toAdd.add(user.getAddress());
         attributes.add(toAdd);
 
+        //color
+        toAdd = new ArrayList<>();
+        toAdd.add("Color");
+        toAdd.add(user.getFavColor());
+        attributes.add(toAdd);
+
+        //sport
+        toAdd = new ArrayList<>();
+        toAdd.add("Sport");
+        toAdd.add(user.getSport());
+        attributes.add(toAdd);
+
+        //meal
+        toAdd = new ArrayList<>();
+        toAdd.add("Favorites Meal");
+        toAdd.add(user.getMeal());
+        attributes.add(toAdd);
+
+        //hobby
+        toAdd = new ArrayList<>();
+        toAdd.add("Hobby");
+        toAdd.add(user.getHobby());
+        attributes.add(toAdd);
+
         return attributes;
     }
 
