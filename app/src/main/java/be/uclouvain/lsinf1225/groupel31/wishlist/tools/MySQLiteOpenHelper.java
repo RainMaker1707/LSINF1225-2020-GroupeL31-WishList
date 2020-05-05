@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.Nullable;
 
@@ -13,8 +15,10 @@ import java.util.List;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
+import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
+    private Context context;
     /**
      *
      * @param context application context
@@ -25,6 +29,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     MySQLiteOpenHelper(@Nullable Context context, @Nullable String name,
                        @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        this.context = context;
     }
 
     /**
@@ -173,12 +178,16 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                         "noemie@gmail.com", "francois@gmail.com", "shaparder@gmail.com",
                         "stanley@gmail.com", "alexandre@gmail.com"};
         User user = new User();
-        for(int i = 1; i < 9; i++) {
+        user.setDb(context);
+        for(int i = 0; i < 8; i++) {
             user.setEmail(tab[i]);
             //user.updateProfilePicture();
         }
 
         //set picture wishlist
+        //Bitmap test = BitmapFactory.decodeResource(context.getResources(), R.drawable.ano);
+        //user.setEmail("hadrien@gmail.com");
+        //user.updateProfilePicture(test);
 
 
         //set wish picture wish

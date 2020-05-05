@@ -1,12 +1,16 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +20,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
+
+import be.uclouvain.lsinf1225.groupel31.wishlist.BuildConfig;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
@@ -30,7 +38,10 @@ public class NewWish extends AppCompatActivity {
     private Bitmap img = null;
     private Bitmap imgChoose = null;
     boolean showed = false;
-    User user = CurrentUser.getInstance();
+    private String photoPath;
+    private static final int IMAGE_CAPTURED = 2;
+    private User user = CurrentUser.getInstance();
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,7 @@ public class NewWish extends AppCompatActivity {
         final EditText market_in = findViewById(R.id.market_in);
         final EditText description_in = findViewById(R.id.description_in);
         popup = new Dialog(this);
+        context = this;
         //Button add wish action
         Button button = findViewById(R.id.add_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +110,30 @@ public class NewWish extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(pick, 1);
+                    }
+                });
+
+                // camera button
+                ImageView camera = popup.findViewById(R.id.take_picture);
+                camera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if(capture.resolveActivity(getPackageManager()) != null){
+                            File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                            File photoFile = null;
+                            try {
+                                photoFile = File.createTempFile("temp", ".jpg", photoDir);
+                                photoPath = photoFile.getAbsolutePath();
+                                Uri photoUri = FileProvider.getUriForFile(context,
+                                        BuildConfig.APPLICATION_ID +".provider",
+                                        photoFile);
+                                capture.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                                startActivityForResult(capture, IMAGE_CAPTURED);
+                            }catch(IOException e){
+                                e.getMessage();
+                            }
+                        }
                     }
                 });
 
@@ -198,6 +234,10 @@ public class NewWish extends AppCompatActivity {
             // get image data path file
             Uri selected = data.getData();
             img = ImageToBlob.getBytePhoto(ImageToBlob.getBytes(selected, this));
+            CircleImageView photo = popup.findViewById(R.id.picture_popup);
+            photo.setImageBitmap(img);
+        }else if (requestCode==IMAGE_CAPTURED && resultCode==RESULT_OK){
+            img = BitmapFactory.decodeFile(photoPath);
             CircleImageView photo = popup.findViewById(R.id.picture_popup);
             photo.setImageBitmap(img);
         }

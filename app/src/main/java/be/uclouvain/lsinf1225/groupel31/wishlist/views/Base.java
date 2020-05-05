@@ -1,12 +1,16 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +23,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
+
+import be.uclouvain.lsinf1225.groupel31.wishlist.BuildConfig;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
@@ -39,6 +47,10 @@ public class Base extends AppCompatActivity {
     private Dialog conf_popup;
     private Dialog picture_popup;
     private Bitmap img;
+    private String photoPath = null;
+
+    private static final int IMAGE_CAPTURED = 2;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +60,7 @@ public class Base extends AppCompatActivity {
         popup = new Dialog(this);
         conf_popup = new Dialog(this);
         picture_popup = new Dialog(this);
+        context = this;
 
         //set the page title to "List of your WishList"
         final TextView title = findViewById(R.id.page_title);
@@ -174,7 +187,7 @@ public class Base extends AppCompatActivity {
                         if(current.getPicture() != null){
                             picture.setImageBitmap(current.getPicture());
                         }
-                        //TODO change picture
+
                         Button change_picture = popup.findViewById(R.id.change_pct_btn);
                         change_picture.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -216,6 +229,30 @@ public class Base extends AppCompatActivity {
                                     public void onClick(View v) {
                                         Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                         startActivityForResult(pick, 1);
+                                    }
+                                });
+
+                                // camera button
+                                ImageView camera = picture_popup.findViewById(R.id.take_picture);
+                                camera.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                        if(capture.resolveActivity(getPackageManager()) != null){
+                                            File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                                            File photoFile = null;
+                                            try {
+                                                photoFile = File.createTempFile("temp", ".jpg", photoDir);
+                                                photoPath = photoFile.getAbsolutePath();
+                                                Uri photoUri = FileProvider.getUriForFile(context,
+                                                        BuildConfig.APPLICATION_ID +".provider",
+                                                        photoFile);
+                                                capture.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                                                startActivityForResult(capture, IMAGE_CAPTURED);
+                                            }catch(IOException e){
+                                                e.getMessage();
+                                            }
+                                        }
                                     }
                                 });
 
@@ -364,6 +401,8 @@ public class Base extends AppCompatActivity {
         });
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -371,6 +410,10 @@ public class Base extends AppCompatActivity {
             // get image data path file
             Uri selected = data.getData();
             img = ImageToBlob.getBytePhoto(ImageToBlob.getBytes(selected, this));
+            CircleImageView photo = picture_popup.findViewById(R.id.picture_popup);
+            photo.setImageBitmap(img);
+        }else if (requestCode==IMAGE_CAPTURED && resultCode==RESULT_OK){
+            img = BitmapFactory.decodeFile(photoPath);
             CircleImageView photo = picture_popup.findViewById(R.id.picture_popup);
             photo.setImageBitmap(img);
         }

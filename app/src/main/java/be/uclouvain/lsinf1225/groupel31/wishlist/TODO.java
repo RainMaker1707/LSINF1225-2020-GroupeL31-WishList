@@ -1,5 +1,7 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist;
 
+import android.graphics.drawable.Drawable;
+
 //Just a class to save my global to do
 public class TODO {
     //** 01/05
@@ -31,7 +33,7 @@ public class TODO {
 
     //** 05/05
     //delete Wish in wishlist
-    //fill db at installation (15min)m
+    //fill db at installation (15min)
     //TODO use camera instead of choose image (30 min)
     //TODO manage permissions complex part ** WARNING REALLY TODO (unknown)
 
