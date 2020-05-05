@@ -152,16 +152,26 @@ public class SearchWish extends AppCompatActivity {
                     Cursor cursor = db.select("SELECT * FROM Wish WHERE name LIKE \"" + s + "%\";");
                     cursor.moveToFirst();
                     while(!cursor.isAfterLast()) {
-                        Wish toAdd = new Wish(cursor.getInt(0),
-                                cursor.getString(1),
-                                cursor.getString(3),
-                                cursor.getString(4),
-                                cursor.getDouble(5),
-                                cursor.getString(6));
-                        if(cursor.getBlob(2) != null){
-                            toAdd.setPicture(ImageToBlob.getBytePhoto(cursor.getBlob(2)));
+                        boolean found = false;
+                        List<Wish> current = CurrentWishList.getInstance().getWishLst();
+                        for(int i = 0; i < current.size(); i++){
+                            if(cursor.getInt(0) == current.get(i).getId()){
+                                found = true;
+                                break;
+                            }
                         }
-                        wishes.add(toAdd);
+                        if(!found) {
+                            Wish toAdd = new Wish(cursor.getInt(0),
+                                    cursor.getString(1),
+                                    cursor.getString(3),
+                                    cursor.getString(4),
+                                    cursor.getDouble(5),
+                                    cursor.getString(6));
+                            if (cursor.getBlob(2) != null) {
+                                toAdd.setPicture(ImageToBlob.getBytePhoto(cursor.getBlob(2)));
+                            }
+                            wishes.add(toAdd);
+                        }
                         cursor.moveToNext();
                     }
                     cursor.close();

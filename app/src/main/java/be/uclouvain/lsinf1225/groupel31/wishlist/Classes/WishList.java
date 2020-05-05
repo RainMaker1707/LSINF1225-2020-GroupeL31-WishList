@@ -62,6 +62,8 @@ public class WishList {
         }
         setWishLst(wishes);
         cursor.close();
+
+        this.size = wishes.size();
     }
 
     /** insert a new line in db table wish
@@ -123,8 +125,11 @@ public class WishList {
         }
     }
 
-    public boolean deleteWish(Wish wish){
-        return false;
+    public void unlinkWish(int wish_id){
+        String req = "DELETE FROM Content WHERE wishlist=\""+
+                this.getId() +"\" AND product=\""+wish_id +"\";";
+        db.insert(req);
+        this.updateWishLst();
     }
 
     public boolean addPermission(String mail, int permId){

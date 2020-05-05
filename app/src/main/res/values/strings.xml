@@ -83,4 +83,6 @@
     <string name="hint_search_wish">Enter Wish\'s name</string>
     <string name="pass">pass this step</string>
     <string name="blind_picture">Profile picture round in middle of the popup</string>
+    <string name="delete_wish">Delete wish</string>
+    <string name="conf_del_wish">Are you sure to delete this wish?</string>
 </resources>

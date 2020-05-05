@@ -25,16 +25,18 @@ public class TODO {
     //modify wishlist picture
     //add preferences in profile layout
 
-    //** TODO tomorrow
+    //** 04/05
     //set picture Wish
     //display Wish picture if set
-    //TODO delete Wish in wishlist
-    //TODO fill db at installation 5min
-    //TODO use camera instead of choose image
+
+    //** 05/05
+    //delete Wish in wishlist
+    //TODO fill db at installation (15min)
+    //TODO use camera instead of choose image (30 min)
+    //TODO manage permissions complex part ** WARNING REALLY TODO (unknown)
 
 
     //** TODO after
-    //TODO manage permissions complex part ** WARNING REALLY TODO
     //TODO modify profile
     //TODO logs table for wish **
     //TODO parameters **

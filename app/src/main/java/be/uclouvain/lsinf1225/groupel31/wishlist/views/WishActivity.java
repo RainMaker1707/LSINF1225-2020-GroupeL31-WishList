@@ -2,30 +2,35 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWish;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WishActivity extends AppCompatActivity {
 
-    private boolean isFriendWish;
+    private Dialog popup;
     private boolean showed = false;
     private User user = CurrentUser.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish);
-        isFriendWish = getIntent().getBooleanExtra("isFriendWish", false);
+        final boolean isFriendWish = getIntent().getBooleanExtra("isFriendWish", false);
+        popup = new Dialog(this);
+
         //Circle profile picture action -> go to profile activity
         de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
         if(user.getProfilePicture() != null){profile_picture.setImageBitmap(user.getProfilePicture());}
@@ -119,13 +124,51 @@ public class WishActivity extends AppCompatActivity {
         if(currentWish.getDescription().length() > 1){ description.setText(currentWish.getDescription());}
         else{description.setText(R.string.no_desc);}
 
-        //button, modify
-        Button modify = findViewById(R.id.modify_btn);
+        //button, delete
+        Button modify = findViewById(R.id.delete_btn);
         if (isFriendWish){ modify.setEnabled(false);}
         else{
-            modify.setOnClickListener(null);
+            modify.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popup.setContentView(R.layout.delete_confirmation);
+
+                    //set Text
+                    TextView text = popup.findViewById(R.id.txt_conf_popup);
+                    text.setText(getString(R.string.conf_del_wish));
+
+                    // set valid button listener
+                    TextView accept = popup.findViewById(R.id.delete_btn);
+                    accept.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CurrentWishList.getInstance().unlinkWish(CurrentWish.getInstance().getId());
+                            Toast.makeText(getApplicationContext(), "Successfully unlink",
+                                    Toast.LENGTH_SHORT).show();
+                            popup.dismiss();
+                            Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                            startActivity(next_layout);
+                            finish();
+                        }
+                    });
+
+                    //set cancel button listener
+                    TextView cancel = popup.findViewById(R.id.cancel_btn);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popup.dismiss();
+                        }
+                    });
+
+                    popup.show();
+
+                }
+            });
         }
 
+
+        //set picture
         CircleImageView photo = findViewById(R.id.pict_wish);
         if(currentWish.getPicture() != null){photo.setImageBitmap(currentWish.getPicture());}
 
