@@ -52,8 +52,7 @@ public class WishList {
         //loop to append wish in list
         while(!cursor.isAfterLast()){
             Wish toAdd = new Wish(cursor.getInt(0), cursor.getString(1),
-                    cursor.getString(3), cursor.getString(4),
-                    cursor.getDouble(5), cursor.getString(6));
+                    cursor.getString(3), cursor.getDouble(4), cursor.getString(5));
             if(cursor.getBlob(2) != null){
                 toAdd.setPicture(ImageToBlob.getBytePhoto(cursor.getBlob(2)));
             }
@@ -76,9 +75,9 @@ public class WishList {
     public void createWish(String name, Bitmap picture, String description,
                            double price, String market){
         // insert
-        String req = "INSERT INTO Wish (name, photo, wish_id, desc, prix, market) VALUES ";
-        req += "(\"" + name + "\", \"" + picture + "\", \"" + this.id + "\", \"";
-        req += description + "\", \"" + price + "\", \"" + market + "\");";
+        String req = "INSERT INTO Wish (name, desc, price, market) VALUES ";
+        req += "(\"" + name + "\", \"" + description + "\", \""
+                + price + "\", \"" + market + "\");";
         db.insert(req);
 
         // select to find id of last wish inserted
@@ -88,11 +87,13 @@ public class WishList {
         cursor.close();
 
         // update picture
-        ContentValues values = new ContentValues();
-        values.put("photo", ImageToBlob.getBytes(picture));
-        String selection = "num LIKE ?";
-        String[] selectionArg = {String.format("%s", wish_id)};
-        db.get().update("Wish", values, selection, selectionArg);
+        if(picture != null) {
+            ContentValues values = new ContentValues();
+            values.put("photo", ImageToBlob.getBytes(picture));
+            String selection = "num LIKE ?";
+            String[] selectionArg = {String.format("%s", wish_id)};
+            db.get().update("Wish", values, selection, selectionArg);
+        }
 
         // link wish
         this.linkWish(wish_id);

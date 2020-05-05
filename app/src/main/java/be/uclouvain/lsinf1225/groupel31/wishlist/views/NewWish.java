@@ -27,8 +27,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewWish extends AppCompatActivity {
     private Dialog popup;
-    private Bitmap img;
-    private Bitmap imgChoose;
+    private Bitmap img = null;
+    private Bitmap imgChoose = null;
     boolean showed = false;
     User user = CurrentUser.getInstance();
 
@@ -107,7 +107,7 @@ public class NewWish extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         imgChoose = img;
-                        picture.setImageBitmap(imgChoose);
+                        if(imgChoose != null) {picture.setImageBitmap(imgChoose);}
                         popup.dismiss();
                     }
                 });

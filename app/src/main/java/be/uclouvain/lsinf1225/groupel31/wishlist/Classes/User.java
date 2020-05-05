@@ -5,10 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -251,7 +249,7 @@ public class User {
     }
 
     // ******* getters and setters *****
-    private void setEmail(String email){
+    public void setEmail(String email){
         this.email = email;
     }
 

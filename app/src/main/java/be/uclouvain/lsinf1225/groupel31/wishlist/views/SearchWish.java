@@ -164,9 +164,8 @@ public class SearchWish extends AppCompatActivity {
                             Wish toAdd = new Wish(cursor.getInt(0),
                                     cursor.getString(1),
                                     cursor.getString(3),
-                                    cursor.getString(4),
-                                    cursor.getDouble(5),
-                                    cursor.getString(6));
+                                    cursor.getDouble(4),
+                                    cursor.getString(5));
                             if (cursor.getBlob(2) != null) {
                                 toAdd.setPicture(ImageToBlob.getBytePhoto(cursor.getBlob(2)));
                             }

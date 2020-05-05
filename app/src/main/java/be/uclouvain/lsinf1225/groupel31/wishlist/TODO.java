@@ -31,14 +31,16 @@ public class TODO {
 
     //** 05/05
     //delete Wish in wishlist
-    //TODO fill db at installation (15min)
+    //fill db at installation (15min)m
     //TODO use camera instead of choose image (30 min)
     //TODO manage permissions complex part ** WARNING REALLY TODO (unknown)
 
 
     //** TODO after
-    //TODO modify profile
-    //TODO logs table for wish **
-    //TODO parameters **
+    //TODO modify profile (1h)
+    //TODO fill db picture
+    //TODO ask for perm in app if disable (30 min)
+    //TODO logs table for wish ** (30 min)
+    //TODO parameters ** ()
 
 }
