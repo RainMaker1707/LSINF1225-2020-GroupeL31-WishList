@@ -76,21 +76,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         );
         db.execSQL("CREATE TABLE Perm ("
                 +"mail VARCHAR (255) REFERENCES User (mail) NOT NULL,"
-                +"perm INTEGER       CHECK (0 <= perm < 3) NOT NULL DEFAULT (2),"
+                +"perm INTEGER       CHECK (0 <= perm < 2) NOT NULL,"
                 +"id   INTEGER       REFERENCES Wishlist (id)NOT NULL,"
                 +"PRIMARY KEY (mail, id));"
-        );
-        db.execSQL("CREATE TABLE Interest ("
-                +"mail VARCHAR (255) REFERENCES User (mail) NOT NULL,"
-                +"id   INTEGER       REFERENCES Wishlist (id) NOT NULL,"
-                +"PRIMARY KEY (mail, id));"
-        );
-        db.execSQL("CREATE TABLE Eval ("
-                +"mail VARCHAR (255) REFERENCES User (mail) NOT NULL,"
-                +"id   INTEGER       REFERENCES Wishlist (id) NOT NULL,"
-                +"num  INTEGER       REFERENCES Wish (num) NOT NULL,"
-                +"eval INTEGER       CHECK (0 <= eval < 11) NOT NULL,"
-                +"PRIMARY KEY (mail, id, num));"
         );
         db.execSQL("CREATE TABLE Content ("
                 +"wishlist INTEGER REFERENCES Wishlist (id),"

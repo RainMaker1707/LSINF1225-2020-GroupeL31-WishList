@@ -248,6 +248,53 @@ public class User {
         this.setRefFromDb(this.getEmail());
     }
 
+    public boolean canRead(int wishlist_id){
+        Cursor cursor = db.select("SELECT perm FROM Perm WHERE mail=\"" + this.getEmail()
+                                        + "\" AND id=\"" + wishlist_id + "\";");
+        cursor.moveToFirst();
+        if(!cursor.isAfterLast()){
+            if(cursor.getInt(0) == 0){
+                cursor.close();
+                return false;
+            }
+        }
+        cursor.close();
+        return true;
+    }
+
+    public boolean canWrite(int wishlist_id){
+        Cursor cursor = db.select("SELECT perm FROM Perm WHERE mail=\"" + this.getEmail()
+                + "\" AND id=\"" + wishlist_id + "\";");
+        cursor.moveToFirst();
+        if(!cursor.isAfterLast()){
+            if(cursor.getInt(0) == 1){
+                cursor.close();
+                return true;
+            }
+        }
+        cursor.close();
+        return false;
+    }
+
+    public void removePerm(String mail, int wishlist_id){
+        String req = "DELETE FROM Perm WHERE mail=\"" + mail + "\" AND ";
+        req += "id=\"" + wishlist_id + "\";";
+        db.insert(req);
+    }
+
+    public void addPerm(String mail, int wishlist_id, int permission){
+        String req = "INSERT INTO Perm (mail, perm, id) VALUES ";
+        req += "(\"" + mail + "\", \"" + permission + "\" , \"";
+        req += wishlist_id + "\");";
+        db.insert(req);
+    }
+
+    public void updatePerm(String mail, int new_perm, int wishlist_id){
+        String req = "UPDATE Perm SET perm=\"" + new_perm + "\" WHERE mail=\"" + mail + "\" AND ";
+        req += "id=\"" + wishlist_id + "\";";
+        db.insert(req);
+    }
+
     // ******* getters and setters *****
     public void setEmail(String email){
         this.email = email;
