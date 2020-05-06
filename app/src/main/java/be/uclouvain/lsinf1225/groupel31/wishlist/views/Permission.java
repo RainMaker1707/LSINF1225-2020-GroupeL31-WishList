@@ -2,15 +2,20 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
@@ -21,11 +26,13 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.tools.PermAdapter;
 public class Permission extends AppCompatActivity {
     private User user = CurrentUser.getInstance();
     private boolean showed = false;
+    private Dialog popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
+        popup = new Dialog(this);
 
         //menu show or not
         final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
@@ -119,13 +126,71 @@ public class Permission extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO popup to upgrade downgrade or delete permission
+                final User currentUser = (User) parent.getAdapter().getItem(position);
+                popup.setContentView(R.layout.perm_popup);
+
+                //delete perm button
+                TextView delete = popup.findViewById(R.id.write_btn);
+                delete.setText(getString(R.string.del_perm));
+                delete.setBackgroundColor(getColor(R.color.Red_alpha));
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //TODO confirmation popup
+                        user.removePerm(currentUser.getEmail(), CurrentWishList.getInstance().getId());
+                        CurrentWishList.getInstance().updatePermitted();
+                        Toast.makeText(getApplicationContext(), "Successfully deleted",
+                                Toast.LENGTH_SHORT).show();
+                        popup.dismiss();
+                    }
+                });
+
+                //quit button
+                TextView quit = popup.findViewById(R.id.quit_btn);
+                quit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popup.dismiss();
+                    }
+                });
+
+                //permute perm button
+                TextView permute = popup.findViewById(R.id.read_btn);
+                if(currentUser.getPerm() == 0){permute.setText(getString(R.string.add_write_perm));}
+                else{permute.setText(getString(R.string.add_read_perm));}
+                permute.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(currentUser.getPerm() == 0){
+                            user.updatePerm(currentUser.getEmail(), 1,
+                                    CurrentWishList.getInstance().getId());
+                            CurrentWishList.getInstance().updatePermitted();
+                            Toast.makeText(getApplicationContext(),
+                                    currentUser.getPseudo() + " can now write in "
+                                            + CurrentWishList.getInstance().getName(),
+                                    Toast.LENGTH_SHORT).show();
+                        }else{
+                            user.updatePerm(currentUser.getEmail(), 0,
+                                    CurrentWishList.getInstance().getId());
+                            CurrentWishList.getInstance().updatePermitted();
+                            Toast.makeText(getApplicationContext(),
+                                    CurrentWishList.getInstance().getName()
+                                            + " is now hided for " + currentUser.getPseudo(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        popup.dismiss();
+                        Intent refresh = new Intent(getApplicationContext(), Permission.class);
+                        startActivity(refresh);
+                        finish();
+                    }
+                });
+                popup.show();
             }
         });
 
         // set button text and listener
         Button add_perm = findViewById(R.id.add_friend);
-        add_perm.setText("Add permission");
+        add_perm.setText(getString(R.string.add_perm2));
         add_perm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

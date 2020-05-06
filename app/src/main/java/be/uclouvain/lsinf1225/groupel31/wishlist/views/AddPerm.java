@@ -119,6 +119,11 @@ public class AddPerm extends AppCompatActivity {
 
         final GridView list_view = findViewById(R.id.list_view_t);
 
+        //set page title
+        TextView title = findViewById(R.id.page_title);
+        title.setText(getString(R.string.add_perm));
+
+
         //on text change listener to search friend
         EditText text = findViewById(R.id.input_search);
         text.addTextChangedListener(new TextWatcher() {

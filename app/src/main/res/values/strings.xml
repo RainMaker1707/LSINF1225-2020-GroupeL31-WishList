@@ -88,4 +88,7 @@
     <string name="manage_perm">Edit Permission</string>
     <string name="add_read_perm">Hide for</string>
     <string name="add_write_perm">Can Write</string>
+    <string name="del_perm">Delete perm</string>
+    <string name="add_perm">Add a permission to a friend</string>
+    <string name="add_perm2">Add permission</string>
 </resources>

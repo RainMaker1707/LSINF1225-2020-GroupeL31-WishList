@@ -281,8 +281,7 @@ public class Base extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent next_layout = new Intent(getApplicationContext(), Permission.class);
                                 startActivity(next_layout);
-                                //finish();
-                                //TODO permissions
+                                finish();
                             }
                         });
 
