@@ -45,13 +45,11 @@ public class TODO {
     //modify permission
     //active button modify wishlist if permission is set at 1
     //remove hided wishlist from friend's wishlist list
-    //TODO modify profile (1h)
+    //TODO modify profile (1h) -> in curse
     //TODO ask for perm in app if disable (30 min)
 
 
     //** TODO after
     //TODO fill db picture
-    //TODO logs table for wish ** (30 min)
-    //TODO parameters ** ()
 
 }
