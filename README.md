@@ -19,5 +19,4 @@ Users can create WishList, private public or cooperation edition mode.
 Users can add product in a WishList he owns or in a friend's WishList wich allow him writting permission ( cooperation edition mode)
 Users can add others users as friend. The requested user have to accept the proposition before the requester user can view the requested user's WishList.
 
-Users can follow (will see the changes made in a designated WishList) friend's WishList.
 Users can delete a friend.. (obviously)
