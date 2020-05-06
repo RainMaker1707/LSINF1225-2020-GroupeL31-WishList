@@ -86,4 +86,6 @@
     <string name="delete_wish">Delete wish</string>
     <string name="conf_del_wish">Are you sure to delete this wish?</string>
     <string name="manage_perm">Edit Permission</string>
+    <string name="add_read_perm">Hide for</string>
+    <string name="add_write_perm">Can Write</string>
 </resources>
