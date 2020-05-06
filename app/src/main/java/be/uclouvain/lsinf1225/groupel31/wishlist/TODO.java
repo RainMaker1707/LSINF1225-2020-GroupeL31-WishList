@@ -37,14 +37,14 @@ public class TODO {
     //use camera instead of choose image
 
     //** 06/05
-    //TODO manage permissions complex part ** WARNING REALLY TODO (unknown)
+    //manage permissions complex part ** WARNING REALLY (6h)
     //display permitted user per wishlist
     //search layout to add permission
     //change color of background in result of permission
     //add permission
     //modify permission
     //active button modify wishlist if permission is set at 1
-    //TODO remove hided wishlist from friend's wishlist list
+    //remove hided wishlist from friend's wishlist list
     //TODO modify profile (1h)
     //TODO ask for perm in app if disable (30 min)
 
