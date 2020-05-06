@@ -1,11 +1,14 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -115,8 +118,16 @@ public class NewWish extends AppCompatActivity {
                 album.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(pick, 1);
+                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.READ_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED){
+                            requestPermissions(new String[] {
+                                    Manifest.permission.READ_EXTERNAL_STORAGE
+                            }, 2);
+                        }else {
+                            Intent pick = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(pick, 1);
+                        }
                     }
                 });
 
@@ -125,20 +136,28 @@ public class NewWish extends AppCompatActivity {
                 camera.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if(capture.resolveActivity(getPackageManager()) != null){
-                            File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                            File photoFile = null;
-                            try {
-                                photoFile = File.createTempFile("temp", ".jpg", photoDir);
-                                photoPath = photoFile.getAbsolutePath();
-                                Uri photoUri = FileProvider.getUriForFile(context,
-                                        BuildConfig.APPLICATION_ID +".provider",
-                                        photoFile);
-                                capture.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                                startActivityForResult(capture, IMAGE_CAPTURED);
-                            }catch(IOException e){
-                                e.getMessage();
+                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED){
+                            requestPermissions(new String[] {
+                                    Manifest.permission.CAMERA
+                            }, 2);
+                        }else {
+                            Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (capture.resolveActivity(getPackageManager()) != null) {
+                                File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                                File photoFile = null;
+                                try {
+                                    photoFile = File.createTempFile("temp", ".jpg", photoDir);
+                                    photoPath = photoFile.getAbsolutePath();
+                                    Uri photoUri = FileProvider.getUriForFile(context,
+                                            BuildConfig.APPLICATION_ID + ".provider",
+                                            photoFile);
+                                    capture.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                                    startActivityForResult(capture, IMAGE_CAPTURED);
+                                } catch (IOException e) {
+                                    e.getMessage();
+                                }
                             }
                         }
                     }
