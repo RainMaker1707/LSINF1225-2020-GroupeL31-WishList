@@ -38,6 +38,13 @@ public class TODO {
 
     //** 06/05
     //TODO manage permissions complex part ** WARNING REALLY TODO (unknown)
+    //display permitted user per wishlist
+    //search layout to add permission
+    //change color of background in result of permission
+    //add permission
+    //TODO modify permission
+    //TODO remove hided wishlist from friend's wishlist list
+    //TODO active button modify wishlist if permission is set at 1
     //TODO modify profile (1h)
     //TODO ask for perm in app if disable (30 min)
 

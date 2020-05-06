@@ -27,7 +27,6 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddPerm extends AppCompatActivity {
     private User user = CurrentUser.getInstance();
@@ -133,36 +132,40 @@ public class AddPerm extends AppCompatActivity {
                 if(count > 0) {
                     //make the list of all user with the name is like the pattern 's' + '*char'
                     final List<User> users = new ArrayList<>();
-                    AccessDataBase db = new AccessDataBase(getApplicationContext());
-                    Cursor cursor = db.select("SELECT pseudo, mail FROM User WHERE pseudo LIKE \""
-                            + s + "%\" OR mail LIKE \"" + s + "%\";");
-                    cursor.moveToFirst();
                     //check all user corresponding to the pattern
-                    while (!cursor.isAfterLast()) {
-                        //check if it's not current user
-                        if(!cursor.getString(1).equals(user.getEmail())) {
-                            boolean found = false;
-                            //check if user is already in listFriend
-                            for(int i = 0; i < current.getPermitted().size(); i++){
-                                //if already in set the flag to true and break the loop
-                                if(cursor.getString(1).equals(
-                                        current.getPermitted().get(i).getEmail())){
-                                    found = true;
-                                    break;
-                                }
-                            }
-                            //if not already in friend list add user to the list to display
-                            if(!found) {
-                                User toAdd = new User();
-                                toAdd.setDb(getApplicationContext());
-                                toAdd.setRefFromDb(cursor.getString(1));
-                                users.add(toAdd);
-                            }
+                    String req = "SELECT mail_host, mail_requested FROM Friend WHERE (mail_host "
+                            + "LIKE \"" + s + "%\" AND relation=1 AND mail_requested=\""
+                            + user.getEmail() + "\") OR (mail_host=\"" + user.getEmail() + "\" AND "
+                            + "relation=1 AND mail_requested LIKE \"" + s + "%\");";
 
+                    AccessDataBase db = new AccessDataBase(getApplicationContext());
+                    Cursor cursor = db.select(req);
+                    cursor.moveToFirst();
+                    while(!cursor.isAfterLast()){
+                        String temp_mail = cursor.getString(0);
+                        boolean found = false;
+                        //set the good mail in temp mail
+                        if(temp_mail.equals(user.getEmail())){
+                            temp_mail = cursor.getString(1);
+                        }
+                        //check if user is already in permission list;
+                        for(int i = 0; i < current.getPermitted().size(); i++){
+                            if(current.getPermitted().get(i).getEmail().equals(temp_mail)){
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        //if not already in permitted list add user to the list to display
+                        if(!found) {
+                            User toAdd = new User();
+                            toAdd.setDb(getApplicationContext());
+                            toAdd.setRefFromDb(temp_mail);
+                            users.add(toAdd);
                         }
                         cursor.moveToNext();
                     }
-                    cursor.close();
+
 
                     //now we have the list we can build the adapter grid view with it
                     list_view.setAdapter(new FriendAdapter(getApplicationContext(), users));
@@ -170,17 +173,71 @@ public class AddPerm extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             // retrieve the user clicked on
-                            final User current = users.get(position);
+                            final User currentUser = users.get(position);
 
                             // set popup args
                             popup.setContentView(R.layout.perm_popup);
 
-                            //TODO popup
+                            //set good name
+                            TextView name = popup.findViewById(R.id.name_popup);
+                            name.setText(currentUser.getPseudo());
+
+                            //set good mail
+                            TextView mail = popup.findViewById(R.id.mail_popup);
+                            mail.setText(currentUser.getEmail());
+
+                            //set wishlist nbr
+                            TextView wishlist = popup.findViewById(R.id.wishlist_popup);
+                            String temp = getString(R.string.wishlist_nbr);
+                            wishlist.setText(String.format("Has %s Wishlist",
+                                    currentUser.getWishlist_list().size()));
+
+                            //set quit button listener
+                            TextView quit = popup.findViewById(R.id.quit_btn);
+                            quit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popup.dismiss();
+                                }
+                            });
+
+                            //set button hide permission listener
+                            TextView hide = popup.findViewById(R.id.read_btn);
+                            hide.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    user.addPerm(currentUser.getEmail(), current.getId(), 0);
+                                    current.updatePermitted();
+                                    Toast.makeText(getApplicationContext(),
+                                            current.getName() + " hided for "
+                                                    + currentUser.getPseudo(),
+                                            Toast.LENGTH_SHORT).show();
+                                    popup.dismiss();
+                                    finish();
+
+                                }
+                            });
+
+                            //set button write permission listener
+                            TextView write = popup.findViewById(R.id.write_btn);
+                            write.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    user.addPerm(currentUser.getEmail(), current.getId(), 1);
+                                    current.updatePermitted();
+                                    Toast.makeText(getApplicationContext(),
+                                            currentUser.getPseudo() + " can now modify "
+                                                    + current.getName(),
+                                            Toast.LENGTH_SHORT).show();
+                                    popup.dismiss();
+                                    finish();
+
+                                }
+                            });
 
                             popup.show();
                         }
                     });
-
                 }
             }
 
