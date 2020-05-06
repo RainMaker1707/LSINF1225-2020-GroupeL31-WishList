@@ -69,9 +69,16 @@ public class NewWish extends AppCompatActivity {
                 //insert in db
                 current_list.createWish(name, imgChoose, description, price, market);
 
-                //go to next layout -> go to base activity
-                Intent next_layout = new Intent(getApplicationContext(), Base.class);
-                startActivity(next_layout);
+                //go to next layout -> go to precedent activity
+                boolean isFriend = getIntent().getBooleanExtra("isFriend", false);
+                if(!isFriend){
+                    Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                    startActivity(next_layout);
+                }else{
+                    Intent next_layout = new Intent(getApplicationContext(), FriendsWishList.class);
+                    next_layout.putExtra("currentFriend",
+                            getIntent().getStringExtra("currentFriend"));
+                }
                 finish();
             }
         });

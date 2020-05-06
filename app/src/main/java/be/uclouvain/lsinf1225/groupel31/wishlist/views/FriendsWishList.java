@@ -115,13 +115,29 @@ public class FriendsWishList extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final WishList current = currentFriend.getWishlist_list().get(position);
+                final WishList current = (WishList) parent.getAdapter().getItem(position);
                 grid.setNumColumns(2);
                 //build adapter with current wishlist content list
                 grid.setAdapter(new WishAdapter(getApplicationContext(), current.getWishLst()));
                 CurrentWishList.setInstance(current);
                 create_wishList.setText(R.string.add_wish);
-                create_wishList.setEnabled(false);
+                if(!user.canWrite(current.getId())){
+                    create_wishList.setEnabled(false);
+                }
+                else{
+                    create_wishList.setEnabled(true);
+                    create_wishList.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CurrentWishList.setInstance(current);
+                            Intent next_layout = new Intent(getApplicationContext(), SearchWish.class);
+                            next_layout.putExtra("isFriend", true);
+                            next_layout.putExtra("userFriend", current.getOwner());
+                            startActivity(next_layout);
+                            finish();
+                        }
+                    });
+                }
 
                 //active wishlist button to back
                 wishlist_btn.setEnabled(true);

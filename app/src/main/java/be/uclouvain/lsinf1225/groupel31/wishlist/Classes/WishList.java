@@ -3,12 +3,10 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.Classes;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 

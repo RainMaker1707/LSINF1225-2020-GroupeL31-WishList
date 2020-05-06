@@ -268,6 +268,7 @@ public class User {
                                         + "\" AND id=\"" + wishlist_id + "\";");
         cursor.moveToFirst();
         if(!cursor.isAfterLast()){
+            System.out.println(String.format("***** %s *****", cursor.getInt(0)));
             if(cursor.getInt(0) == 0){
                 cursor.close();
                 return false;
@@ -281,11 +282,12 @@ public class User {
         Cursor cursor = db.select("SELECT perm FROM Perm WHERE mail=\"" + this.getEmail()
                 + "\" AND id=\"" + wishlist_id + "\";");
         cursor.moveToFirst();
-        if(!cursor.isAfterLast()){
+        while(!cursor.isAfterLast()){
             if(cursor.getInt(0) == 1){
                 cursor.close();
                 return true;
             }
+            cursor.moveToNext();
         }
         cursor.close();
         return false;

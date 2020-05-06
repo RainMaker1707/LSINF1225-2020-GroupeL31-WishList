@@ -116,6 +116,12 @@ public class SearchWish extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent next_layout = new Intent(getApplicationContext(), NewWish.class);
+                boolean isFriend = getIntent().getBooleanExtra("isFriend", false);
+                next_layout.putExtra("isFriend", isFriend);
+                if(isFriend){
+                    next_layout.putExtra("currentUser",
+                            getIntent().getStringExtra("currentUser"));
+                }
                 startActivity(next_layout);
                 finish();
             }

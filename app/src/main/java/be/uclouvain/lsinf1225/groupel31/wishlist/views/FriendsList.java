@@ -142,6 +142,7 @@ public class FriendsList extends AppCompatActivity {
                 wishlist_nbr.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        popup.dismiss();
                         Intent next_layout = new Intent(getApplicationContext(), FriendsWishList.class);
                         next_layout.putExtra("currentFriend", current.getEmail());
                         startActivity(next_layout);
