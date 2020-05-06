@@ -157,6 +157,7 @@ public class FriendsWishList extends AppCompatActivity {
                         CurrentWish.setInstance(current.getWishLst().get(position));
                         Intent next_layout = new Intent(getApplicationContext(), WishActivity.class);
                         next_layout.putExtra("isFriendWish", true);
+                        next_layout.putExtra("canWrite", user.canWrite(current.getId()));
                         startActivity(next_layout);
                         finish();
                     }

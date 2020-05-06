@@ -29,6 +29,7 @@ public class WishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish);
         final boolean isFriendWish = getIntent().getBooleanExtra("isFriendWish", false);
+        final boolean canWrite = getIntent().getBooleanExtra("canWrite", false);
         popup = new Dialog(this);
 
         //Circle profile picture action -> go to profile activity
@@ -126,7 +127,7 @@ public class WishActivity extends AppCompatActivity {
 
         //button, delete
         Button modify = findViewById(R.id.delete_btn);
-        if (isFriendWish){ modify.setEnabled(false);}
+        if (isFriendWish && !canWrite){ modify.setEnabled(false);}
         else{
             modify.setOnClickListener(new View.OnClickListener() {
                 @Override
