@@ -230,8 +230,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
         //permission
         req = "INSERT INTO Perm (mail, perm, id) VALUES ";
-        db.execSQL(req + "(\"nicolas@gmail.com\", 1, 4);");
-        db.execSQL(req + "(\"julien@gmail.com\", 0, 4);");
+        //db.execSQL(req + "(\"nicolas@gmail.com\", 1, 4);");
+        //db.execSQL(req + "(\"julien@gmail.com\", 0, 4);");
 
     }
 

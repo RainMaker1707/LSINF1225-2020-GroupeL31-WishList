@@ -122,6 +122,7 @@ public class FriendsWishList extends AppCompatActivity {
                 CurrentWishList.setInstance(current);
                 create_wishList.setText(R.string.add_wish);
                 create_wishList.setEnabled(false);
+
                 //active wishlist button to back
                 wishlist_btn.setEnabled(true);
                 wishlist_btn.setOnClickListener(new View.OnClickListener() {

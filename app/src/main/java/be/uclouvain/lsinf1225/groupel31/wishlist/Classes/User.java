@@ -71,7 +71,20 @@ public class User {
         if(CurrentUser.getInstance().getEmail().equals(mail)) {
             updateFriendList();
         }
+    }
 
+    /** Retrieve some data from db and set it in usable var
+     */
+    public void setLessRefFromDb(String mail) {
+        Cursor cursor = db.select("SELECT * FROM user WHERE mail=\"" + mail + "\";");
+        cursor.moveToLast();
+        setPseudo(cursor.getString(0));
+        setEmail(cursor.getString( 2));
+        if(cursor.getBlob(3) != null) {
+            byte[] picture = cursor.getBlob(3);
+            setProfilePicture(ImageToBlob.getBytePhoto(picture));
+        }
+        cursor.close();
     }
 
 
@@ -102,6 +115,7 @@ public class User {
         cursor.close();
         setWishlist_list(wishlists);
     }
+
 
     /** Update the friend list from the dataBase
      */

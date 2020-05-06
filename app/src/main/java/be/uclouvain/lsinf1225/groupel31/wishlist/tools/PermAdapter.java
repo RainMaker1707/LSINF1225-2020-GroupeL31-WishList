@@ -45,7 +45,6 @@ public class PermAdapter extends BaseAdapter {
         User current = this.getItem(position);
 
         TextView name = convertView.findViewById(R.id.name);
-        TextView nbr_wishlist = convertView.findViewById(R.id.nbr_wishlist);
         TextView mail = convertView.findViewById(R.id.mail_friend);
         ImageView background = convertView.findViewById(R.id.background);
         if(current.getPerm() == 0){
@@ -59,7 +58,6 @@ public class PermAdapter extends BaseAdapter {
             img.setImageBitmap(current.getProfilePicture());
         }
         name.setText(current.getPseudo());
-        nbr_wishlist.setText(String.format("Has %s WishLists", current.getWishlist_list().size()));
         mail.setText(current.getEmail());
         return convertView;
     }

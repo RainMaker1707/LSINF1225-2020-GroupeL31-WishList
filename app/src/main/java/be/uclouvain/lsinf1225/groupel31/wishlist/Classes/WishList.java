@@ -49,7 +49,7 @@ public class WishList {
         while(!cursor.isAfterLast()){
             User toAdd = new User();
             toAdd.setDb(db.getContext());
-            toAdd.setRefFromDb(cursor.getString(cursor.getColumnIndex("mail")));
+            toAdd.setLessRefFromDb(cursor.getString(cursor.getColumnIndex("mail")));
             toAdd.setPerm(cursor.getInt(1));
             permittedTemp.add(toAdd);
             cursor.moveToNext();

@@ -279,6 +279,7 @@ public class Base extends AppCompatActivity {
                         manage.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                popup.dismiss();
                                 Intent next_layout = new Intent(getApplicationContext(), Permission.class);
                                 startActivity(next_layout);
                                 finish();

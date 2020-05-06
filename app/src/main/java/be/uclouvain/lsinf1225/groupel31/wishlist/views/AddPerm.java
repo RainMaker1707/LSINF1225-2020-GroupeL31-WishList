@@ -133,7 +133,7 @@ public class AddPerm extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence s, final int start, int before, int count) {
                 if(count > 0) {
                     //make the list of all user with the name is like the pattern 's' + '*char'
                     final List<User> users = new ArrayList<>();
@@ -191,12 +191,6 @@ public class AddPerm extends AppCompatActivity {
                             TextView mail = popup.findViewById(R.id.mail_popup);
                             mail.setText(currentUser.getEmail());
 
-                            //set wishlist nbr
-                            TextView wishlist = popup.findViewById(R.id.wishlist_popup);
-                            String temp = getString(R.string.wishlist_nbr);
-                            wishlist.setText(String.format("Has %s Wishlist",
-                                    currentUser.getWishlist_list().size()));
-
                             //set quit button listener
                             TextView quit = popup.findViewById(R.id.quit_btn);
                             quit.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +212,8 @@ public class AddPerm extends AppCompatActivity {
                                                     + currentUser.getPseudo(),
                                             Toast.LENGTH_SHORT).show();
                                     popup.dismiss();
+                                    Intent refresh = new Intent(getApplicationContext(), Permission.class);
+                                    startActivity(refresh);
                                     finish();
 
                                 }
@@ -235,11 +231,12 @@ public class AddPerm extends AppCompatActivity {
                                                     + current.getName(),
                                             Toast.LENGTH_SHORT).show();
                                     popup.dismiss();
+                                    Intent refresh = new Intent(getApplicationContext(), Permission.class);
+                                    startActivity(refresh);
                                     finish();
 
                                 }
                             });
-
                             popup.show();
                         }
                     });
