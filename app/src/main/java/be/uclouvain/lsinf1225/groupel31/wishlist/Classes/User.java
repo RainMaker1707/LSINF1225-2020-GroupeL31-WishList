@@ -282,12 +282,11 @@ public class User {
         Cursor cursor = db.select("SELECT perm FROM Perm WHERE mail=\"" + this.getEmail()
                 + "\" AND id=\"" + wishlist_id + "\";");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
+        if(!cursor.isAfterLast()){
             if(cursor.getInt(0) == 1){
                 cursor.close();
                 return true;
             }
-            cursor.moveToNext();
         }
         cursor.close();
         return false;

@@ -8,10 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -59,7 +62,14 @@ public class FriendAdapter extends BaseAdapter {
             img.setImageBitmap(current.getProfilePicture());
         }
         name.setText(current.getPseudo());
-        nbr_wishlist.setText(String.format("Has %s WishLists", current.getWishlist_list().size()));
+        //format list of wishlist in function of permission
+        List<WishList> wishList = new ArrayList<>();
+        for(int i = 0; i < current.getWishlist_list().size(); i++){
+            if(CurrentUser.getInstance().canRead(current.getWishlist_list().get(i).getId())){
+                wishList.add(current.getWishlist_list().get(i));
+            }
+        }
+        nbr_wishlist.setText(String.format("Has %s WishLists", wishList.size()));
         mail.setText(current.getEmail());
         return convertView;
     }

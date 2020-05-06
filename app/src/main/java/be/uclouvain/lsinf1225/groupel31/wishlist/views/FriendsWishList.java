@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
@@ -106,10 +109,18 @@ public class FriendsWishList extends AppCompatActivity {
         final Button create_wishList = findViewById(R.id.create_wishlist);
         create_wishList.setEnabled(false);
 
+        //format list of wishlist in function of permission
+        List<WishList> wishList = new ArrayList<>();
+        for(int i = 0; i < currentFriend.getWishlist_list().size(); i++){
+            if(user.canRead(currentFriend.getWishlist_list().get(i).getId())){
+                wishList.add(currentFriend.getWishlist_list().get(i));
+            }
+        }
+
         //grid view
         final GridView grid = findViewById(R.id.news_grid);
         grid.setNumColumns(1);
-        grid.setAdapter(new WishListAdapter(getApplicationContext(), this, currentFriend.getWishlist_list()));
+        grid.setAdapter(new WishListAdapter(getApplicationContext(), this, wishList));
 
         //grid view on item listener display wishes contain in the wishlist
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

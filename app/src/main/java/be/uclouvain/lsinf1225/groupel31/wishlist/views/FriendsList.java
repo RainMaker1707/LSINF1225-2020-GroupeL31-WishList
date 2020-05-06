@@ -13,7 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
@@ -138,7 +142,14 @@ public class FriendsList extends AppCompatActivity {
 
                 // set the number of wishlist in the string and the listener to display them
                 TextView wishlist_nbr = popup.findViewById(R.id.wishlist_nbr_popup);
-                wishlist_nbr.setText(String.format("Has %s WishList", current.getWishlist_list().size()));
+                //format list of wishlist in function of permission
+                List<WishList> wishList = new ArrayList<>();
+                for(int i = 0; i < current.getWishlist_list().size(); i++){
+                    if(user.canRead(current.getWishlist_list().get(i).getId())){
+                        wishList.add(current.getWishlist_list().get(i));
+                    }
+                }
+                wishlist_nbr.setText(String.format("Has %s WishList", wishList.size()));
                 wishlist_nbr.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
