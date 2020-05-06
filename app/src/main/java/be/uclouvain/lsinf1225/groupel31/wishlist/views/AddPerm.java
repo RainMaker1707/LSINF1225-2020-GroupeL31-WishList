@@ -1,7 +1,5 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.views;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,17 +15,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
+import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentUser;
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.FriendAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AddFriend extends AppCompatActivity {
+public class AddPerm extends AppCompatActivity {
+    private User user = CurrentUser.getInstance();
+    private WishList current = CurrentWishList.getInstance();
     private boolean showed = false;
     private Dialog popup;
 
@@ -37,24 +41,23 @@ public class AddFriend extends AppCompatActivity {
         setContentView(R.layout.activity_add_friend);
         popup = new Dialog(this);
 
-        //get logged in user reference
-        final User user = CurrentUser.getInstance();
-
-
         //menu show or not
         final de.hdodenhof.circleimageview.CircleImageView profile_picture = findViewById(R.id.picture_profile);
-        if(user.getProfilePicture() != null){profile_picture.setImageBitmap(user.getProfilePicture());}
+        if (user.getProfilePicture() != null) {
+            profile_picture.setImageBitmap(user.getProfilePicture());
+        }
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // parameters margins setter
                 RelativeLayout menu = findViewById(R.id.menu);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout
                         .LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                if (!showed){
-                    params.setMargins(0, 70,0,0);
+                if (!showed) {
+                    params.setMargins(0, 70, 0, 0);
                     showed = true;
-                }else {
+                } else {
                     params.setMarginStart(600);
                     showed = false;
                 }
@@ -78,7 +81,14 @@ public class AddFriend extends AppCompatActivity {
 
         //button wish list
         final Button wishlist_btn = findViewById(R.id.wishlist);
-        wishlist_btn.setEnabled(false);
+        wishlist_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), Base.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
 
         //button friend list
         final Button friend_list_btn = findViewById(R.id.friend_list);
@@ -108,15 +118,6 @@ public class AddFriend extends AppCompatActivity {
         });
         //**** Menu buttons END ****
 
-
-        //Hide useless button
-        Button button = findViewById(R.id.button_new);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.setMarginStart(-600);
-        button.setLayoutParams(params);
-
-
         final GridView list_view = findViewById(R.id.list_view_t);
 
         //on text change listener to search friend
@@ -131,7 +132,7 @@ public class AddFriend extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(count > 0) {
                     //make the list of all user with the name is like the pattern 's' + '*char'
-                    final List <User> users = new ArrayList<>();
+                    final List<User> users = new ArrayList<>();
                     AccessDataBase db = new AccessDataBase(getApplicationContext());
                     Cursor cursor = db.select("SELECT pseudo, mail FROM User WHERE pseudo LIKE \""
                             + s + "%\" OR mail LIKE \"" + s + "%\";");
@@ -142,9 +143,10 @@ public class AddFriend extends AppCompatActivity {
                         if(!cursor.getString(1).equals(user.getEmail())) {
                             boolean found = false;
                             //check if user is already in listFriend
-                            for(int i = 0; i< user.getFriendList().size(); i++){
+                            for(int i = 0; i < current.getPermitted().size(); i++){
                                 //if already in set the flag to true and break the loop
-                                if(cursor.getString(1).equals(user.getFriendList().get(i).getEmail())){
+                                if(cursor.getString(1).equals(
+                                        current.getPermitted().get(i).getEmail())){
                                     found = true;
                                     break;
                                 }
@@ -171,52 +173,9 @@ public class AddFriend extends AppCompatActivity {
                             final User current = users.get(position);
 
                             // set popup args
-                            popup.setContentView(R.layout.friend_popup);
+                            popup.setContentView(R.layout.perm_popup);
 
-                            // set picture if set in db
-                            if(current.getProfilePicture() != null){
-                                CircleImageView img = popup.findViewById(R.id.friend_picture_popup);
-                                img.setImageBitmap(current.getProfilePicture());
-                            }
-
-                            // set friend name
-                            TextView name = popup.findViewById(R.id.friend_name_popup);
-                            name.setText(current.getPseudo());
-
-                            // set friend mail
-                            TextView mail = popup.findViewById(R.id.mail_friend_popup);
-                            mail.setText(current.getEmail());
-
-                            // set friend wishlist nbr
-                            TextView nbr = popup.findViewById(R.id.wishlist_nbr_popup);
-                            nbr.setText(String.format("Has %s WishLists",
-                                    current.getWishlist_list().size()));
-
-
-                            // button add
-                            TextView add = popup.findViewById(R.id.add_friend__popup);
-                            add.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                    user.addFriend(current.getEmail());
-
-                                    Toast.makeText(getApplicationContext(), "Correctly added "
-                                            + current.getPseudo(),
-                                            Toast.LENGTH_SHORT).show();
-                                    popup.dismiss();
-
-                                }
-                            });
-
-                            // listener for quit button
-                            TextView quit = popup.findViewById(R.id.quit_popup);
-                            quit.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    popup.dismiss();
-                                }
-                            });
+                            //TODO popup
 
                             popup.show();
                         }

@@ -28,6 +28,7 @@ public class User {
     private String color;
     private String hobby;
     private Bitmap profilePicture;
+    private int perm = 2;
     private List<WishList> wishlist_list;
     private List<User> friendList;
     private AccessDataBase db;
@@ -405,5 +406,13 @@ public class User {
 
     public void setHobby(String hobby) {
         this.hobby = hobby;
+    }
+
+    public void setPerm(int perm) {
+        this.perm = perm;
+    }
+
+    public int getPerm() {
+        return perm;
     }
 }

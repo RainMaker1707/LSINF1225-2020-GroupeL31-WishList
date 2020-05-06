@@ -228,6 +228,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(req + "(\"" +tab[7] + "\", 1, \"" + tab[0] + "\");");
         db.execSQL(req + "(\"" +tab[7] + "\", 0, \"" + tab[1] + "\");");
 
+        //permission
+        req = "INSERT INTO Perm (mail, perm, id) VALUES ";
+        db.execSQL(req + "(\"nicolas@gmail.com\", 1, 4);");
+        db.execSQL(req + "(\"julien@gmail.com\", 0, 4);");
+
     }
 
     /**

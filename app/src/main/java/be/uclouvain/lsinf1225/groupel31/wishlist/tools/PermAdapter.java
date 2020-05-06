@@ -14,13 +14,13 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+public class PermAdapter extends BaseAdapter {
 
-public class FriendAdapter extends BaseAdapter {
     private List<User> user_l;
     private LayoutInflater inflater;
 
-    public FriendAdapter(Context context, List<User> users) {
-        this.user_l = users;
+    public PermAdapter(Context context, List<User> permitted){
+        this.user_l = permitted;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -31,7 +31,7 @@ public class FriendAdapter extends BaseAdapter {
 
     @Override
     public User getItem(int position) {
-        return this.user_l.get(position);
+        return this. user_l.get(position);
     }
 
     @Override
@@ -48,10 +48,10 @@ public class FriendAdapter extends BaseAdapter {
         TextView nbr_wishlist = convertView.findViewById(R.id.nbr_wishlist);
         TextView mail = convertView.findViewById(R.id.mail_friend);
         ImageView background = convertView.findViewById(R.id.background);
-        if(!current.isFriend() && current.isRequested()){
-            background.setImageResource(R.drawable.friend_req);
-        }else if(!current.isFriend() && !current.isRequested()){
+        if(current.getPerm() == 0){
             background.setImageResource(R.drawable.friend_dis);
+        }else if (current.getPerm() == 1){
+            background.setImageResource(R.drawable.friend_req);
         }
 
         if(current.getProfilePicture() != null){

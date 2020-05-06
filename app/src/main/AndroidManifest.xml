@@ -4,12 +4,12 @@
     package="be.uclouvain.lsinf1225.groupel31.wishlist">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -20,18 +20,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".views.SignUpMoreInfo"/>
-        <activity android:name=".views.SearchWish"/>
-        <activity android:name=".views.AddFriend"/>
-        <activity android:name=".views.FriendsList"/>
-        <activity android:name=".views.ProfileActivity"/>
-        <activity android:name=".views.WishActivity"/>
-        <activity android:name=".views.NewWish"/>
-        <activity android:name=".views.NewWishList"/>
-        <activity android:name=".views.Base"/>
-        <activity android:name=".views.SignUp"/>
-        <activity android:name=".views.SignIn"/>
-        <activity android:name=".views.FriendsWishList"/>
+        <activity android:name=".views.Permission"/>
+        <activity android:name=".views.SignUpMoreInfo" />
+        <activity android:name=".views.SearchWish" />
+        <activity android:name=".views.AddFriend" />
+        <activity android:name=".views.FriendsList" />
+        <activity android:name=".views.ProfileActivity" />
+        <activity android:name=".views.WishActivity" />
+        <activity android:name=".views.NewWish" />
+        <activity android:name=".views.NewWishList" />
+        <activity android:name=".views.Base" />
+        <activity android:name=".views.SignUp" />
+        <activity android:name=".views.SignIn" />
+        <activity android:name=".views.AddPerm"/>
+        <activity android:name=".views.FriendsWishList" />
         <activity android:name=".views.LogInUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,16 +43,14 @@
         </activity>
 
         <provider
-            android:authorities="${applicationId}.provider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_path"/>
+                android:resource="@xml/provider_path" />
         </provider>
-
-
     </application>
 
 </manifest>

@@ -11,18 +11,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
-import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 
 public class WishAdapter extends BaseAdapter {
-    private Context context;
     private List<Wish> wish_l;
     private LayoutInflater inflater;
 
     public WishAdapter(Context context, List<Wish> wish_l){
-        this.context = context;
         this.wish_l = wish_l;
-        this.inflater = LayoutInflater.from(this.context);
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override

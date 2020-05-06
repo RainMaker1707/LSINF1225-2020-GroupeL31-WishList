@@ -1,14 +1,14 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.Classes;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.Image;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import be.uclouvain.lsinf1225.groupel31.wishlist.singleton.CurrentWishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
 import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 
@@ -21,6 +21,7 @@ public class WishList {
     private Integer id;
     private AccessDataBase db;
     private List<Wish> wishLst = new ArrayList<>();
+    private List<User> permitted = new ArrayList<>();
 
     /** Constructor
      * @param db
@@ -38,6 +39,23 @@ public class WishList {
         this.owner = owner;
         this.db = db;
         updateWishLst();
+        updatePermitted();
+    }
+
+    public void updatePermitted() {
+        List<User> permittedTemp = new ArrayList<>();
+        Cursor cursor = db.select("SELECT * FROM Perm WHERE id=" + this.getId() + ";");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            User toAdd = new User();
+            toAdd.setDb(db.getContext());
+            toAdd.setRefFromDb(cursor.getString(cursor.getColumnIndex("mail")));
+            toAdd.setPerm(cursor.getInt(1));
+            permittedTemp.add(toAdd);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        this.permitted = permittedTemp;
     }
 
     /** Create a list of wish from the db data
@@ -199,4 +217,7 @@ public class WishList {
         this.wishLst = wishLst;
     }
 
+    public List<User> getPermitted() {
+        return permitted;
+    }
 }

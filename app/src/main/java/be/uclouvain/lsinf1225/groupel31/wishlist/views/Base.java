@@ -274,6 +274,18 @@ public class Base extends AppCompatActivity {
                             }
                         });
 
+                        // button manage permission
+                        Button manage = popup.findViewById(R.id.permission_btn);
+                        manage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent next_layout = new Intent(getApplicationContext(), Permission.class);
+                                startActivity(next_layout);
+                                //finish();
+                                //TODO permissions
+                            }
+                        });
+
                         //save change button listener
                         TextView modify_btn = popup.findViewById(R.id.modify_btn);
                         modify_btn.setOnClickListener(new View.OnClickListener() {
@@ -282,8 +294,13 @@ public class Base extends AppCompatActivity {
                                 // get the input text
                                 EditText input_t = popup.findViewById(R.id.name_in_popup);
                                 String input = input_t.getText().toString();
+                                if(input.length() == 0){
+                                    Toast.makeText(getApplicationContext(), "Name not changed",
+                                            Toast.LENGTH_SHORT).show();
+                                    popup.dismiss();
+                                }
                                 //check if length > 2
-                                if(input.length() < 2){
+                                else if(input.length() < 2){
                                     Toast.makeText(getApplicationContext(),
                                             "New name need a length greater than 2",
                                             Toast.LENGTH_SHORT).show();
