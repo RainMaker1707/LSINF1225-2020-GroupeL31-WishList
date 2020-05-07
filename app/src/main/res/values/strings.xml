@@ -99,4 +99,8 @@
     <string name="user6">shaparder@gmail.com</string>
     <string name="user7">stanley@gmail.com</string>
     <string name="user8">alexandre@gmail.com</string>
+    <string name="change_password">Change password</string>
+    <string name="old_pass">Old password</string>
+    <string name="new_pass">New password</string>
+    <string name="new_pass_conf">Confirmation</string>
 </resources>

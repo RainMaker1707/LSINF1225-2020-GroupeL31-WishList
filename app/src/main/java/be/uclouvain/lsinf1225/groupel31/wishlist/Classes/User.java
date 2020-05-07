@@ -36,9 +36,7 @@ public class User {
     private boolean requested = false;
 
     //only set the created on true
-    public User(){
-
-    }
+    public User(){}
 
     /** Set signIn on true, retrieve all data from data base and set the current user singleton
      * on this one
@@ -171,7 +169,7 @@ public class User {
 
     /** Destroy the user attributes and remove the singleton reference
      */
-    public void LogOut(){
+    public void logOut(){
         destroyUser();
         CurrentUser.setInstance(null);
         Toast.makeText(this.context, "See You Soon !",
@@ -206,7 +204,7 @@ public class User {
      * @param email user's mail input
      * @return true if exist false else
      */
-    public boolean ExistingUSer(String email){
+    public boolean existingUser(String email){
         String req = "SELECT * FROM user WHERE mail=\"" + email + "\";";
         Cursor cursor = db.select(req);
         try {
@@ -254,15 +252,6 @@ public class User {
         updateWishList();
     }
 
-    public void updateProfilePicture(Bitmap profilePicture){
-        ContentValues values = new ContentValues();
-        values.put("photo", ImageToBlob.getBytes(profilePicture));
-        String selection = "mail LIKE ?";
-        String[] selectionArg = {this.getEmail()};
-        db.get().update("User", values, selection, selectionArg);
-        this.setRefFromDb(this.getEmail());
-    }
-
     public boolean canRead(int wishlist_id){
         Cursor cursor = db.select("SELECT perm FROM Perm WHERE mail=\"" + this.getEmail()
                                         + "\" AND id=\"" + wishlist_id + "\";");
@@ -305,13 +294,11 @@ public class User {
         db.insert(req);
     }
 
-    public void updatePerm(String mail, int new_perm, int wishlist_id){
+    public void updatePerm(String mail, int new_perm, int wishlist_id) {
         String req = "UPDATE Perm SET perm=\"" + new_perm + "\" WHERE mail=\"" + mail + "\" AND ";
         req += "id=\"" + wishlist_id + "\";";
         db.insert(req);
     }
-    // ******* DB setter ******
-
 
     // ******* getters and setters *****
     private void setEmail(String email){
@@ -351,7 +338,7 @@ public class User {
         return pseudo;
     }
 
-    private String getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -431,5 +418,64 @@ public class User {
 
     public int getPerm() {
         return perm;
+    }
+
+    // ******* DB setter ******
+
+    public void updatePassword(String pass) {
+        String req = "UPDATE User SET password=\"" + pass + "\" WHERE mail=\""
+                + this.getEmail() + "\";";
+        db.insert(req);
+    }
+
+
+    public void updateProfilePicture(Bitmap profilePicture){
+        ContentValues values = new ContentValues();
+        values.put("photo", ImageToBlob.getBytes(profilePicture));
+        String selection = "mail LIKE ?";
+        String[] selectionArg = {this.getEmail()};
+        db.get().update("User", values, selection, selectionArg);
+        this.setRefFromDb(this.getEmail());
+    }
+
+    public void updatePseudo(String pseudo){
+        String req = "UPDATE User SET pseudo=\"" + pseudo + "\" WHERE mail=\""
+                + this.getEmail() + "\";";
+        db.insert(req);
+    }
+
+    public void updateAddress(String address){
+        String req = "UPDATE User SET address=\"" + address + "\" WHERE mail=\""
+                + this.getEmail() + "\";";
+        db.insert(req);
+        this.setRefFromDb(this.getEmail());
+    }
+
+    public void updateSport(String sport){
+        String req = "UPDATE User SET sport=\"" + sport + "\" WHERE mail=\""
+                + this.getEmail() + "\";";
+        db.insert(req);
+        this.setRefFromDb(this.getEmail());
+    }
+
+    public void updateMeal(String meal){
+        String req = "UPDATE User SET meal=\"" + meal + "\" WHERE mail=\""
+                + this.getEmail() + "\";";
+        db.insert(req);
+        this.setRefFromDb(this.getEmail());
+    }
+
+    public void updateColor(String color){
+        String req = "UPDATE User SET color=\"" + color + "\" WHERE mail=\""
+                + this.getEmail() + "\";";
+        db.insert(req);
+        this.setRefFromDb(this.getEmail());
+    }
+
+    public void updateHobby(String hobby){
+        String req = "UPDATE User SET hobby=\"" + hobby + "\" WHERE mail=\""
+                + this.getEmail() + "\";";
+        db.insert(req);
+        this.setRefFromDb(this.getEmail());
     }
 }

@@ -70,7 +70,7 @@ public class SignUp extends AppCompatActivity {
                             //create new empty user
                             User new_user = new User();
                             new_user.setDb(getApplicationContext());
-                            if(!new_user.ExistingUSer(mail)){ // check unique email
+                            if(!new_user.existingUser(mail)){ // check unique email
                                 //insert in db
                                 new_user.signUp(mail, pseudo, password.getText().toString(), null, null);
                                 //set all user's attributes with db ref and set singleton CurrentUser on this user

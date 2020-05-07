@@ -92,7 +92,7 @@ public class FriendsList extends AppCompatActivity {
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.LogOut();
+                user.logOut();
                 Intent next_layout = new Intent(getApplicationContext(), LogInUp.class);
                 startActivity(next_layout);
                 finish();

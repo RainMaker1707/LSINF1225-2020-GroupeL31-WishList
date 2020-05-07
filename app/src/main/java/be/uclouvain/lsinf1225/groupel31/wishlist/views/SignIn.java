@@ -53,7 +53,7 @@ public class SignIn extends AppCompatActivity {
 
                 //give application context and create a link between user and db
                 user.setDb(getApplicationContext());
-                if (user.ExistingUSer(mail)){
+                if (user.existingUser(mail)){
                     //set user's attributes with db ref
                     user.signIn(mail);
                     if(user.matchingPassAndMail(password, mail)){
@@ -66,7 +66,7 @@ public class SignIn extends AppCompatActivity {
                         finish();
                     }else{
                         //error password check
-                        user.LogOut();
+                        user.logOut();
                         error.setText(R.string.pass_error);
                         error.setTextColor(getResources().getColor(R.color.Red, getTheme()));
                         error.setHeight(50);

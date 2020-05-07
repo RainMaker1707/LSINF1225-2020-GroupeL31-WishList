@@ -32,7 +32,16 @@ public class ProfileActivity extends AppCompatActivity {
         ListView list = findViewById(R.id.list_view);
         list.setAdapter(new UserAdapter(getApplicationContext(), CurrentUser.getInstance()));
 
-        //TODO modify profile
+        // set modify profile button listener
+        Button modify = findViewById(R.id.modify_profile);
+        modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_layout = new Intent(getApplicationContext(), ModifyProfile.class);
+                startActivity(next_layout);
+                finish();
+            }
+        });
 
         // Menu and menu buttons
         Button menu = findViewById(R.id.menu_btn);
@@ -90,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.LogOut();
+                user.logOut();
                 Intent next_layout = new Intent(getApplicationContext(), LogInUp.class);
                 startActivity(next_layout);
                 finish();

@@ -47,5 +47,5 @@ public class TODO {
     //ask for perm in app if disable (30 min)
     //change app logo
     //fill db permission
-    //TODO modify profile (1h)
+    //modify profile (1h)
 }

@@ -43,22 +43,14 @@ public class WishListAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.wishlist_layout, null);
 
         final WishList current = getItem(position);
-
         TextView title = convertView.findViewById(R.id.wishlist_title);
         TextView items = convertView.findViewById(R.id.wishlist_in);
-
         if(current.getPicture() != null){
             CircleImageView picture = convertView.findViewById(R.id.wishlist_picture);
             picture.setImageBitmap(current.getPicture());
         }
-
-
         title.setText(current.getName());
         items.setText(String.format("Wish In: %d", current.getSize()));
-
-        //TODO set Image
-
-
         return convertView;
     }
 }

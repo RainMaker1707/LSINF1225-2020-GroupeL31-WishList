@@ -28,13 +28,13 @@ public class UserAdapter extends BaseAdapter {
 
         //pseudo
         List <String> toAdd = new ArrayList<>();
-        toAdd.add("Name");
+        toAdd.add("Name   ");
         toAdd.add(user.getPseudo());
         attributes.add(toAdd);
 
         //mail
         toAdd = new ArrayList<>();
-        toAdd.add("Email");
+        toAdd.add("Email   ");
         toAdd.add(user.getEmail());
         attributes.add(toAdd);
 
@@ -46,25 +46,25 @@ public class UserAdapter extends BaseAdapter {
 
         //color
         toAdd = new ArrayList<>();
-        toAdd.add("Color");
+        toAdd.add("Color    ");
         toAdd.add(user.getFavColor());
         attributes.add(toAdd);
 
         //sport
         toAdd = new ArrayList<>();
-        toAdd.add("Sport");
+        toAdd.add("Sport    ");
         toAdd.add(user.getSport());
         attributes.add(toAdd);
 
         //meal
         toAdd = new ArrayList<>();
-        toAdd.add("Favorites Meal");
+        toAdd.add("Meal     ");
         toAdd.add(user.getMeal());
         attributes.add(toAdd);
 
         //hobby
         toAdd = new ArrayList<>();
-        toAdd.add("Hobby");
+        toAdd.add("Hobby    ");
         toAdd.add(user.getHobby());
         attributes.add(toAdd);
 
