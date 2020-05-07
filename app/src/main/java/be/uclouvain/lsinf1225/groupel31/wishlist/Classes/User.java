@@ -62,7 +62,7 @@ public class User {
             setProfilePicture(ImageToBlob.getBytePhoto(picture));
         }
         setSport(cursor.getString(4));
-        setfavColor(cursor.getString(5));
+        setFavColor(cursor.getString(5));
         setHobby(cursor.getString(6));
         setMeal(cursor.getString(7));
         setAddress(cursor.getString(8));
@@ -75,7 +75,7 @@ public class User {
 
     /** Retrieve some data from db and set it in usable var
      */
-    public void setLessRefFromDb(String mail) {
+    void setLessRefFromDb(String mail) {
         Cursor cursor = db.select("SELECT * FROM user WHERE mail=\"" + mail + "\";");
         cursor.moveToLast();
         setPseudo(cursor.getString(0));
@@ -135,7 +135,7 @@ public class User {
             toAdd.setDb(this.context);
             toAdd.setRefFromDb(temp_mail);
             if(cursor.getInt(1) == 1 ){toAdd.setFriend(true);}
-            else if(temp_mail.equals(cursor.getString(0))){toAdd.setRequested(true);}
+            else if(temp_mail.equals(cursor.getString(0))){toAdd.setRequested();}
             friendList.add(toAdd);
             cursor.moveToNext();
         }
@@ -188,7 +188,7 @@ public class User {
         setPseudo(null);
         setWishlist_list(null);
         setMeal(null);
-        setfavColor(null);
+        setFavColor(null);
         setSport(null);
         setHobby(null);
     }
@@ -310,9 +310,11 @@ public class User {
         req += "id=\"" + wishlist_id + "\";";
         db.insert(req);
     }
+    // ******* DB setter ******
+
 
     // ******* getters and setters *****
-    public void setEmail(String email){
+    private void setEmail(String email){
         this.email = email;
     }
 
@@ -387,15 +389,15 @@ public class User {
         return requested;
     }
 
-    public void setRequested(boolean requested) {
-        this.requested = requested;
+    private void setRequested() {
+        this.requested = true;
     }
 
     public String getSport() {
         return sport;
     }
 
-    public void setSport(String sport) {
+    private void setSport(String sport) {
         this.sport = sport;
     }
 
@@ -403,7 +405,7 @@ public class User {
         return meal;
     }
 
-    public void setMeal(String meal) {
+    private void setMeal(String meal) {
         this.meal = meal;
     }
 
@@ -411,7 +413,7 @@ public class User {
         return color;
     }
 
-    public void setfavColor(String color) {
+    private void setFavColor(String color) {
         this.color = color;
     }
 
@@ -419,11 +421,11 @@ public class User {
         return hobby;
     }
 
-    public void setHobby(String hobby) {
+    private void setHobby(String hobby) {
         this.hobby = hobby;
     }
 
-    public void setPerm(int perm) {
+    void setPerm(int perm) {
         this.perm = perm;
     }
 

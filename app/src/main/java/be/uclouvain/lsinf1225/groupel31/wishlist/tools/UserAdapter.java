@@ -5,27 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
-import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 
 public class UserAdapter extends BaseAdapter {
 
-    private Context context;
     private List<List<String>> attributesList;
     private LayoutInflater inflater;
 
     public UserAdapter(Context context, User user){
-        this.context = context;
         this.attributesList = makeListFromUser(user);
-        this.inflater = LayoutInflater.from(this.context);
+        this.inflater = LayoutInflater.from(context);
     }
 
     private List<List<String>> makeListFromUser(User user) {

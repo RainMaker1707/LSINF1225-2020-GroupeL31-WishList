@@ -78,7 +78,7 @@ public class Base extends AppCompatActivity {
 
         //grid set adapter if something in user.list<WishList>
         if(user.getWishlist_list().size() != 0){
-            grid.setAdapter(new WishListAdapter(getApplicationContext(), this, user.getWishlist_list()));
+            grid.setAdapter(new WishListAdapter(getApplicationContext(), user.getWishlist_list()));
         }
 
         //menu show or not
@@ -258,7 +258,7 @@ public class Base extends AppCompatActivity {
                                             Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                             if (capture.resolveActivity(getPackageManager()) != null) {
                                                 File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                                                File photoFile = null;
+                                                File photoFile;
                                                 try {
                                                     photoFile = File.createTempFile("temp", ".jpg", photoDir);
                                                     photoPath = photoFile.getAbsolutePath();

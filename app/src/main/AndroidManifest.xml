@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".views.Permission"/>
+        <activity android:name=".views.ModifyProfile" />
+        <activity android:name=".views.Permission" />
         <activity android:name=".views.SignUpMoreInfo" />
         <activity android:name=".views.SearchWish" />
         <activity android:name=".views.AddFriend" />
@@ -32,7 +33,7 @@
         <activity android:name=".views.Base" />
         <activity android:name=".views.SignUp" />
         <activity android:name=".views.SignIn" />
-        <activity android:name=".views.AddPerm"/>
+        <activity android:name=".views.AddPerm" />
         <activity android:name=".views.FriendsWishList" />
         <activity android:name=".views.LogInUp">
             <intent-filter>

@@ -14,8 +14,6 @@ import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 
 public class SignIn extends AppCompatActivity {
-    private TextView sign_up;
-    private Button sign_in;
     private EditText mail_in;
     private EditText pass_in;
     @Override
@@ -26,8 +24,8 @@ public class SignIn extends AppCompatActivity {
         this.pass_in = findViewById(R.id.pass_in);
 
         //Text with action "sign up instead" -> go to sign up activity
-        this.sign_up = findViewById(R.id.go_sign_up);
-        this.sign_up.setOnClickListener(new View.OnClickListener() {
+        TextView sign_up = findViewById(R.id.go_sign_up);
+        sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent next_layout = new Intent(getApplicationContext(), SignUp.class);
@@ -37,8 +35,8 @@ public class SignIn extends AppCompatActivity {
         });
 
 
-        this.sign_in = findViewById(R.id.sign_in_button);
-        this.sign_in.setOnClickListener(new View.OnClickListener() {
+        Button sign_in = findViewById(R.id.sign_in_button);
+        sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //get EditText inputs

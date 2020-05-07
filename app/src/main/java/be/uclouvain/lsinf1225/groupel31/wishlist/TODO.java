@@ -1,6 +1,5 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist;
 
-import android.graphics.drawable.Drawable;
 
 //Just a class to save my global to do
 public class TODO {
@@ -47,7 +46,6 @@ public class TODO {
     //remove hided wishlist from friend's wishlist list
     //ask for perm in app if disable (30 min)
     //change app logo
+    //fill db permission
     //TODO modify profile (1h)
-    //TODO fill db picture
-
 }

@@ -22,20 +22,20 @@ public class WishList {
     private List<User> permitted = new ArrayList<>();
 
     /** Constructor
-     * @param db
-     * @param id
-     * @param name
-     * @param picture
-     * @param size
-     * @param owner
+     * @param db AccessDataBase to insert or select in database
+     * @param id wishlist'is
+     * @param name wishlist name
+     * @param picture wishlist's picture
+     * @param size wishlist's size
+     * @param owner wishlist's owner
      */
     public WishList(AccessDataBase db, Integer id, String name, Bitmap picture, Integer size, String owner){
-        this.id = id;
-        this.name = name;
-        this.picture = picture;
-        this.size = size;
-        this.owner = owner;
         this.db = db;
+        setId(id);
+        setName(name);
+        setPicture(picture);
+        setSize(size);
+        setOwner(owner);
         updateWishLst();
         updatePermitted();
     }
@@ -82,11 +82,11 @@ public class WishList {
     }
 
     /** insert a new line in db table wish
-     * @param name
-     * @param picture
-     * @param description
-     * @param price
-     * @param market
+     * @param name new wish's name
+     * @param picture new wish's picture
+     * @param description new wish's description
+     * @param price new wish's price
+     * @param market new wish's market where you can find it
      */
     public void createWish(String name, Bitmap picture, String description,
                            double price, String market){
@@ -149,23 +149,6 @@ public class WishList {
         this.updateWishLst();
     }
 
-    public boolean addPermission(String mail, int permId){
-        return false;
-    }
-
-    public boolean deletePermission(String mail, int permId) {
-        return false;
-    }
-
-    public boolean canRead(String mail){
-        return false;
-    }
-
-    public boolean canWrite(String mail){
-        return false;
-    }
-
-
     // ***** Getters and setters *****
     public String getName() {
         return this.name;
@@ -187,7 +170,7 @@ public class WishList {
         return this.wishLst;
     }
 
-    public void setOwner(String owner){
+    private void setOwner(String owner){
         this.owner = owner;
     }
 
@@ -211,7 +194,7 @@ public class WishList {
         this.id = id;
     }
 
-    public void setWishLst(List<Wish> wishLst) {
+    private void setWishLst(List<Wish> wishLst) {
         this.wishLst = wishLst;
     }
 

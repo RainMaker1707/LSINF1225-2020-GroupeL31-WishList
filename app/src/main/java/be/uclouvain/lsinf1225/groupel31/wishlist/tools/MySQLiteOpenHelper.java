@@ -3,12 +3,9 @@ package be.uclouvain.lsinf1225.groupel31.wishlist.tools;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
 
-import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 
@@ -157,9 +154,10 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(req + "(\"SewingKit\", \"to make mask for the deconfinement\", 25, \"Amazon\");");
 
         //set picture profile
-        String[] tab = {"hadrien@gmail.com", "nicolas@gmail.com", "julien@gmail.com",
-                        "noemie@gmail.com", "francois@gmail.com", "shaparder@gmail.com",
-                        "stanley@gmail.com", "alexandre@gmail.com"};
+        String[] tab = {context.getString(R.string.user1), context.getString(R.string.user2), 
+                context.getString(R.string.user3), context.getString(R.string.user4), 
+                context.getString(R.string.user5), context.getString(R.string.user6),
+                context.getString(R.string.user7), context.getString(R.string.user8)};
 
         //set wish picture wish
         Wish toSet = new Wish(0, null, null, 0, null);

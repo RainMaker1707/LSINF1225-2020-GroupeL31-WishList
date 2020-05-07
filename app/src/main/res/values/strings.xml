@@ -91,4 +91,12 @@
     <string name="del_perm">Delete perm</string>
     <string name="add_perm">Add a permission to a friend</string>
     <string name="add_perm2">Add permission</string>
+    <string name="user1">hadrien@gmail.com</string>
+    <string name="user2">nicolas@gmail.com</string>
+    <string name="user3">julien@gmail.com</string>
+    <string name="user4">noemie@gmail.com</string>
+    <string name="user5">francois@gmail.com</string>
+    <string name="user6">shaparder@gmail.com</string>
+    <string name="user7">stanley@gmail.com</string>
+    <string name="user8">alexandre@gmail.com</string>
 </resources>

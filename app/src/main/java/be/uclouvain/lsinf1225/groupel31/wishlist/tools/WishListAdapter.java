@@ -1,12 +1,10 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.tools;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,16 +15,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class WishListAdapter extends BaseAdapter {
-    private Context context;
     private List<WishList> wish_list;
     private LayoutInflater inflater;
-    private Activity activity;
 
-    public WishListAdapter(Context context, Activity activity, List<WishList> wish_list){
-        this.activity = activity;
-        this.context = context;
+    public WishListAdapter(Context context, List<WishList> wish_list){
         this.wish_list = wish_list;
-        this.inflater = LayoutInflater.from(this.context);
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override

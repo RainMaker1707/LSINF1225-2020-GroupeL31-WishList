@@ -1,13 +1,6 @@
 package be.uclouvain.lsinf1225.groupel31.wishlist.Classes;
 
-import android.content.ContentValues;
 import android.graphics.Bitmap;
-import android.media.Image;
-
-import androidx.annotation.Nullable;
-
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.AccessDataBase;
-import be.uclouvain.lsinf1225.groupel31.wishlist.tools.ImageToBlob;
 
 public class Wish {
     private String name;
@@ -16,13 +9,12 @@ public class Wish {
     private Bitmap picture;
     private String description;
     private double price;
-    private double eval;
 
     /** Constructor
-     * @param name
-     * @param description
-     * @param price
-     * @param market
+     * @param name wish's name
+     * @param description wish's description
+     * @param price wish's price
+     * @param market wish's market where you can find it
      */
     public Wish(int id, String name, String description, double price, String market) {
         this.id = id;
@@ -44,22 +36,6 @@ public class Wish {
 
     public void setPicture(Bitmap picture) {
         this.picture = picture;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setMarket(String market) {
-        this.market = market;
-    }
-
-    public void setEval(double eval) {
-        this.eval = eval;
     }
 
     public String getName() {
@@ -84,10 +60,6 @@ public class Wish {
 
     public String getMarket() {
         return market;
-    }
-
-    public double getEval() {
-        return eval;
     }
 
 }

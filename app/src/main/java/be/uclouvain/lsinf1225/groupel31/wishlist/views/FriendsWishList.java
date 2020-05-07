@@ -120,7 +120,7 @@ public class FriendsWishList extends AppCompatActivity {
         //grid view
         final GridView grid = findViewById(R.id.news_grid);
         grid.setNumColumns(1);
-        grid.setAdapter(new WishListAdapter(getApplicationContext(), this, wishList));
+        grid.setAdapter(new WishListAdapter(getApplicationContext(), wishList));
 
         //grid view on item listener display wishes contain in the wishlist
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

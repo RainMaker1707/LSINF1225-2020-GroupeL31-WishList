@@ -4,18 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import androidx.annotation.Nullable;
-
 public class AccessDataBase {
-    private String dbName = "wishlist_db.db";
-    private Integer version = 1;
     private MySQLiteOpenHelper SQLiteHelper;
     private SQLiteDatabase db;
     private Context context;
 
     public AccessDataBase(Context context){
         this.context = context;
-        SQLiteHelper = new MySQLiteOpenHelper(context, dbName, null, version);
+        SQLiteHelper = new MySQLiteOpenHelper(context, "wishlist_db.db", null, 1);
     }
 
     public void insert(String req){
