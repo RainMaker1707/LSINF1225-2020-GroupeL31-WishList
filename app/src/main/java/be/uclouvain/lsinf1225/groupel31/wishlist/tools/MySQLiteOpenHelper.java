@@ -5,16 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.User;
 import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.Wish;
-import be.uclouvain.lsinf1225.groupel31.wishlist.Classes.WishList;
 import be.uclouvain.lsinf1225.groupel31.wishlist.R;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
@@ -165,18 +160,6 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         String[] tab = {"hadrien@gmail.com", "nicolas@gmail.com", "julien@gmail.com",
                         "noemie@gmail.com", "francois@gmail.com", "shaparder@gmail.com",
                         "stanley@gmail.com", "alexandre@gmail.com"};
-        User user = new User();
-        user.setDb(context);
-        for(int i = 0; i < 8; i++) {
-            user.setEmail(tab[i]);
-            //user.updateProfilePicture();
-        }
-
-        //set picture wishlist
-        //Bitmap test = BitmapFactory.decodeResource(context.getResources(), R.drawable.ano);
-        //user.setEmail("hadrien@gmail.com");
-        //user.updateProfilePicture(test);
-
 
         //set wish picture wish
         Wish toSet = new Wish(0, null, null, 0, null);
@@ -230,8 +213,23 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
         //permission
         req = "INSERT INTO Perm (mail, perm, id) VALUES ";
-        //db.execSQL(req + "(\"nicolas@gmail.com\", 1, 4);");
-        //db.execSQL(req + "(\"julien@gmail.com\", 0, 4);");
+        db.execSQL(req + "(\"nicolas@gmail.com\", 1, 4);");
+        db.execSQL(req + "(\"julien@gmail.com\", 0, 4);");
+        db.execSQL(req + "(\"stanley@gmail.com\", 1 , 5);");
+        db.execSQL(req + "(\"stanley@gmail.com\", 0 , 6);");
+        db.execSQL(req + "(\"stanley@gmail.com\", 0 , 7);");
+        db.execSQL(req + "(\"hadrien@gmail.com\", 1 , 6);");
+        db.execSQL(req + "(\"hadrien@gmail.com\", 1 , 7);");
+        db.execSQL(req + "(\"alexandre@gmail.com\", 0 , 2);");
+        db.execSQL(req + "(\"alexandre@gmail.com\", 0 , 3);");
+        db.execSQL(req + "(\"nicolas@gmail.com\", 1 , 2);");
+        db.execSQL(req + "(\"julien@gmail.com\", 0 , 3);");
+        db.execSQL(req + "(\"hadrien@gmail.com\", 1 , 8);");
+        db.execSQL(req + "(\"hadrien@gmail.com\", 1 , 9);");
+        db.execSQL(req + "(\"noemie@gmail.com\", 0 , 19);");
+        db.execSQL(req + "(\"noemie@gmail.com\", 1 , 20);");
+        db.execSQL(req + "(\"alexandre@gmail.com\", 0 , 10);");
+        db.execSQL(req + "(\"alexandre@gmail.com\", 1 , 11);");
 
     }
 
