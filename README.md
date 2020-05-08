@@ -1,16 +1,24 @@
 #WishList
+
 ##Base de donnée
+
 ####Table principales
+
 Est une application basée sur un sytême de base de donnée relationnelles, celle-ci s'axant majoritairement autour d'une table (User) contenant la plupart des informations relatives aux utilisateurs.
 
 Une table Wishlist permet de contenir les quelques informations relatives a une wishlist donnée (id, nom, taille & le mail de l'utilisateur propriétaire afin de le lié à cette wishlist).
 
 Une table Wish contient quant à elle les informations relatives aux produits pouvant être contenu dans une WishList (id, nom, photo, prix, description, lieu d'achat).
+
 ####Tables relationnelles
+
 Pour lié ces tables nous utilisons trois tables pour trois différentes relations:
+
 <ul>
 <li>Friend contient toutes les relations d'amitiés et leur stade (mail_host, relation, mail_requested) pour deux relation possible [0, 1] 0 signifie une demande en attende de l'utilisateur [mail_host] à l'utilisateur [mail_requested].</li>
+  
 <li>Perm contient les differentes permissions (mail, perm, wishlist_id) de tel façon que là permission est set à "wishlist [wihslist_id] caché pour l'utilisateur [mail]" quand elle contient 0 et inversement "l'utilisateur [mail] peut modifier la wishlist[wishlist_id] quand elle vaut 1.</li>
+  
 <li>Content contient toutes les relations où une wishlist contient un wish (wishlist_id, wish_id) une ligne présente signifie un produit contenu, si un produit doit etre supprimé d'une wishlist, la ligne représentant la relatione st simplement supprimée.</li>
 </ul>
 
@@ -39,6 +47,7 @@ Un bouton parametres à été prévu afin d'accueillir d'éventuels modification
 ####Les Fonctionnalitées
 
 ######Profil
+
 <ul>
 <li>Inscription</li>
 Permet l'inscription d'un utilisateur et l'enregistrement de ses données dans la base de données.
@@ -52,6 +61,7 @@ Permet la modification des données retenue dans la base de données.
 </ul>
 
 ######Friend
+
 <ul>
 <li>Affichage</li>
 Permet laffichage des utilisateurs considérer comme amis, en attente ou requereur d'un lien d'amitié
@@ -70,6 +80,7 @@ Permet la suppression d'un lien d'amitié par la suppression de la ligne relativ
 </ul>
 
 ######WishList
+
 <ul>
 <li>Création</li>
 Permet la création d'une wishlist et l'enregistrement de ses données dans la base de données.
@@ -86,6 +97,7 @@ Suppression de toutes les informations relatives à une wishlist stockées dans 
 </ul>
 
 ######Wish
+
 <ul>
 <li>Création</li>
 Permet la création d'un wish et l'enregistrement de ses données dans la base de données.
